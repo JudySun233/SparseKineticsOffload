@@ -1,0 +1,102 @@
+[
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 512,
+    "prompt_token_counts": [
+      669
+    ],
+    "max_tokens": 128,
+    "latency_s": 3.317158760037273,
+    "Lout_tokens": [
+      128
+    ],
+    "avg_Lout": 128.0,
+    "max_gpu_mem_gb": 19.851285934448242,
+    "P_params": 8000000000.0,
+    "gqa_ratio": 4.0,
+    "kv_bytes_per_token": 589824,
+    "dtype": "bfloat16",
+    "C_comp": 2490717175808.0,
+    "C_mem_total": 110679293952
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 512,
+    "prompt_token_counts": [
+      669
+    ],
+    "max_tokens": 256,
+    "latency_s": 6.504547310993075,
+    "Lout_tokens": [
+      256
+    ],
+    "avg_Lout": 256.0,
+    "max_gpu_mem_gb": 19.851285934448242,
+    "P_params": 8000000000.0,
+    "gqa_ratio": 4.0,
+    "kv_bytes_per_token": 589824,
+    "dtype": "bfloat16",
+    "C_comp": 5058743762944.0,
+    "C_mem_total": 240685940736
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 512,
+    "prompt_token_counts": [
+      669
+    ],
+    "max_tokens": 512,
+    "latency_s": 12.914619675837457,
+    "Lout_tokens": [
+      512
+    ],
+    "avg_Lout": 512.0,
+    "max_gpu_mem_gb": 19.851285934448242,
+    "P_params": 8000000000.0,
+    "gqa_ratio": 4.0,
+    "kv_bytes_per_token": 589824,
+    "dtype": "bfloat16",
+    "C_comp": 10426725171200.0,
+    "C_mem_total": 558681292800
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 512,
+    "prompt_token_counts": [
+      669
+    ],
+    "max_tokens": 1024,
+    "latency_s": 25.85276600997895,
+    "Lout_tokens": [
+      1024
+    ],
+    "avg_Lout": 1024.0,
+    "max_gpu_mem_gb": 19.851285934448242,
+    "P_params": 8000000000.0,
+    "gqa_ratio": 4.0,
+    "kv_bytes_per_token": 589824,
+    "dtype": "bfloat16",
+    "C_comp": 22090400923648.0,
+    "C_mem_total": 1426600230912
+  }
+]
