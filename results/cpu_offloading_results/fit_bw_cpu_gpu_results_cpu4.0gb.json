@@ -1,0 +1,1194 @@
+[
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 1024,
+    "prompt_token_counts": [
+      1291
+    ],
+    "max_tokens": 128,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 3.4935470619238913,
+    "avg_Lout": 128.0,
+    "total_out_tokens": 128,
+    "max_gpu_mem_gb": 19.943178176879883,
+    "lmcache_total_size_gb": 0.1773,
+    "lmcache_total_size_bytes": 190374425.3952,
+    "lmcache_total_cost_ms": 25.1357,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 141.76931754089114,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.1773,
+        "cost_ms": 25.1357
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 1024,
+    "prompt_token_counts": [
+      1291
+    ],
+    "max_tokens": 256,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 6.449492495972663,
+    "avg_Lout": 256.0,
+    "total_out_tokens": 256,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0015,
+    "lmcache_total_size_bytes": 1610612.736,
+    "lmcache_total_cost_ms": 0.649,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 432.6666666666667,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0015,
+        "cost_ms": 0.649
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 1024,
+    "prompt_token_counts": [
+      1291
+    ],
+    "max_tokens": 512,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 12.920309679117054,
+    "avg_Lout": 512.0,
+    "total_out_tokens": 512,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0015,
+    "lmcache_total_size_bytes": 1610612.736,
+    "lmcache_total_cost_ms": 0.5683,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 378.8666666666667,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0015,
+        "cost_ms": 0.5683
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 1024,
+    "prompt_token_counts": [
+      1291
+    ],
+    "max_tokens": 1024,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 25.850967421662062,
+    "avg_Lout": 1024.0,
+    "total_out_tokens": 1024,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0015,
+    "lmcache_total_size_bytes": 1610612.736,
+    "lmcache_total_cost_ms": 0.603,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 402.0,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0015,
+        "cost_ms": 0.603
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 1024,
+    "prompt_token_counts": [
+      1291
+    ],
+    "max_tokens": 2048,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 52.25008958997205,
+    "avg_Lout": 2048.0,
+    "total_out_tokens": 2048,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0015,
+    "lmcache_total_size_bytes": 1610612.736,
+    "lmcache_total_cost_ms": 0.6099,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 406.59999999999997,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0015,
+        "cost_ms": 0.6099
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 2048,
+    "prompt_token_counts": [
+      2504
+    ],
+    "max_tokens": 128,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 3.79410781012848,
+    "avg_Lout": 128.0,
+    "total_out_tokens": 128,
+    "max_gpu_mem_gb": 20.054232120513916,
+    "lmcache_total_size_gb": 0.3439,
+    "lmcache_total_size_bytes": 369259813.2736,
+    "lmcache_total_cost_ms": 41.7455,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 121.38848502471649,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.3439,
+        "cost_ms": 41.7455
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 2048,
+    "prompt_token_counts": [
+      2504
+    ],
+    "max_tokens": 256,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 6.606689820997417,
+    "avg_Lout": 256.0,
+    "total_out_tokens": 256,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0275,
+    "lmcache_total_size_bytes": 29527900.16,
+    "lmcache_total_cost_ms": 5.0986,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 185.40363636363637,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0275,
+        "cost_ms": 5.0986
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 2048,
+    "prompt_token_counts": [
+      2504
+    ],
+    "max_tokens": 512,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 13.133529014885426,
+    "avg_Lout": 512.0,
+    "total_out_tokens": 512,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0275,
+    "lmcache_total_size_bytes": 29527900.16,
+    "lmcache_total_cost_ms": 5.1823,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 188.44727272727272,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0275,
+        "cost_ms": 5.1823
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 2048,
+    "prompt_token_counts": [
+      2504
+    ],
+    "max_tokens": 1024,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 26.317623410839587,
+    "avg_Lout": 1024.0,
+    "total_out_tokens": 1024,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0275,
+    "lmcache_total_size_bytes": 29527900.16,
+    "lmcache_total_cost_ms": 5.228,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 190.1090909090909,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0275,
+        "cost_ms": 5.228
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 2048,
+    "prompt_token_counts": [
+      2504
+    ],
+    "max_tokens": 2048,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 53.285212312825024,
+    "avg_Lout": 2048.0,
+    "total_out_tokens": 2048,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0275,
+    "lmcache_total_size_bytes": 29527900.16,
+    "lmcache_total_cost_ms": 5.1832,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 188.48000000000002,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0275,
+        "cost_ms": 5.1832
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 3072,
+    "prompt_token_counts": [
+      3744
+    ],
+    "max_tokens": 128,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 4.1115388921462,
+    "avg_Lout": 128.0,
+    "total_out_tokens": 128,
+    "max_gpu_mem_gb": 20.166292667388916,
+    "lmcache_total_size_gb": 0.5142,
+    "lmcache_total_size_bytes": 552118045.9008,
+    "lmcache_total_cost_ms": 39.8446,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 77.48852586542202,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.5142,
+        "cost_ms": 39.8446
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 3072,
+    "prompt_token_counts": [
+      3744
+    ],
+    "max_tokens": 256,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 6.709678682032973,
+    "avg_Lout": 256.0,
+    "total_out_tokens": 256,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.022,
+    "lmcache_total_size_bytes": 23622320.128,
+    "lmcache_total_cost_ms": 4.6715,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 212.3409090909091,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.022,
+        "cost_ms": 4.6715
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 3072,
+    "prompt_token_counts": [
+      3744
+    ],
+    "max_tokens": 512,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 13.423982239793986,
+    "avg_Lout": 512.0,
+    "total_out_tokens": 512,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.022,
+    "lmcache_total_size_bytes": 23622320.128,
+    "lmcache_total_cost_ms": 4.7014,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 213.7,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.022,
+        "cost_ms": 4.7014
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 3072,
+    "prompt_token_counts": [
+      3744
+    ],
+    "max_tokens": 1024,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 26.882637422997504,
+    "avg_Lout": 1024.0,
+    "total_out_tokens": 1024,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.022,
+    "lmcache_total_size_bytes": 23622320.128,
+    "lmcache_total_cost_ms": 4.6203,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 210.01363636363638,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.022,
+        "cost_ms": 4.6203
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 3072,
+    "prompt_token_counts": [
+      3744
+    ],
+    "max_tokens": 2048,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 53.91118537308648,
+    "avg_Lout": 2048.0,
+    "total_out_tokens": 2048,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.022,
+    "lmcache_total_size_bytes": 23622320.128,
+    "lmcache_total_cost_ms": 4.6472,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 211.23636363636365,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.022,
+        "cost_ms": 4.6472
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 4096,
+    "prompt_token_counts": [
+      4962
+    ],
+    "max_tokens": 128,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 4.4590855948626995,
+    "avg_Lout": 128.0,
+    "total_out_tokens": 128,
+    "max_gpu_mem_gb": 20.277803897857666,
+    "lmcache_total_size_gb": 0.6814,
+    "lmcache_total_size_bytes": 731647678.8736,
+    "lmcache_total_cost_ms": 78.3698,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 115.01291458761374,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.6814,
+        "cost_ms": 78.3698
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 4096,
+    "prompt_token_counts": [
+      4962
+    ],
+    "max_tokens": 256,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 6.771090981084853,
+    "avg_Lout": 256.0,
+    "total_out_tokens": 256,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0135,
+    "lmcache_total_size_bytes": 14495514.624,
+    "lmcache_total_cost_ms": 2.9857,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 221.16296296296298,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0135,
+        "cost_ms": 2.9857
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 4096,
+    "prompt_token_counts": [
+      4962
+    ],
+    "max_tokens": 512,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 13.455735619645566,
+    "avg_Lout": 512.0,
+    "total_out_tokens": 512,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0135,
+    "lmcache_total_size_bytes": 14495514.624,
+    "lmcache_total_cost_ms": 2.9735,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 220.25925925925927,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0135,
+        "cost_ms": 2.9735
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 4096,
+    "prompt_token_counts": [
+      4962
+    ],
+    "max_tokens": 1024,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 26.86635228805244,
+    "avg_Lout": 1024.0,
+    "total_out_tokens": 1024,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0135,
+    "lmcache_total_size_bytes": 14495514.624,
+    "lmcache_total_cost_ms": 2.9788,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 220.65185185185186,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0135,
+        "cost_ms": 2.9788
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 4096,
+    "prompt_token_counts": [
+      4962
+    ],
+    "max_tokens": 2048,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 54.43863836908713,
+    "avg_Lout": 2048.0,
+    "total_out_tokens": 2048,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0135,
+    "lmcache_total_size_bytes": 14495514.624,
+    "lmcache_total_cost_ms": 3.0093,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 222.91111111111113,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0135,
+        "cost_ms": 3.0093
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 6144,
+    "prompt_token_counts": [
+      7387
+    ],
+    "max_tokens": 128,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 5.111399744171649,
+    "avg_Lout": 128.0,
+    "total_out_tokens": 128,
+    "max_gpu_mem_gb": 20.50128412246704,
+    "lmcache_total_size_gb": 1.0145,
+    "lmcache_total_size_bytes": 1089311080.448,
+    "lmcache_total_cost_ms": 85.3665,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 84.14637752587483,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 1.0145,
+        "cost_ms": 85.3665
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 6144,
+    "prompt_token_counts": [
+      7387
+    ],
+    "max_tokens": 256,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 6.94027792615816,
+    "avg_Lout": 256.0,
+    "total_out_tokens": 256,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0301,
+    "lmcache_total_size_bytes": 32319628.9024,
+    "lmcache_total_cost_ms": 5.7424,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 190.77740863787378,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0301,
+        "cost_ms": 5.7424
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 6144,
+    "prompt_token_counts": [
+      7387
+    ],
+    "max_tokens": 512,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 13.821543933823705,
+    "avg_Lout": 512.0,
+    "total_out_tokens": 512,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0301,
+    "lmcache_total_size_bytes": 32319628.9024,
+    "lmcache_total_cost_ms": 5.6204,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 186.72425249169436,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0301,
+        "cost_ms": 5.6204
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 6144,
+    "prompt_token_counts": [
+      7387
+    ],
+    "max_tokens": 1024,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 27.70017415098846,
+    "avg_Lout": 1024.0,
+    "total_out_tokens": 1024,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0301,
+    "lmcache_total_size_bytes": 32319628.9024,
+    "lmcache_total_cost_ms": 5.4568,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 181.28903654485052,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0301,
+        "cost_ms": 5.4568
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 6144,
+    "prompt_token_counts": [
+      7387
+    ],
+    "max_tokens": 2048,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 55.39167333301157,
+    "avg_Lout": 2048.0,
+    "total_out_tokens": 2048,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0301,
+    "lmcache_total_size_bytes": 32319628.9024,
+    "lmcache_total_cost_ms": 5.4878,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 182.31893687707642,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0301,
+        "cost_ms": 5.4878
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 8192,
+    "prompt_token_counts": [
+      9856
+    ],
+    "max_tokens": 128,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 5.86557676596567,
+    "avg_Lout": 128.0,
+    "total_out_tokens": 128,
+    "max_gpu_mem_gb": 20.574984073638916,
+    "lmcache_total_size_gb": 1.3535,
+    "lmcache_total_size_bytes": 1453309558.784,
+    "lmcache_total_cost_ms": 153.4121,
+    "lmcache_events": 2,
+    "lmcache_ms_per_gb": 113.34473586996677,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 1.125,
+        "cost_ms": 123.9755
+      },
+      {
+        "size_gb": 0.2285,
+        "cost_ms": 29.4366
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 8192,
+    "prompt_token_counts": [
+      9856
+    ],
+    "max_tokens": 256,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 7.080226496327668,
+    "avg_Lout": 256.0,
+    "total_out_tokens": 256,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0176,
+    "lmcache_total_size_bytes": 18897856.1024,
+    "lmcache_total_cost_ms": 3.8446,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 218.44318181818178,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0176,
+        "cost_ms": 3.8446
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 8192,
+    "prompt_token_counts": [
+      9856
+    ],
+    "max_tokens": 512,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 14.101408598944545,
+    "avg_Lout": 512.0,
+    "total_out_tokens": 512,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0176,
+    "lmcache_total_size_bytes": 18897856.1024,
+    "lmcache_total_cost_ms": 3.8903,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 221.03977272727272,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0176,
+        "cost_ms": 3.8903
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 8192,
+    "prompt_token_counts": [
+      9856
+    ],
+    "max_tokens": 1024,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 28.075367582961917,
+    "avg_Lout": 1024.0,
+    "total_out_tokens": 1024,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0176,
+    "lmcache_total_size_bytes": 18897856.1024,
+    "lmcache_total_cost_ms": 3.8146,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 216.73863636363635,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0176,
+        "cost_ms": 3.8146
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 8192,
+    "prompt_token_counts": [
+      9856
+    ],
+    "max_tokens": 2048,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 56.642786626238376,
+    "avg_Lout": 2048.0,
+    "total_out_tokens": 2048,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0176,
+    "lmcache_total_size_bytes": 18897856.1024,
+    "lmcache_total_cost_ms": 3.8902,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 221.0340909090909,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0176,
+        "cost_ms": 3.8902
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 9216,
+    "prompt_token_counts": [
+      11077
+    ],
+    "max_tokens": 128,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 6.251030982937664,
+    "avg_Lout": 128.0,
+    "total_out_tokens": 128,
+    "max_gpu_mem_gb": 20.574984073638916,
+    "lmcache_total_size_gb": 1.5211999999999999,
+    "lmcache_total_size_bytes": 1633376062.6687999,
+    "lmcache_total_cost_ms": 172.2762,
+    "lmcache_events": 2,
+    "lmcache_ms_per_gb": 113.25019721272679,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 1.125,
+        "cost_ms": 124.9365
+      },
+      {
+        "size_gb": 0.3962,
+        "cost_ms": 47.3397
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 9216,
+    "prompt_token_counts": [
+      11077
+    ],
+    "max_tokens": 256,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 7.076160537078977,
+    "avg_Lout": 256.0,
+    "total_out_tokens": 256,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0095,
+    "lmcache_total_size_bytes": 10200547.328,
+    "lmcache_total_cost_ms": 2.3173,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 243.92631578947368,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0095,
+        "cost_ms": 2.3173
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 9216,
+    "prompt_token_counts": [
+      11077
+    ],
+    "max_tokens": 512,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 14.155597957782447,
+    "avg_Lout": 512.0,
+    "total_out_tokens": 512,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0095,
+    "lmcache_total_size_bytes": 10200547.328,
+    "lmcache_total_cost_ms": 2.2315,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 234.89473684210526,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0095,
+        "cost_ms": 2.2315
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 9216,
+    "prompt_token_counts": [
+      11077
+    ],
+    "max_tokens": 1024,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 28.546900315210223,
+    "avg_Lout": 1024.0,
+    "total_out_tokens": 1024,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0095,
+    "lmcache_total_size_bytes": 10200547.328,
+    "lmcache_total_cost_ms": 2.2729,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 239.25263157894736,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0095,
+        "cost_ms": 2.2729
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 9216,
+    "prompt_token_counts": [
+      11077
+    ],
+    "max_tokens": 2048,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 57.34728355985135,
+    "avg_Lout": 2048.0,
+    "total_out_tokens": 2048,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0095,
+    "lmcache_total_size_bytes": 10200547.328,
+    "lmcache_total_cost_ms": 2.3396,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 246.2736842105263,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0095,
+        "cost_ms": 2.3396
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 12288,
+    "prompt_token_counts": [
+      14750
+    ],
+    "max_tokens": 128,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 7.554777690209448,
+    "avg_Lout": 128.0,
+    "total_out_tokens": 128,
+    "max_gpu_mem_gb": 20.574984073638916,
+    "lmcache_total_size_gb": 2.0256,
+    "lmcache_total_size_bytes": 2174971438.6944,
+    "lmcache_total_cost_ms": 224.9814,
+    "lmcache_events": 2,
+    "lmcache_ms_per_gb": 111.06901658767774,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 1.125,
+        "cost_ms": 124.2453
+      },
+      {
+        "size_gb": 0.9006,
+        "cost_ms": 100.7361
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 12288,
+    "prompt_token_counts": [
+      14750
+    ],
+    "max_tokens": 256,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 7.3596364497207105,
+    "avg_Lout": 256.0,
+    "total_out_tokens": 256,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0217,
+    "lmcache_total_size_bytes": 23300197.5808,
+    "lmcache_total_cost_ms": 4.6896,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 216.11059907834104,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0217,
+        "cost_ms": 4.6896
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 12288,
+    "prompt_token_counts": [
+      14750
+    ],
+    "max_tokens": 512,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 14.682574299629778,
+    "avg_Lout": 512.0,
+    "total_out_tokens": 512,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0217,
+    "lmcache_total_size_bytes": 23300197.5808,
+    "lmcache_total_cost_ms": 4.6449,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 214.05069124423963,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0217,
+        "cost_ms": 4.6449
+      }
+    ]
+  },
+  {
+    "model": "Qwen/Qwen3-8B",
+    "max_model_len": 16384,
+    "gpu_memory_utilization": 0.9,
+    "kv_chunk_size": 256,
+    "cpu_budget_gb": 4.0,
+    "num_prompts": 1,
+    "approx_prompt_tokens": 12288,
+    "prompt_token_counts": [
+      14750
+    ],
+    "max_tokens": 1024,
+    "temperature": 0.1,
+    "top_p": 1.0,
+    "latency_s": 29.404691574629396,
+    "avg_Lout": 1024.0,
+    "total_out_tokens": 1024,
+    "max_gpu_mem_gb": 19.826973915100098,
+    "lmcache_total_size_gb": 0.0217,
+    "lmcache_total_size_bytes": 23300197.5808,
+    "lmcache_total_cost_ms": 4.8385,
+    "lmcache_events": 1,
+    "lmcache_ms_per_gb": 222.97235023041472,
+    "lmcache_event_trace": [
+      {
+        "size_gb": 0.0217,
+        "cost_ms": 4.8385
+      }
+    ]
+  },
+  {
+    "skipped": true,
+    "skip_reason": "prompt_len + max_tokens exceeds max_model_len",
+    "approx_tokens": 12288,
+    "max_tokens": 2048,
+    "cpu_budget_gb": 4.0,
+    "prompt_token_counts": [
+      14750
+    ]
+  }
+]
