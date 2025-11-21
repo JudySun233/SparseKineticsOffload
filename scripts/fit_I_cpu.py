@@ -145,7 +145,8 @@ def parse_args() -> argparse.Namespace:
     # Max new tokens (Lout upper bound) per request; more midpoints to vary KV and runtime.
     parser.add_argument("--max-tokens", type=int, nargs="+", default=[128, 256, 512, 1024, 2048])
     # CPU KV budgets in GB (LMCACHE_MAX_LOCAL_CPU_SIZE); include small caps to trigger pressure.
-    parser.add_argument("--cpu-budgets-gb", type=float, nargs="+", default=[1.0, 2.0, 4.0, 8.0, 16.0])
+    # parser.add_argument("--cpu-budgets-gb", type=float, nargs="+", default=[1.0, 2.0, 4.0, 8.0, 16.0])
+    parser.add_argument("--cpu-budget-gb", type=float, default=1.0)
     # Batch size; keep 1 to stay in the Long-CoT setting without best-of-N.
     parser.add_argument("--num-prompts", type=int, default=1)
     # Generation temperature; 0.0 for deterministic outputs so timing noise is reduced.
@@ -250,6 +251,9 @@ def main() -> None:
         kv_role="kv_both",
     )
 
+    cpu_gb = args.cpu_budget_gb
+    setup_lmcache_env(cpu_gb=cpu_gb, chunk_size=args.kv_chunk_size)
+
     llm = LLM(
         model=args.model,
         kv_transfer_config=kv_cfg,
@@ -261,26 +265,22 @@ def main() -> None:
 
     results: List[Dict] = []
 
-    for cpu_gb in args.cpu_budgets_gb:
-        setup_lmcache_env(cpu_gb=cpu_gb, chunk_size=args.kv_chunk_size)
-        LMCacheEngineBuilder.destroy(ENGINE_NAME)
+    for approx_tokens in args.prompt_lengths:
+        for max_tokens in args.max_tokens:
+            res = run_one_config(
+                llm=llm,
+                tokenizer=tokenizer,
+                num_prompts=args.num_prompts,
+                approx_tokens=approx_tokens,
+                max_tokens=max_tokens,
+                cpu_gb=cpu_gb,
+                args=args,
+            )
+            logging.info("CONFIG RESULT: %s", res)
+            results.append(res)
 
-        for approx_tokens in args.prompt_lengths:
-            for max_tokens in args.max_tokens:
-                res = run_one_config(
-                    llm=llm,
-                    tokenizer=tokenizer,
-                    num_prompts=args.num_prompts,
-                    approx_tokens=approx_tokens,
-                    max_tokens=max_tokens,
-                    cpu_gb=cpu_gb,
-                    args=args,
-                )
-                logging.info("CONFIG RESULT: %s", res)
-                results.append(res)
-
-                with open(args.output, "w") as f:
-                    json.dump(results, f, indent=2)
+            with open(args.output, "w") as f:
+                json.dump(results, f, indent=2)
 
         # LMCacheEngineBuilder.destroy(ENGINE_NAME)
 
