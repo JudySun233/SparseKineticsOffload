@@ -1,0 +1,482 @@
+[2025-11-21 17:15:59] INFO fit_I_gpu.py:163: Model struct: {'params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'num_layers': 36, 'hidden_size': 4096, 'num_heads': 32, 'num_kv_heads': 8, 'dtype': 'bfloat16'}
+INFO 11-21 17:15:59 [utils.py:253] non-default args: {'max_model_len': 16384, 'enable_prefix_caching': False, 'disable_log_stats': True, 'model': 'Qwen/Qwen3-8B'}
+WARNING 11-21 17:16:00 [model.py:438] The global random seed is set to 0. Since VLLM_ENABLE_V1_MULTIPROCESSING is set to False, this may affect the random state of the Python process that launched vLLM.
+INFO 11-21 17:16:00 [model.py:631] Resolved architecture: Qwen3ForCausalLM
+INFO 11-21 17:16:00 [model.py:1745] Using max model len 16384
+INFO 11-21 17:16:00 [scheduler.py:216] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 11-21 17:16:01 [core.py:93] Initializing a V1 LLM engine (v0.11.1) with config: model='Qwen/Qwen3-8B', speculative_config=None, tokenizer='Qwen/Qwen3-8B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=16384, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None), seed=0, served_model_name=Qwen/Qwen3-8B, enable_prefix_caching=False, enable_chunked_prefill=True, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'splitting_ops': ['vllm::unified_attention', 'vllm::unified_attention_with_output', 'vllm::unified_mla_attention', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::gdn_attention_core', 'vllm::kda_attention', 'vllm::sparse_attn_indexer'], 'compile_mm_encoder': False, 'use_inductor': None, 'compile_sizes': [], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {}, 'max_cudagraph_capture_size': 512, 'local_cache_dir': None}
+INFO 11-21 17:16:02 [parallel_state.py:1208] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://10.1.1.9:57767 backend=nccl
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+INFO 11-21 17:16:02 [parallel_state.py:1394] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0, EP rank 0
+INFO 11-21 17:16:02 [gpu_model_runner.py:3255] Starting to load model Qwen/Qwen3-8B...
+Traceback (most recent call last):
+  File "/home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/tvm_ffi/utils/_build_optional_torch_c_dlpack.py", line 836, in <module>
+    main()
+    ~~~~^^
+  File "/home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/tvm_ffi/utils/_build_optional_torch_c_dlpack.py", line 829, in main
+    build_ninja(build_dir=str(build_dir))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/tvm_ffi/cpp/extension.py", line 353, in build_ninja
+    raise RuntimeError("\n".join(msg))
+RuntimeError: ninja exited with status 1
+stdout:
+[1/2] c++ -MMD -MF main.o.d -std=c++17 -fPIC -O3 -DBUILD_WITH_CUDA -D_GLIBCXX_USE_CXX11_ABI=1 -I/home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/tvm_ffi/include -I/home/haojias/miniconda3/envs/kinetics_env/include/python3.13 -I/home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/torch/include -I/home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda-12.6/targets/x86_64-linux/include -c /tmp/tvm-ffi-torch-c-dlpack-uogtjklc/addon.cc -o main.o
+FAILED: [code=1] main.o 
+c++ -MMD -MF main.o.d -std=c++17 -fPIC -O3 -DBUILD_WITH_CUDA -D_GLIBCXX_USE_CXX11_ABI=1 -I/home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/tvm_ffi/include -I/home/haojias/miniconda3/envs/kinetics_env/include/python3.13 -I/home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/torch/include -I/home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/torch/include/torch/csrc/api/include -I/usr/local/cuda-12.6/targets/x86_64-linux/include -c /tmp/tvm-ffi-torch-c-dlpack-uogtjklc/addon.cc -o main.o
+In file included from /home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/torch/include/c10/util/CallOnce.h:4,
+                 from /home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/torch/include/ATen/Context.h:25,
+                 from /home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/torch/include/ATen/ATen.h:7,
+                 from /home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/torch/include/ATen/DLConvertor.h:3,
+                 from /tmp/tvm-ffi-torch-c-dlpack-uogtjklc/addon.cc:3:
+/home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/torch/include/c10/util/C++17.h:13:2: error: #error "You're trying to build PyTorch with a too old version of GCC. We need GCC 9 or later."
+ #error \
+  ^~~~~
+ninja: build stopped: subcommand failed.
+
+/home/haojias/miniconda3/envs/kinetics_env/lib/python3.13/site-packages/tvm_ffi/_optional_torch_c_dlpack.py:106: UserWarning: Failed to JIT torch c dlpack extension, EnvTensorAllocator will not be enabled.
+You may try AOT-module via `pip install torch-c-dlpack-ext`
+  warnings.warn(
+INFO 11-21 17:16:19 [cuda.py:418] Valid backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION']
+INFO 11-21 17:16:19 [cuda.py:427] Using FLASH_ATTN backend.
+
+Loading safetensors checkpoint shards:   0% Completed | 0/5 [00:00<?, ?it/s]
+
+Loading safetensors checkpoint shards:  20% Completed | 1/5 [00:03<00:12,  3.05s/it]
+
+Loading safetensors checkpoint shards:  40% Completed | 2/5 [00:06<00:09,  3.27s/it]
+
+Loading safetensors checkpoint shards:  60% Completed | 3/5 [00:07<00:04,  2.32s/it]
+
+Loading safetensors checkpoint shards:  80% Completed | 4/5 [00:11<00:02,  2.77s/it]
+
+Loading safetensors checkpoint shards: 100% Completed | 5/5 [00:14<00:00,  2.83s/it]
+
+Loading safetensors checkpoint shards: 100% Completed | 5/5 [00:14<00:00,  2.81s/it]
+
+INFO 11-21 17:16:34 [default_loader.py:314] Loading weights took 14.11 seconds
+INFO 11-21 17:16:34 [gpu_model_runner.py:3334] Model loading took 15.2683 GiB memory and 31.361108 seconds
+INFO 11-21 17:16:42 [backends.py:631] Using cache directory: /home/haojias/.cache/vllm/torch_compile_cache/7040da8d20/rank_0_0/backbone for vLLM's torch.compile
+INFO 11-21 17:16:42 [backends.py:647] Dynamo bytecode transform time: 7.84 s
+INFO 11-21 17:16:43 [backends.py:251] Cache the graph for dynamic shape for later use
+INFO 11-21 17:16:47 [backends.py:282] Compiling a graph for dynamic shape takes 4.15 s
+INFO 11-21 17:16:48 [monitor.py:34] torch.compile takes 12.00 s in total
+INFO 11-21 17:16:51 [gpu_worker.py:359] Available KV cache memory: 4.44 GiB
+INFO 11-21 17:16:51 [kv_cache_utils.py:1229] GPU KV cache size: 32,288 tokens
+INFO 11-21 17:16:51 [kv_cache_utils.py:1234] Maximum concurrency for 16,384 tokens per request: 1.97x
+
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   0%|          | 0/51 [00:00<?, ?it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   2%|▏         | 1/51 [00:00<00:05,  9.69it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   4%|▍         | 2/51 [00:00<00:05,  9.75it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   6%|▌         | 3/51 [00:00<00:04,  9.73it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):   8%|▊         | 4/51 [00:00<00:04,  9.72it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  10%|▉         | 5/51 [00:00<00:04,  9.65it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  12%|█▏        | 6/51 [00:00<00:04,  9.66it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  14%|█▎        | 7/51 [00:00<00:04,  9.64it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  16%|█▌        | 8/51 [00:00<00:04,  9.65it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  20%|█▉        | 10/51 [00:01<00:04, 10.19it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  24%|██▎       | 12/51 [00:01<00:03, 10.48it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  27%|██▋       | 14/51 [00:01<00:03, 10.72it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  31%|███▏      | 16/51 [00:01<00:03, 10.85it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  35%|███▌      | 18/51 [00:01<00:02, 12.00it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  39%|███▉      | 20/51 [00:01<00:02, 12.88it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  43%|████▎     | 22/51 [00:01<00:02, 13.49it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  47%|████▋     | 24/51 [00:02<00:01, 14.00it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  51%|█████     | 26/51 [00:02<00:01, 14.39it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  55%|█████▍    | 28/51 [00:02<00:01, 14.72it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  59%|█████▉    | 30/51 [00:02<00:01, 14.94it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  63%|██████▎   | 32/51 [00:02<00:01, 15.04it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  69%|██████▊   | 35/51 [00:02<00:00, 16.75it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  75%|███████▍  | 38/51 [00:02<00:00, 17.97it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  78%|███████▊  | 40/51 [00:03<00:00, 17.92it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  84%|████████▍ | 43/51 [00:03<00:00, 18.83it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  90%|█████████ | 46/51 [00:03<00:00, 19.61it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE):  96%|█████████▌| 49/51 [00:03<00:00, 20.13it/s]
+Capturing CUDA graphs (mixed prefill-decode, PIECEWISE): 100%|██████████| 51/51 [00:03<00:00, 14.40it/s]
+
+Capturing CUDA graphs (decode, FULL):   0%|          | 0/35 [00:00<?, ?it/s]
+Capturing CUDA graphs (decode, FULL):   3%|▎         | 1/35 [00:00<00:03,  9.97it/s]
+Capturing CUDA graphs (decode, FULL):   9%|▊         | 3/35 [00:00<00:02, 12.96it/s]
+Capturing CUDA graphs (decode, FULL):  14%|█▍        | 5/35 [00:00<00:02, 13.75it/s]
+Capturing CUDA graphs (decode, FULL):  20%|██        | 7/35 [00:00<00:01, 14.04it/s]
+Capturing CUDA graphs (decode, FULL):  26%|██▌       | 9/35 [00:00<00:01, 14.24it/s]
+Capturing CUDA graphs (decode, FULL):  31%|███▏      | 11/35 [00:00<00:01, 14.51it/s]
+Capturing CUDA graphs (decode, FULL):  37%|███▋      | 13/35 [00:00<00:01, 14.70it/s]
+Capturing CUDA graphs (decode, FULL):  43%|████▎     | 15/35 [00:01<00:01, 14.83it/s]
+Capturing CUDA graphs (decode, FULL):  49%|████▊     | 17/35 [00:01<00:01, 15.52it/s]
+Capturing CUDA graphs (decode, FULL):  57%|█████▋    | 20/35 [00:01<00:00, 17.24it/s]
+Capturing CUDA graphs (decode, FULL):  66%|██████▌   | 23/35 [00:01<00:00, 18.45it/s]
+Capturing CUDA graphs (decode, FULL):  74%|███████▍  | 26/35 [00:01<00:00, 19.49it/s]
+Capturing CUDA graphs (decode, FULL):  83%|████████▎ | 29/35 [00:01<00:00, 20.37it/s]
+Capturing CUDA graphs (decode, FULL):  91%|█████████▏| 32/35 [00:01<00:00, 21.26it/s]
+Capturing CUDA graphs (decode, FULL): 100%|██████████| 35/35 [00:01<00:00, 21.97it/s]
+Capturing CUDA graphs (decode, FULL): 100%|██████████| 35/35 [00:01<00:00, 17.69it/s]
+INFO 11-21 17:16:57 [gpu_model_runner.py:4240] Graph capturing finished in 6 secs, took 0.54 GiB
+INFO 11-21 17:16:57 [core.py:250] init engine (profile, create kv cache, warmup model) took 22.93 seconds
+INFO 11-21 17:16:58 [llm.py:352] Supported tasks: ('generate',)
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 652.91it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:03<00:00,  3.31s/it, est. speed input: 201.85 toks/s, output: 38.62 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:03<00:00,  3.31s/it, est. speed input: 201.85 toks/s, output: 38.62 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:03<00:00,  3.31s/it, est. speed input: 201.85 toks/s, output: 38.62 toks/s]
+[2025-11-21 17:17:01] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 512, 'prompt_token_counts': [669], 'max_tokens': 128, 'latency_s': 3.317158760037273, 'Lout_tokens': [128], 'avg_Lout': 128.0, 'max_gpu_mem_gb': 19.851285934448242, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 2490717175808.0, 'C_mem_total': 110679293952}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 501.83it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:06<00:00,  6.50s/it, est. speed input: 102.90 toks/s, output: 39.37 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:06<00:00,  6.50s/it, est. speed input: 102.90 toks/s, output: 39.37 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:06<00:00,  6.50s/it, est. speed input: 102.90 toks/s, output: 39.37 toks/s]
+[2025-11-21 17:17:08] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 512, 'prompt_token_counts': [669], 'max_tokens': 256, 'latency_s': 6.504547310993075, 'Lout_tokens': [256], 'avg_Lout': 256.0, 'max_gpu_mem_gb': 19.851285934448242, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 5058743762944.0, 'C_mem_total': 240685940736}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 381.51it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:12<00:00, 12.91s/it, est. speed input: 51.82 toks/s, output: 39.66 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:12<00:00, 12.91s/it, est. speed input: 51.82 toks/s, output: 39.66 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:12<00:00, 12.91s/it, est. speed input: 51.82 toks/s, output: 39.66 toks/s]
+[2025-11-21 17:17:21] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 512, 'prompt_token_counts': [669], 'max_tokens': 512, 'latency_s': 12.914619675837457, 'Lout_tokens': [512], 'avg_Lout': 512.0, 'max_gpu_mem_gb': 19.851285934448242, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 10426725171200.0, 'C_mem_total': 558681292800}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 394.87it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:25<00:00, 25.85s/it, est. speed input: 25.88 toks/s, output: 39.62 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:25<00:00, 25.85s/it, est. speed input: 25.88 toks/s, output: 39.62 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:25<00:00, 25.85s/it, est. speed input: 25.88 toks/s, output: 39.62 toks/s]
+[2025-11-21 17:17:47] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 512, 'prompt_token_counts': [669], 'max_tokens': 1024, 'latency_s': 25.85276600997895, 'Lout_tokens': [1024], 'avg_Lout': 1024.0, 'max_gpu_mem_gb': 19.851285934448242, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 22090400923648.0, 'C_mem_total': 1426600230912}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 476.08it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:52<00:00, 52.12s/it, est. speed input: 12.84 toks/s, output: 39.30 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:52<00:00, 52.12s/it, est. speed input: 12.84 toks/s, output: 39.30 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:52<00:00, 52.12s/it, est. speed input: 12.84 toks/s, output: 39.30 toks/s]
+[2025-11-21 17:18:39] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 512, 'prompt_token_counts': [669], 'max_tokens': 2048, 'latency_s': 52.121049917303026, 'Lout_tokens': [2048], 'avg_Lout': 2048.0, 'max_gpu_mem_gb': 19.851285934448242, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 49128604172288.0, 'C_mem_total': 4090151043072}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 285.89it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:03<00:00,  3.49s/it, est. speed input: 370.45 toks/s, output: 36.73 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:03<00:00,  3.49s/it, est. speed input: 370.45 toks/s, output: 36.73 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:03<00:00,  3.49s/it, est. speed input: 370.45 toks/s, output: 36.73 toks/s]
+[2025-11-21 17:18:43] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 1024, 'prompt_token_counts': [1291], 'max_tokens': 128, 'latency_s': 3.4895571037195623, 'Lout_tokens': [128], 'avg_Lout': 128.0, 'max_gpu_mem_gb': 19.908021926879883, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 2866392596480.0, 'C_mem_total': 204598149120}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 290.06it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:06<00:00,  6.74s/it, est. speed input: 191.68 toks/s, output: 38.01 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:06<00:00,  6.74s/it, est. speed input: 191.68 toks/s, output: 38.01 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:06<00:00,  6.74s/it, est. speed input: 191.68 toks/s, output: 38.01 toks/s]
+[2025-11-21 17:18:49] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 1024, 'prompt_token_counts': [1291], 'max_tokens': 256, 'latency_s': 6.739577019121498, 'Lout_tokens': [256], 'avg_Lout': 256.0, 'max_gpu_mem_gb': 19.908021926879883, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 5810094604288.0, 'C_mem_total': 428523651072}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 303.12it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:13<00:00, 13.24s/it, est. speed input: 97.53 toks/s, output: 38.68 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:13<00:00, 13.24s/it, est. speed input: 97.53 toks/s, output: 38.68 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:13<00:00, 13.24s/it, est. speed input: 97.53 toks/s, output: 38.68 toks/s]
+[2025-11-21 17:19:03] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 1024, 'prompt_token_counts': [1291], 'max_tokens': 512, 'latency_s': 13.241630993317813, 'Lout_tokens': [512], 'avg_Lout': 512.0, 'max_gpu_mem_gb': 19.908021926879883, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 11929426853888.0, 'C_mem_total': 934356713472}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 316.91it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:26<00:00, 26.31s/it, est. speed input: 49.07 toks/s, output: 38.92 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:26<00:00, 26.31s/it, est. speed input: 49.07 toks/s, output: 38.92 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:26<00:00, 26.31s/it, est. speed input: 49.07 toks/s, output: 38.92 toks/s]
+[2025-11-21 17:19:29] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 1024, 'prompt_token_counts': [1291], 'max_tokens': 1024, 'latency_s': 26.313512449152768, 'Lout_tokens': [1024], 'avg_Lout': 1024.0, 'max_gpu_mem_gb': 19.908021926879883, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 25095804289024.0, 'C_mem_total': 2177951072256}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 226.03it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:52<00:00, 52.65s/it, est. speed input: 24.52 toks/s, output: 38.90 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:52<00:00, 52.65s/it, est. speed input: 24.52 toks/s, output: 38.90 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:52<00:00, 52.65s/it, est. speed input: 24.52 toks/s, output: 38.90 toks/s]
+[2025-11-21 17:20:22] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 1024, 'prompt_token_counts': [1291], 'max_tokens': 2048, 'latency_s': 52.66059751436114, 'Lout_tokens': [2048], 'avg_Lout': 2048.0, 'max_gpu_mem_gb': 19.908021926879883, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 55139410903040.0, 'C_mem_total': 5592852725760}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 194.77it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:03<00:00,  3.76s/it, est. speed input: 666.78 toks/s, output: 34.08 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:03<00:00,  3.76s/it, est. speed input: 666.78 toks/s, output: 34.08 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:03<00:00,  3.76s/it, est. speed input: 666.78 toks/s, output: 34.08 toks/s]
+[2025-11-21 17:20:26] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 2048, 'prompt_token_counts': [2504], 'max_tokens': 128, 'latency_s': 3.7617816696874797, 'Lout_tokens': [128], 'avg_Lout': 128.0, 'max_gpu_mem_gb': 20.019075393676758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 3599020064768.0, 'C_mem_total': 387755016192}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 182.53it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:07<00:00,  7.06s/it, est. speed input: 354.55 toks/s, output: 36.25 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:07<00:00,  7.06s/it, est. speed input: 354.55 toks/s, output: 36.25 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:07<00:00,  7.06s/it, est. speed input: 354.55 toks/s, output: 36.25 toks/s]
+[2025-11-21 17:20:33] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 2048, 'prompt_token_counts': [2504], 'max_tokens': 256, 'latency_s': 7.068806148134172, 'Lout_tokens': [256], 'avg_Lout': 256.0, 'max_gpu_mem_gb': 20.019075393676758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 7275349540864.0, 'C_mem_total': 794837385216}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 142.07it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:13<00:00, 13.64s/it, est. speed input: 183.53 toks/s, output: 37.53 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:13<00:00, 13.64s/it, est. speed input: 183.53 toks/s, output: 37.53 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:13<00:00, 13.64s/it, est. speed input: 183.53 toks/s, output: 37.53 toks/s]
+[2025-11-21 17:20:46] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 2048, 'prompt_token_counts': [2504], 'max_tokens': 512, 'latency_s': 13.651696773711592, 'Lout_tokens': [512], 'avg_Lout': 512.0, 'max_gpu_mem_gb': 20.019075393676758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 14859936727040.0, 'C_mem_total': 1666984181760}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 158.71it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:26<00:00, 26.75s/it, est. speed input: 93.60 toks/s, output: 38.28 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:26<00:00, 26.75s/it, est. speed input: 93.60 toks/s, output: 38.28 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:26<00:00, 26.75s/it, est. speed input: 93.60 toks/s, output: 38.28 toks/s]
+[2025-11-21 17:21:13] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 2048, 'prompt_token_counts': [2504], 'max_tokens': 1024, 'latency_s': 26.760569278150797, 'Lout_tokens': [1024], 'avg_Lout': 1024.0, 'max_gpu_mem_gb': 20.019075393676758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 30956824035328.0, 'C_mem_total': 3643206008832}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 163.27it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:53<00:00, 53.38s/it, est. speed input: 46.91 toks/s, output: 38.37 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:53<00:00, 53.38s/it, est. speed input: 46.91 toks/s, output: 38.37 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:53<00:00, 53.38s/it, est. speed input: 46.91 toks/s, output: 38.37 toks/s]
+[2025-11-21 17:22:07] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 2048, 'prompt_token_counts': [2504], 'max_tokens': 2048, 'latency_s': 53.38644730206579, 'Lout_tokens': [2048], 'avg_Lout': 2048.0, 'max_gpu_mem_gb': 20.019075393676758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 66861450395648.0, 'C_mem_total': 8523362598912}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 130.41it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:04<00:00,  4.06s/it, est. speed input: 923.12 toks/s, output: 31.56 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:04<00:00,  4.06s/it, est. speed input: 923.12 toks/s, output: 31.56 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:04<00:00,  4.06s/it, est. speed input: 923.12 toks/s, output: 31.56 toks/s]
+[2025-11-21 17:22:11] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 3072, 'prompt_token_counts': [3744], 'max_tokens': 128, 'latency_s': 4.064524597022682, 'Lout_tokens': [128], 'avg_Lout': 128.0, 'max_gpu_mem_gb': 20.132600784301758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 4347954987008.0, 'C_mem_total': 574988746752}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 115.17it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:07<00:00,  7.39s/it, est. speed input: 506.30 toks/s, output: 34.62 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:07<00:00,  7.39s/it, est. speed input: 506.30 toks/s, output: 34.62 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:07<00:00,  7.40s/it, est. speed input: 506.30 toks/s, output: 34.62 toks/s]
+[2025-11-21 17:22:18] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 3072, 'prompt_token_counts': [3744], 'max_tokens': 256, 'latency_s': 7.4045186107978225, 'Lout_tokens': [256], 'avg_Lout': 256.0, 'max_gpu_mem_gb': 20.132600784301758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 8773219385344.0, 'C_mem_total': 1169304846336}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 125.09it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:14<00:00, 14.08s/it, est. speed input: 265.95 toks/s, output: 36.37 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:14<00:00, 14.08s/it, est. speed input: 265.95 toks/s, output: 36.37 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:14<00:00, 14.08s/it, est. speed input: 265.95 toks/s, output: 36.37 toks/s]
+[2025-11-21 17:22:32] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 3072, 'prompt_token_counts': [3744], 'max_tokens': 512, 'latency_s': 14.086892354302108, 'Lout_tokens': [512], 'avg_Lout': 512.0, 'max_gpu_mem_gb': 20.132600784301758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 17855676416000.0, 'C_mem_total': 2415919104000}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 131.00it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:27<00:00, 27.47s/it, est. speed input: 136.32 toks/s, output: 37.28 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:27<00:00, 27.47s/it, est. speed input: 136.32 toks/s, output: 37.28 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:27<00:00, 27.47s/it, est. speed input: 136.32 toks/s, output: 37.28 toks/s]
+[2025-11-21 17:23:00] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 3072, 'prompt_token_counts': [3744], 'max_tokens': 1024, 'latency_s': 27.47446323186159, 'Lout_tokens': [1024], 'avg_Lout': 1024.0, 'max_gpu_mem_gb': 20.132600784301758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 36948303413248.0, 'C_mem_total': 5141075853312}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 128.10it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:54<00:00, 54.39s/it, est. speed input: 68.83 toks/s, output: 37.65 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:54<00:00, 54.39s/it, est. speed input: 68.83 toks/s, output: 37.65 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:54<00:00, 54.39s/it, est. speed input: 68.83 toks/s, output: 37.65 toks/s]
+[2025-11-21 17:23:54] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 3072, 'prompt_token_counts': [3744], 'max_tokens': 2048, 'latency_s': 54.403709462843835, 'Lout_tokens': [2048], 'avg_Lout': 2048.0, 'max_gpu_mem_gb': 20.132600784301758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 78844409151488.0, 'C_mem_total': 11519102287872}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 100.18it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:04<00:00,  4.34s/it, est. speed input: 1142.91 toks/s, output: 29.48 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:04<00:00,  4.34s/it, est. speed input: 1142.91 toks/s, output: 29.48 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:04<00:00,  4.34s/it, est. speed input: 1142.91 toks/s, output: 29.48 toks/s]
+[2025-11-21 17:23:58] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 4096, 'prompt_token_counts': [4962], 'max_tokens': 128, 'latency_s': 4.352532331831753, 'Lout_tokens': [128], 'avg_Lout': 128.0, 'max_gpu_mem_gb': 20.244112014770508, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 5083602354176.0, 'C_mem_total': 758900588544}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 101.21it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:07<00:00,  7.70s/it, est. speed input: 644.45 toks/s, output: 33.25 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:07<00:00,  7.70s/it, est. speed input: 644.45 toks/s, output: 33.25 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:07<00:00,  7.70s/it, est. speed input: 644.45 toks/s, output: 33.25 toks/s]
+[2025-11-21 17:24:06] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 4096, 'prompt_token_counts': [4962], 'max_tokens': 256, 'latency_s': 7.71036111889407, 'Lout_tokens': [256], 'avg_Lout': 256.0, 'max_gpu_mem_gb': 20.244112014770508, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 10244514119680.0, 'C_mem_total': 1537128529920}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 101.53it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:14<00:00, 14.42s/it, est. speed input: 343.99 toks/s, output: 35.49 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:14<00:00, 14.42s/it, est. speed input: 343.99 toks/s, output: 35.49 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:14<00:00, 14.42s/it, est. speed input: 343.99 toks/s, output: 35.49 toks/s]
+[2025-11-21 17:24:21] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 4096, 'prompt_token_counts': [4962], 'max_tokens': 512, 'latency_s': 14.435512455645949, 'Lout_tokens': [512], 'avg_Lout': 512.0, 'max_gpu_mem_gb': 20.244112014770508, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 20798265884672.0, 'C_mem_total': 3151566471168}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 102.48it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:27<00:00, 27.95s/it, est. speed input: 177.54 toks/s, output: 36.64 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:27<00:00, 27.95s/it, est. speed input: 177.54 toks/s, output: 36.64 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:27<00:00, 27.95s/it, est. speed input: 177.54 toks/s, output: 36.64 toks/s]
+[2025-11-21 17:24:49] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 4096, 'prompt_token_counts': [4962], 'max_tokens': 1024, 'latency_s': 27.960718711372465, 'Lout_tokens': [1024], 'avg_Lout': 1024.0, 'max_gpu_mem_gb': 20.244112014770508, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 42833482350592.0, 'C_mem_total': 6612370587648}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 79.96it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:55<00:00, 55.14s/it, est. speed input: 89.99 toks/s, output: 37.14 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:55<00:00, 55.14s/it, est. speed input: 89.99 toks/s, output: 37.14 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:55<00:00, 55.14s/it, est. speed input: 89.99 toks/s, output: 37.14 toks/s]
+[2025-11-21 17:25:44] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 4096, 'prompt_token_counts': [4962], 'max_tokens': 2048, 'latency_s': 55.155142101924866, 'Lout_tokens': [2048], 'avg_Lout': 2048.0, 'max_gpu_mem_gb': 20.244112014770508, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 90614767026176.0, 'C_mem_total': 14461691756544}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 72.63it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:04<00:00,  4.97s/it, est. speed input: 1484.89 toks/s, output: 25.73 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:04<00:00,  4.97s/it, est. speed input: 1484.89 toks/s, output: 25.73 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:04<00:00,  4.98s/it, est. speed input: 1484.89 toks/s, output: 25.73 toks/s]
+[2025-11-21 17:25:49] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 6144, 'prompt_token_counts': [7387], 'max_tokens': 128, 'latency_s': 4.98997757723555, 'Lout_tokens': [128], 'avg_Lout': 128.0, 'max_gpu_mem_gb': 20.466127395629883, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 6548253310976.0, 'C_mem_total': 1125063327744}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 70.87it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:08<00:00,  8.39s/it, est. speed input: 880.07 toks/s, output: 30.50 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:08<00:00,  8.39s/it, est. speed input: 880.07 toks/s, output: 30.50 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:08<00:00,  8.39s/it, est. speed input: 880.07 toks/s, output: 30.50 toks/s]
+[2025-11-21 17:25:57] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 6144, 'prompt_token_counts': [7387], 'max_tokens': 256, 'latency_s': 8.408738784026355, 'Lout_tokens': [256], 'avg_Lout': 256.0, 'max_gpu_mem_gb': 20.466127395629883, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 13173816033280.0, 'C_mem_total': 2269454008320}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 56.53it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:15<00:00, 15.29s/it, est. speed input: 483.20 toks/s, output: 33.49 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:15<00:00, 15.29s/it, est. speed input: 483.20 toks/s, output: 33.49 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:15<00:00, 15.29s/it, est. speed input: 483.20 toks/s, output: 33.49 toks/s]
+[2025-11-21 17:26:12] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 6144, 'prompt_token_counts': [7387], 'max_tokens': 512, 'latency_s': 15.306337614078075, 'Lout_tokens': [512], 'avg_Lout': 512.0, 'max_gpu_mem_gb': 20.466127395629883, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 26656869711872.0, 'C_mem_total': 4616217427968}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 62.68it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:29<00:00, 29.08s/it, est. speed input: 254.01 toks/s, output: 35.21 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:29<00:00, 29.08s/it, est. speed input: 254.01 toks/s, output: 35.21 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:29<00:00, 29.08s/it, est. speed input: 254.01 toks/s, output: 35.21 toks/s]
+[2025-11-21 17:26:42] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 6144, 'prompt_token_counts': [7387], 'max_tokens': 1024, 'latency_s': 29.098614782094955, 'Lout_tokens': [1024], 'avg_Lout': 1024.0, 'max_gpu_mem_gb': 20.466127395629883, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 54550690004992.0, 'C_mem_total': 9541672501248}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 67.78it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:56<00:00, 56.78s/it, est. speed input: 130.10 toks/s, output: 36.07 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:56<00:00, 56.78s/it, est. speed input: 130.10 toks/s, output: 36.07 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:56<00:00, 56.78s/it, est. speed input: 130.10 toks/s, output: 36.07 toks/s]
+[2025-11-21 17:27:38] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 6144, 'prompt_token_counts': [7387], 'max_tokens': 2048, 'latency_s': 56.795315550174564, 'Lout_tokens': [2048], 'avg_Lout': 2048.0, 'max_gpu_mem_gb': 20.466127395629883, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 114049182334976.0, 'C_mem_total': 20320295583744}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 50.19it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:05<00:00,  5.68s/it, est. speed input: 1736.41 toks/s, output: 22.55 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:05<00:00,  5.68s/it, est. speed input: 1736.41 toks/s, output: 22.55 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:05<00:00,  5.68s/it, est. speed input: 1736.41 toks/s, output: 22.55 toks/s]
+[2025-11-21 17:27:44] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 8192, 'prompt_token_counts': [9856], 'max_tokens': 128, 'latency_s': 5.6972923767752945, 'Lout_tokens': [128], 'avg_Lout': 128.0, 'max_gpu_mem_gb': 20.539827346801758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 8039479377920.0, 'C_mem_total': 1497869844480}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 50.35it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:09<00:00,  9.19s/it, est. speed input: 1072.40 toks/s, output: 27.85 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:09<00:00,  9.19s/it, est. speed input: 1072.40 toks/s, output: 27.85 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:09<00:00,  9.19s/it, est. speed input: 1072.40 toks/s, output: 27.85 toks/s]
+[2025-11-21 17:27:53] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 8192, 'prompt_token_counts': [9856], 'max_tokens': 256, 'latency_s': 9.211430590134114, 'Lout_tokens': [256], 'avg_Lout': 256.0, 'max_gpu_mem_gb': 20.539827346801758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 16156268167168.0, 'C_mem_total': 3015067041792}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 54.02it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:16<00:00, 16.09s/it, est. speed input: 612.54 toks/s, output: 31.82 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:16<00:00, 16.09s/it, est. speed input: 612.54 toks/s, output: 31.82 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:16<00:00, 16.09s/it, est. speed input: 612.54 toks/s, output: 31.82 toks/s]
+[2025-11-21 17:28:09] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 8192, 'prompt_token_counts': [9856], 'max_tokens': 512, 'latency_s': 16.10989391291514, 'Lout_tokens': [512], 'avg_Lout': 512.0, 'max_gpu_mem_gb': 20.539827346801758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 32621773979648.0, 'C_mem_total': 6107443494912}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 53.93it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:30<00:00, 30.06s/it, est. speed input: 327.90 toks/s, output: 34.07 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:30<00:00, 30.06s/it, est. speed input: 327.90 toks/s, output: 34.07 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:30<00:00, 30.06s/it, est. speed input: 327.90 toks/s, output: 34.07 toks/s]
+[2025-11-21 17:28:39] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 8192, 'prompt_token_counts': [9856], 'max_tokens': 1024, 'latency_s': 30.07884324202314, 'Lout_tokens': [1024], 'avg_Lout': 1024.0, 'max_gpu_mem_gb': 20.539827346801758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 66480498540544.0, 'C_mem_total': 12524124635136}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 41.44it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:58<00:00, 58.46s/it, est. speed input: 168.59 toks/s, output: 35.03 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:58<00:00, 58.46s/it, est. speed input: 168.59 toks/s, output: 35.03 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:58<00:00, 58.46s/it, est. speed input: 168.59 toks/s, output: 35.03 toks/s]
+[2025-11-21 17:29:38] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 8192, 'prompt_token_counts': [9856], 'max_tokens': 2048, 'latency_s': 58.48554893489927, 'Lout_tokens': [2048], 'avg_Lout': 2048.0, 'max_gpu_mem_gb': 20.539827346801758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 137908799406080.0, 'C_mem_total': 26285199851520}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 46.71it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:06<00:00,  6.05s/it, est. speed input: 1829.79 toks/s, output: 21.14 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:06<00:00,  6.05s/it, est. speed input: 1829.79 toks/s, output: 21.14 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:06<00:00,  6.05s/it, est. speed input: 1829.79 toks/s, output: 21.14 toks/s]
+[2025-11-21 17:29:44] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 9216, 'prompt_token_counts': [11077], 'max_tokens': 128, 'latency_s': 6.077106181997806, 'Lout_tokens': [128], 'avg_Lout': 128.0, 'max_gpu_mem_gb': 20.539827346801758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 8776938684416.0, 'C_mem_total': 1682234671104}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 44.86it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:09<00:00,  9.57s/it, est. speed input: 1157.26 toks/s, output: 26.75 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:09<00:00,  9.57s/it, est. speed input: 1157.26 toks/s, output: 26.75 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:09<00:00,  9.57s/it, est. speed input: 1157.26 toks/s, output: 26.75 toks/s]
+[2025-11-21 17:29:54] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 9216, 'prompt_token_counts': [11077], 'max_tokens': 256, 'latency_s': 9.595357596408576, 'Lout_tokens': [256], 'avg_Lout': 256.0, 'max_gpu_mem_gb': 20.539827346801758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 17631186780160.0, 'C_mem_total': 3383796695040}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 37.36it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:16<00:00, 16.64s/it, est. speed input: 665.63 toks/s, output: 30.77 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:16<00:00, 16.64s/it, est. speed input: 665.63 toks/s, output: 30.77 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:16<00:00, 16.64s/it, est. speed input: 665.63 toks/s, output: 30.77 toks/s]
+[2025-11-21 17:30:10] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 9216, 'prompt_token_counts': [11077], 'max_tokens': 512, 'latency_s': 16.66915418719873, 'Lout_tokens': [512], 'avg_Lout': 512.0, 'max_gpu_mem_gb': 20.539827346801758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 35571611205632.0, 'C_mem_total': 6844902801408}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 42.99it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:30<00:00, 30.82s/it, est. speed input: 359.39 toks/s, output: 33.22 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:30<00:00, 30.82s/it, est. speed input: 359.39 toks/s, output: 33.22 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:30<00:00, 30.82s/it, est. speed input: 359.39 toks/s, output: 33.22 toks/s]
+[2025-11-21 17:30:41] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 9216, 'prompt_token_counts': [11077], 'max_tokens': 1024, 'latency_s': 30.846206868998706, 'Lout_tokens': [1024], 'avg_Lout': 1024.0, 'max_gpu_mem_gb': 20.539827346801758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 72380172992512.0, 'C_mem_total': 13999043248128}
+
+Adding requests:   0%|          | 0/1 [00:00<?, ?it/s]
+Adding requests: 100%|██████████| 1/1 [00:00<00:00, 44.40it/s]
+
+Processed prompts:   0%|          | 0/1 [00:00<?, ?it/s, est. speed input: 0.00 toks/s, output: 0.00 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:59<00:00, 59.34s/it, est. speed input: 186.68 toks/s, output: 34.52 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:59<00:00, 59.34s/it, est. speed input: 186.68 toks/s, output: 34.52 toks/s]
+Processed prompts: 100%|██████████| 1/1 [00:59<00:00, 59.34s/it, est. speed input: 186.68 toks/s, output: 34.52 toks/s]
+[2025-11-21 17:31:41] INFO fit_I_gpu.py:238: CONFIG RESULT: {'model': 'Qwen/Qwen3-8B', 'max_model_len': 16384, 'gpu_memory_utilization': 0.9, 'temperature': 0.1, 'top_p': 1.0, 'num_prompts': 1, 'approx_prompt_tokens': 9216, 'prompt_token_counts': [11077], 'max_tokens': 2048, 'latency_s': 59.36077411239967, 'Lout_tokens': [2048], 'avg_Lout': 2048.0, 'max_gpu_mem_gb': 20.539827346801758, 'P_params': 8000000000.0, 'gqa_ratio': 4.0, 'kv_bytes_per_token': 589824, 'dtype': 'bfloat16', 'C_comp': 149708148310016.0, 'C_mem_total': 29235037077504}
+[2025-11-21 17:31:41] INFO fit_I_gpu.py:243: Saved 40 configs to ../results/gpu_without_offloading_results/fit_I_gpu_results.json
+[rank0]:[W1121 17:31:41.081616070 ProcessGroupNCCL.cpp:1524] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
