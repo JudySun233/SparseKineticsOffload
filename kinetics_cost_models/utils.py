@@ -55,6 +55,21 @@ def dense_cost(nparams, num_attn_heads, num_kv_heads, head_dim, E_flops, context
     
     return compute_cost, memory_cost
 
+def dense_cost_w_offload(nparams, num_attn_heads, num_kv_heads, head_dim, E_flops_GPU, E_flops_CPU, context_length, generation_length, lmcache_total_size_gb, num_trials=1):
+    compute_cost = (
+        2 * nparams * generation_length + \
+        2 * (2 * context_length + generation_length) * generation_length * num_attn_heads * head_dim
+    ) * num_trials * 1e-12  
+
+    tot_mem = 2 * (2 * context_length + generation_length * num_trials) * generation_length * num_kv_heads * head_dim
+    # 2 * nparams * generation_length * num_trials + \
+
+    comm_mem_cost =  lmcache_total_size_gb * E_flops_CPU * 1e-12
+    # Currently, we use tot_mem - lmcache_total_size_gb to estimate the GPU memory usage
+    gpu_mem_cost = (tot_mem - lmcache_total_size_gb) * E_flops_GPU * 1e-12
+
+    return compute_cost, comm_mem_cost + gpu_mem_cost
+
 def zero_overhead_sparse_cost(nparams, num_attn_heads, num_kv_heads, head_dim, E_flops, context_length, budget, generation_length, num_trials=1):
     kv_scaling_factor =  budget * generation_length + 0.5 * max(0, budget - context_length)**2 
     
