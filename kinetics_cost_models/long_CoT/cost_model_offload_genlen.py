@@ -154,7 +154,7 @@ if __name__ == "__main__":
                         # Provide a placeholder lmcache_offload_gb when metadata is not available
                         lmcache_offload_gb = row.get("lmcache_offload_gb", None)
                         if lmcache_offload_gb is None:
-                            # sample a plausible lmcache usage in GB (0.1 - 8.0 GB)
+                            # sample a lmcache usage in GB (0.1 - 8.0 GB)
                             lmcache_offload_gb = float(rng.uniform(0.1, 8.0))
                         
                         kwargs = {}
@@ -162,11 +162,11 @@ if __name__ == "__main__":
                             cost_fn = dense_cost_w_offload
                             budget = None
 
-                        # TODO: For different gen len, the actual lmcache offload size should vary, add related fix later
+                        # TODO: For different gen len, the actual lmcache offload size should vary, to fix
                         compute_cost, comm_mem_cost, gpu_mem_cost = expected_cost(cost_fn, generation_lengths, context_length=context_length, lmcache_total_size_gb=lmcache_offload_gb,
                                                                   nparams=nparams, num_attn_heads=num_attn_heads, num_kv_heads=num_kv_heads, 
                                                                   head_dim=head_dim, E_flops_GPU=E_flops_A5000, E_flops_CPU=E_flops_CPU, **kwargs)
-                        
+
                         res_dict = {
                             "query_id": row["query_id"],
                             "generation_length": generation_lengths,
@@ -185,5 +185,5 @@ if __name__ == "__main__":
                         result_df.append(res_dict)
                         
                 result_df = pd.DataFrame(result_df)
-                result_df.to_csv(f"{res_dir}/{log_file.split('/')[-1].split('.')[0]}_offload_genlen_tradeoff.csv", index=False)
-                print(f"Saved results to {res_dir}/{log_file.split('/')[-1].split('.')[0]}_offload_genlen_tradeoff.csv")
+                result_df.to_csv(f"{res_dir}/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv", index=False)
+                print(f"Saved results to {res_dir}/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv")

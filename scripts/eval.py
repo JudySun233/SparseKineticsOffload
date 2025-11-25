@@ -25,7 +25,7 @@ import os
 import time
 import re
 from dataclasses import dataclass, asdict
-from typing import Dict, List
+from typing import Dict
 from vllm import LLM, SamplingParams
 from vllm.config import KVTransferConfig
 
@@ -79,8 +79,8 @@ class LMCacheAggregates:
 
 lmcache_stats = LMCacheAggregates()
 lmcache_events: list[LMCacheEvent] = []
-lmcache_stats_batch = LMCacheAggregates()
-lmcache_events_batch: list[LMCacheEvent] = []
+lmcache_stats_request = LMCacheAggregates()
+lmcache_events_request: list[LMCacheEvent] = []
 
 
 class LMCacheLogHandler(logging.Handler):
@@ -96,8 +96,8 @@ class LMCacheLogHandler(logging.Handler):
             cost_ms = float(match.group(2))
             lmcache_stats.add(size_gb=size_gb, cost_ms=cost_ms)
             lmcache_events.append(LMCacheEvent(size_gb=size_gb, cost_ms=cost_ms))
-            lmcache_stats_batch.add(size_gb=size_gb, cost_ms=cost_ms)
-            lmcache_events_batch.append(LMCacheEvent(size_gb=size_gb, cost_ms=cost_ms))
+            lmcache_stats_request.add(size_gb=size_gb, cost_ms=cost_ms)
+            lmcache_events_request.append(LMCacheEvent(size_gb=size_gb, cost_ms=cost_ms))
         except ValueError:
             pass
 
@@ -125,10 +125,10 @@ def reset_lmcache_counters_global() -> None:
     lmcache_stats = LMCacheAggregates()
     lmcache_events = []
 
-def reset_lmcache_counters_batch() -> None:
-    global lmcache_stats_batch, lmcache_events_batch
-    lmcache_stats_batch = LMCacheAggregates()
-    lmcache_events_batch = []
+def reset_lmcache_counters_request() -> None:
+    global lmcache_stats_request, lmcache_events_request
+    lmcache_stats_request = LMCacheAggregates()
+    lmcache_events_request = []
 
 
 def extract_prompt(obj: Dict) -> str:
@@ -196,166 +196,114 @@ def main() -> None:
 
     base_kwargs = {}
     if args.greedy:
-        base_kwargs = {
-            "temperature": 0.0,
-            "top_k": 1,
-        }
+        base_kwargs = {"temperature": 0.0, "top_k": 1}
         if args.repetition_penalty and args.repetition_penalty > 1.0:
             base_kwargs["repetition_penalty"] = args.repetition_penalty
     else:
-        base_kwargs = {
-            "temperature": args.temperature,
-            "top_p": args.top_p,
-        }
+        base_kwargs = {"temperature": args.temperature, "top_p": args.top_p}
         if args.top_k and args.top_k > 0:
             base_kwargs["top_k"] = args.top_k
         if args.repetition_penalty and args.repetition_penalty > 1.0:
             base_kwargs["repetition_penalty"] = args.repetition_penalty
 
-    total = 0
-    start_all = time.perf_counter()
-
-    def extract_choice(sol: str) -> List[str]:
-        s = sol.strip()
-        s = re.sub(r"\\boxed|\\begin\{.*?\}|\\end\{.*?\}", "", s)
-        s = s.replace("$", "").strip()
-        s = s.strip("{} ")
-        return [s] if s else []
-
+    overall_start = time.perf_counter()
     with open(args.input, "r") as fin, open(args.output, "w") as fout:
-
         fout.write("{}\n")
-        buffer_prompts: List[str] = []
-        buffer_orig: List[Dict] = []
         processed_count = 0
+        for idx, line in enumerate(fin):
+            if args.limit and processed_count >= args.limit:
+                break
+            obj = json.loads(line)
+            prompt_body = extract_prompt(obj)
+            query = MATH_QUERY_TEMPLATE.replace("{Question}", prompt_body).replace("{Response}", "")
 
-        def flush_buffer():
-            nonlocal total, processed_count
-            if not buffer_prompts:
-                return
-            t0 = time.perf_counter()
+            prefix_chat = [{"role": "user", "content": query}]
+            prefix_length = len(tokenizer.apply_chat_template(prefix_chat, tokenize=True, add_generation_prompt=True))
+            remaining_cap = args.max_model_len - prefix_length
+            if remaining_cap <= 0:
+                skip_rec = {
+                    "model": args.model,
+                    "query": query,
+                    "skip_reason": "prefix_exceeds_available_context",
+                    "prefix_length": prefix_length,
+                    "max_model_len": args.max_model_len,
+                }
+                fout.write(json.dumps(skip_rec) + "\n")
+                continue
+
+            dynamic_max_tokens = remaining_cap
+            sampling = SamplingParams(max_tokens=dynamic_max_tokens, **base_kwargs)
             if getattr(args, "enable_lmcache", False):
-                reset_lmcache_counters_batch()
-
-            prefix_lengths: List[int] = []
-            for q in buffer_prompts:
-                prefix_chat = [
-                    {"role": "user", "content": MATH_QUERY_TEMPLATE.replace("{Question}", q).replace("{Response}", "")}
-                ]
-                pl = len(tokenizer.apply_chat_template(prefix_chat, tokenize=True, add_generation_prompt=True))
-                prefix_lengths.append(pl)
-
-            remaining_caps = [args.max_model_len - pl for pl in prefix_lengths]
-            if any(r <= 0 for r in remaining_caps):
-                for i, r in enumerate(remaining_caps):
-                    print(f"Example {i} has non-positive remaining capacity {r}, skipping.")
-                buffer_prompts.clear()
-                buffer_orig.clear()
-                return
-
-            # For batch >1 we must use a single max_tokens = min(all remaining caps)
-            dynamic_max_tokens = min(remaining_caps)
-            dynamic_sampling = SamplingParams(max_tokens=dynamic_max_tokens, **base_kwargs)
-
-            outputs = llm.generate(buffer_prompts, dynamic_sampling)
-
+                reset_lmcache_counters_request()
+            t0 = time.perf_counter()
+            outputs = llm.generate([query], sampling)
             t1 = time.perf_counter()
 
             if getattr(args, "enable_lmcache", False):
                 stable_rounds = 0
-                last_batch_events = lmcache_stats_batch.num_events
+                last_events = lmcache_stats_request.num_events
                 for _ in range(8):
                     time.sleep(0.01)
-                    if lmcache_stats_batch.num_events == last_batch_events:
+                    if lmcache_stats_request.num_events == last_events:
                         stable_rounds += 1
                     else:
                         stable_rounds = 0
-                        last_batch_events = lmcache_stats_batch.num_events
+                        last_events = lmcache_stats_request.num_events
                     if stable_rounds >= 2:
                         break
 
-            for i, out in enumerate(outputs):
-                orig = buffer_orig[i]
-
-                text = out.outputs[0].text
-
-                prefix_length = prefix_lengths[i]
+            out = outputs[0]
+            text = out.outputs[0].text
+            try:
+                gen_token_len = len(out.outputs[0].token_ids)
+            except Exception:
                 gen_token_len = None
-                try:
-                    gen_token_len = len(out.outputs[0].token_ids)
-                except Exception:
-                    print("Warning: could not get generated token length from vLLM output.")
+            choices = []
+            if "solution" in obj:
+                cleaned_sol = re.sub(r"\\boxed|\\begin\{.*?\}|\\end\{.*?\}", "", obj["solution"]).replace("$", "").strip().strip("{} ")
+                if cleaned_sol:
+                    choices = [cleaned_sol]
+            id_val = obj.get("id") if obj.get("id") is not None else idx
 
-                choices = extract_choice(orig.get("solution"))
+            rec = {
+                "model": args.model,
+                "query": query,
+                "prediction": [text],
+                "choices": choices,
+                "prefix_length": prefix_length,
+                "token_length": gen_token_len,
+                "id": id_val,
+                "latency_s": t1 - t0,
+                "dynamic_max_tokens": dynamic_max_tokens,
+                "max_model_len": args.max_model_len,
+            }
+            if getattr(args, "enable_lmcache", False):
+                req_gb = lmcache_stats_request.total_size_gb
+                req_cost = lmcache_stats_request.total_cost_ms
+                cumulative_gb = lmcache_stats.total_size_gb
+                cumulative_cost = lmcache_stats.total_cost_ms
+                rec["lmcache_offload_gb"] = req_gb
+                rec["lmcache_offload_cost_ms"] = req_cost
+                rec["lmcache_offload_ms_per_gb"] = (req_cost / req_gb) if req_gb > 0 else 0.0
+                rec["lmcache_offload_cumulative_gb"] = cumulative_gb
+                rec["lmcache_offload_cumulative_cost_ms"] = cumulative_cost
+                rec["lmcache_offload_cumulative_ms_per_gb"] = (cumulative_cost / cumulative_gb) if cumulative_gb > 0 else 0.0
+                rec["logged_offload_gb"] = cumulative_gb
+                rec["lmcache_source"] = "logged"
+            else:
+                rec["lmcache_offload_gb"] = None
+                rec["lmcache_offload_cost_ms"] = None
+                rec["lmcache_offload_ms_per_gb"] = None
+                rec["lmcache_offload_cumulative_gb"] = None
+                rec["lmcache_offload_cumulative_cost_ms"] = None
+                rec["lmcache_offload_cumulative_ms_per_gb"] = None
+                rec["logged_offload_gb"] = None
+                rec["lmcache_source"] = "none"
+            fout.write(json.dumps(rec) + "\n")
+            total += 1
+            processed_count += 1
 
-                id_val = orig.get("id") if orig.get("id") is not None else orig.get("_index", processed_count)
-
-                out_rec = {
-                    "model": args.model,
-                    "query": orig.get("query", orig.get("problem") or orig.get("prompt") or ""),
-                    "prediction": [text],
-                    "choices": choices,
-                    "prefix_length": prefix_length,
-                    "token_length": gen_token_len,
-                    "id": id_val,
-                    "batch_latency_s": t1 - t0,
-                }
-
-                if getattr(args, "enable_lmcache", False):
-                    batch_gb = lmcache_stats_batch.total_size_gb
-                    batch_cost = lmcache_stats_batch.total_cost_ms
-                    batch_events_list = [asdict(e) for e in lmcache_events_batch]
-                    cumulative_gb = lmcache_stats.total_size_gb
-                    cumulative_cost = lmcache_stats.total_cost_ms
-                    out_rec["lmcache_offload_batch_gb"] = batch_gb
-                    out_rec["lmcache_offload_batch_cost_ms"] = batch_cost
-                    out_rec["lmcache_offload_batch_ms_per_gb"] = (batch_cost / batch_gb) if batch_gb > 0 else 0.0
-                    out_rec["lmcache_offload_batch_events"] = batch_events_list
-                    out_rec["lmcache_offload_cumulative_gb"] = cumulative_gb
-                    out_rec["lmcache_offload_cumulative_cost_ms"] = cumulative_cost
-                    out_rec["lmcache_offload_cumulative_ms_per_gb"] = (cumulative_cost / cumulative_gb) if cumulative_gb > 0 else 0.0
-                    out_rec["logged_offload_gb"] = cumulative_gb
-                    out_rec["lmcache_source"] = "logged"
-                else:
-                    out_rec["lmcache_offload_batch_gb"] = None
-                    out_rec["lmcache_offload_batch_cost_ms"] = None
-                    out_rec["lmcache_offload_batch_ms_per_gb"] = None
-                    out_rec["lmcache_offload_batch_events"] = None
-                    out_rec["lmcache_offload_cumulative_gb"] = None
-                    out_rec["lmcache_offload_cumulative_cost_ms"] = None
-                    out_rec["lmcache_offload_cumulative_ms_per_gb"] = None
-                    out_rec["logged_offload_gb"] = None
-                    out_rec["lmcache_source"] = "none"
-                fout.write(json.dumps(out_rec) + "\n")
-                total += 1
-                processed_count += 1
-
-            buffer_prompts.clear()
-            buffer_orig.clear()
-
-        for idx, line in enumerate(fin):
-            if args.limit and processed_count >= args.limit:
-                break
-            
-            obj = json.loads(line)
-
-            prompt_body = extract_prompt(obj)
-
-            query = MATH_QUERY_TEMPLATE.replace("{Question}", prompt_body).replace("{Response}", "")
-            obj_copy = dict(obj)
-            obj_copy["_index"] = idx
-            obj_copy["query"] = query
-
-            buffer_prompts.append(query)
-            buffer_orig.append(obj_copy)
-
-            if len(buffer_prompts) >= 1:
-                flush_buffer()
-
-        # final flush
-        flush_buffer()
-
-    dur = time.perf_counter() - start_all
+    dur = time.perf_counter() - overall_start
     logging.info("Done. Wrote results to %s. Examples processed: %d. Time: %.2fs", args.output, total, dur)
 
 
