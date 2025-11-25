@@ -61,12 +61,13 @@ def dense_cost_w_offload(nparams, num_attn_heads, num_kv_heads, head_dim, E_flop
         2 * (2 * context_length + generation_length) * generation_length * num_attn_heads * head_dim
     ) * num_trials * 1e-12  
 
-    tot_mem = 2 * (2 * context_length + generation_length * num_trials) * generation_length * num_kv_heads * head_dim
-    # 2 * nparams * generation_length * num_trials + \
+    total_kv_elements = 2 * (2 * context_length + generation_length * num_trials) * generation_length * num_kv_heads * head_dim
+    offloaded_kv_elements = lmcache_total_size_gb * (1024 ** 3) / 2
 
-    comm_mem_cost =  lmcache_total_size_gb * E_flops_CPU * 1e-12
-    # Currently, we use tot_mem - lmcache_total_size_gb to estimate the GPU memory usage
-    gpu_mem_cost = (tot_mem - lmcache_total_size_gb) * E_flops_GPU * 1e-12
+    comm_mem_cost = offloaded_kv_elements * E_flops_CPU * 1e-12
+
+    gpu_resident_gb = max(0.0, total_kv_elements - offloaded_kv_elements)
+    gpu_mem_cost = gpu_resident_gb * E_flops_GPU * 1e-12
 
     return compute_cost, comm_mem_cost, gpu_mem_cost
 

@@ -44,13 +44,14 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from utils import *
  
  
-def make_process_fn(model_name, query_to_id, gen_lens):
+def make_process_fn(model_name, gen_lens):
     def process_fn(example):
         query = example["query"]
         prediction = example["prediction"][0]
         golds = example["choices"]
         tokenized = tokenizer.encode(prediction)
         token_length = len(tokenized)
+        lmcache_offload_gb = example.get("lmcache_offload_gb")
 
         rows = []
         for gen_len in gen_lens:
@@ -66,11 +67,11 @@ def make_process_fn(model_name, query_to_id, gen_lens):
                 score = 0
 
             rows.append({
-                "query_id": query_to_id[query],
                 "query": query,
                 "gen_len_budget": gen_len,
                 "gen_len": min(token_length, gen_len),
                 "score": score,
+                "lmcache_offload_gb": lmcache_offload_gb,
             })
 
         return {"results": rows}
@@ -121,51 +122,58 @@ if __name__ == "__main__":
                 file_path = os.path.join(res_dir, log_file)
 
                 data = load_dataset("json", data_files=file_path, split="train").skip(1)
-                
-                # populate query_to_id if empty
-                if len(query_to_id) == 0:
-                    query_id = 0
-                    for example in data:
-                        if example["query"] not in query_to_id:
-                            query_to_id[example["query"]] = query_id
-                            query_id += 1
-                
-                process_fn = make_process_fn(f"Qwen/{model}", query_to_id, gen_lens)
-                processed = data.map(process_fn, num_proc=8, remove_columns=data.column_names)
-                
+
+                process_fn = make_process_fn(f"Qwen/{model}", gen_lens)
+                processed = data.map(process_fn, num_proc=4, remove_columns=[])
+
                 all_rows = list(chain.from_iterable(processed["results"]))
                 raw_df = pd.DataFrame(all_rows)
-                
+
+                raw_df["query_id"] = raw_df.groupby("query").ngroup()
+
+                # Skip entire file if any missing lmcache_offload_gb
+                if raw_df["lmcache_offload_gb"].isna().any():
+                    print(f"Skipping file {log_file} due to missing lmcache_offload_gb.")
+                    continue
+
                 raw_df = raw_df.groupby(["query_id", "gen_len_budget"]).agg({
                     "query": "first",
                     "gen_len": list,
-                    "score": list
+                    "score": list,
+                    "lmcache_offload_gb": "first"
                 }).reset_index()
-                
-                result_df = [] 
+
+                result_df = []
                 for gen_len in gen_lens:
                     grouped_df_budgeted = raw_df[raw_df["gen_len_budget"] == gen_len]
                     for index, row in tqdm(grouped_df_budgeted.iterrows(), total=len(grouped_df_budgeted), desc="Processing rows"):
                         context_length = len(tokenizer.encode(row["query"]))
                         generation_lengths = row["gen_len"]
-                        
+
                         scores = row["score"]
                         cov = coverage(scores, nsamples=[1])[0]    # using ntrial=1 for cot length analysis
-                        # Provide a placeholder lmcache_offload_gb when metadata is not available
+
                         lmcache_offload_gb = row.get("lmcache_offload_gb", None)
-                        if lmcache_offload_gb is None:
-                            # sample a lmcache usage in GB (0.1 - 8.0 GB)
-                            lmcache_offload_gb = float(rng.uniform(0.1, 8.0))
-                        
+
                         kwargs = {}
                         if sparse_arg == "dense":
                             cost_fn = dense_cost_w_offload
                             budget = None
 
                         # TODO: For different gen len, the actual lmcache offload size should vary, to fix
-                        compute_cost, comm_mem_cost, gpu_mem_cost = expected_cost(cost_fn, generation_lengths, context_length=context_length, lmcache_total_size_gb=lmcache_offload_gb,
-                                                                  nparams=nparams, num_attn_heads=num_attn_heads, num_kv_heads=num_kv_heads, 
-                                                                  head_dim=head_dim, E_flops_GPU=E_flops_A5000, E_flops_CPU=E_flops_CPU, **kwargs)
+                        compute_cost, comm_mem_cost, gpu_mem_cost = expected_cost(
+                            cost_fn,
+                            generation_lengths,
+                            context_length=context_length,
+                            lmcache_total_size_gb=lmcache_offload_gb,
+                            nparams=nparams,
+                            num_attn_heads=num_attn_heads,
+                            num_kv_heads=num_kv_heads,
+                            head_dim=head_dim,
+                            E_flops_GPU=E_flops_A5000,
+                            E_flops_CPU=E_flops_CPU,
+                            **kwargs
+                        )
 
                         res_dict = {
                             "query_id": row["query_id"],
@@ -178,12 +186,12 @@ if __name__ == "__main__":
                             "gpu_mem_cost": gpu_mem_cost,
                             "total_cost": compute_cost + comm_mem_cost + gpu_mem_cost
                         }
-                        
+
                         if sparse_arg != "dense":
                             res_dict["budget"] = budget
-                            
+
                         result_df.append(res_dict)
-                        
+
                 result_df = pd.DataFrame(result_df)
-                result_df.to_csv(f"{res_dir}/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv", index=False)
-                print(f"Saved results to {res_dir}/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv")
+                result_df.to_csv(f"{res_dir}/offload/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv", index=False)
+                print(f"Saved results to {res_dir}/offload/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv")

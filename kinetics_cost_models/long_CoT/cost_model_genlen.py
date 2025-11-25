@@ -182,5 +182,6 @@ if __name__ == "__main__":
                         result_df.append(res_dict)
                         
                 result_df = pd.DataFrame(result_df)
-                result_df.to_csv(f"{res_dir}/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv", index=False)
+                result_df.to_csv(f"{res_dir}/no_offload/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv", index=False)
+                print(f"Saved results to {res_dir}/no_offload/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv")
                         
