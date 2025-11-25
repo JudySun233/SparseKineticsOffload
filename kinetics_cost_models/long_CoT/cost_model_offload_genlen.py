@@ -92,15 +92,13 @@ if __name__ == "__main__":
         "32B": 32.76
     }
 
-    #gen_lens = [2048, 4096, 6144, 8192, 10240, 12288, 14336, 16384, 18432, 20480, 22528, 24576, 26624, 28672, 30720, 32768]
-    gen_lens = [512]
+    gen_lens =[1024, 2048, 4096, 6144, 8192, 10240, 12288, 14336, 16384, 18432, 20480, 22528, 24576, 26624, 28672, 30720, 32768]
     # RNG for placeholder offload/lmcache values (reproducible)
     rng = np.random.default_rng(42)
    
     query_to_id = {}
     query_id  = 0
     
-    # for model in ["Qwen3-32B", "Qwen3-14B", "Qwen3-8B", "Qwen3-4B", "Qwen3-1.7B", "Qwen3-0.6B"]:
     for model in ["Qwen3-8B"]:
         config = AutoConfig.from_pretrained(f"Qwen/{model}")
         config = AutoConfig.from_pretrained(f"Qwen/{model}")
@@ -114,30 +112,15 @@ if __name__ == "__main__":
     
         res_dir = f"{task}/{sparse_arg}" 
         log_files = os.listdir(res_dir)
-        
         tokenizer = AutoTokenizer.from_pretrained(f"Qwen/{model}")
         model_name = model.lower().replace(".", "-")
 
         for log_file in log_files:
+            print(f"Processing file: {log_file}")
             if log_file.endswith(".jsonl") and f"_{sparse_arg}" in log_file and model_name in log_file:
                 file_path = os.path.join(res_dir, log_file)
-                try:
-                    with open(file_path, "r", encoding="utf-8") as fh:
-                        first_line = fh.readline()
-                        second_line = fh.readline()
-                except Exception as e:
-                    print(f"Warning: could not open {file_path}: {e}")
-                    continue
 
-                if not second_line:
-                    print(f"Skipping {file_path}: no examples found (file empty or only metadata line).")
-                    continue
-
-                try:
-                    data = load_dataset("json", data_files=file_path, split="train").skip(1)
-                except Exception as e:
-                    print(f"Warning: failed to load dataset from {file_path}: {e}")
-                    continue
+                data = load_dataset("json", data_files=file_path, split="train").skip(1)
                 
                 # populate query_to_id if empty
                 if len(query_to_id) == 0:
@@ -168,29 +151,19 @@ if __name__ == "__main__":
                         
                         scores = row["score"]
                         cov = coverage(scores, nsamples=[1])[0]    # using ntrial=1 for cot length analysis
-                        # Provide a placeholder lmcache_used_gb when metadata is not available
-                        lmcache_used_gb = row.get("lmcache_used_gb", None)
-                        if lmcache_used_gb is None:
+                        # Provide a placeholder lmcache_offload_gb when metadata is not available
+                        lmcache_offload_gb = row.get("lmcache_offload_gb", None)
+                        if lmcache_offload_gb is None:
                             # sample a plausible lmcache usage in GB (0.1 - 8.0 GB)
-                            lmcache_used_gb = float(rng.uniform(0.1, 8.0))
+                            lmcache_offload_gb = float(rng.uniform(0.1, 8.0))
                         
                         kwargs = {}
                         if sparse_arg == "dense":
                             cost_fn = dense_cost_w_offload
                             budget = None
-                        # else:
-                            # attn_local = int(log_file.split("local")[-1].split("_")[0])
-                            # if sparse_arg == "blocktopk":
-                            #     kwargs["block_size"] = int(re.search(r'block(\d+)', log_file).group(1))
-                            #     kwargs["block_topk"] = int(re.search(r'blocktopk(\d+)', log_file).group(1))
-                            #     budget = attn_local + kwargs["block_size"] * kwargs["block_topk"]
-                            #     kwargs["local"] = attn_local
-                            #     cost_fn = block_sparse_cost
-                            # else:
-                            #     budget = kwargs["budget"] = int(re.search(r'topk(\d+)', log_file).group(1)) + attn_local
-                            #     cost_fn = zero_overhead_sparse_cost
-# def dense_cost_w_offload(nparams, num_attn_heads, num_kv_heads, head_dim, E_flops_GPU, E_flops_CPU, context_length, generation_length, lmcache_total_size_gb, num_trials=1):
-                        compute_cost, memory_cost = expected_cost(cost_fn, generation_lengths, context_length=context_length, lmcache_total_size_gb=lmcache_used_gb,
+
+                        # TODO: For different gen len, the actual lmcache offload size should vary, add related fix later
+                        compute_cost, comm_mem_cost, gpu_mem_cost = expected_cost(cost_fn, generation_lengths, context_length=context_length, lmcache_total_size_gb=lmcache_offload_gb,
                                                                   nparams=nparams, num_attn_heads=num_attn_heads, num_kv_heads=num_kv_heads, 
                                                                   head_dim=head_dim, E_flops_GPU=E_flops_A5000, E_flops_CPU=E_flops_CPU, **kwargs)
                         
@@ -199,10 +172,11 @@ if __name__ == "__main__":
                             "generation_length": generation_lengths,
                             "gen_len_budget": gen_len,
                             "coverage": cov,
-                            "lmcache_used_gb": lmcache_used_gb,
+                            "lmcache_offload_gb": lmcache_offload_gb,
                             "compute_cost": compute_cost,
-                            "memory_cost": memory_cost,
-                            "total_cost": compute_cost + memory_cost
+                            "comm_mem_cost": comm_mem_cost,
+                            "gpu_mem_cost": gpu_mem_cost,
+                            "total_cost": compute_cost + comm_mem_cost + gpu_mem_cost
                         }
                         
                         if sparse_arg != "dense":
@@ -211,4 +185,5 @@ if __name__ == "__main__":
                         result_df.append(res_dict)
                         
                 result_df = pd.DataFrame(result_df)
-                result_df.to_csv(f"{res_dir}/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv", index=False)
+                result_df.to_csv(f"{res_dir}/{log_file.split('/')[-1].split('.')[0]}_offload_genlen_tradeoff.csv", index=False)
+                print(f"Saved results to {res_dir}/{log_file.split('/')[-1].split('.')[0]}_offload_genlen_tradeoff.csv")

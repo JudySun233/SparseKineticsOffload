@@ -77,7 +77,8 @@ def make_process_fn(model_name, query_to_id, gen_lens):
     return process_fn
 
 if __name__ == "__main__":
-    E_flops = 562.5
+    E_flops_B200 = 562.5
+    E_flops = 289.3
     task = sys.argv[1]
     sparse_arg = sys.argv[2]
     
@@ -93,8 +94,8 @@ if __name__ == "__main__":
    
     query_to_id = {}
     query_id = 0
-    
-    for model in ["Qwen3-32B", "Qwen3-14B", "Qwen3-8B", "Qwen3-4B", "Qwen3-1.7B", "Qwen3-0.6B"]:
+
+    for model in ["Qwen3-8B"]:
         config = AutoConfig.from_pretrained(f"Qwen/{model}")
         tokenizer = AutoTokenizer.from_pretrained(f"Qwen/{model}")
         

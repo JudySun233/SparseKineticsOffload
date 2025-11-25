@@ -68,7 +68,7 @@ def dense_cost_w_offload(nparams, num_attn_heads, num_kv_heads, head_dim, E_flop
     # Currently, we use tot_mem - lmcache_total_size_gb to estimate the GPU memory usage
     gpu_mem_cost = (tot_mem - lmcache_total_size_gb) * E_flops_GPU * 1e-12
 
-    return compute_cost, comm_mem_cost + gpu_mem_cost
+    return compute_cost, comm_mem_cost, gpu_mem_cost
 
 def zero_overhead_sparse_cost(nparams, num_attn_heads, num_kv_heads, head_dim, E_flops, context_length, budget, generation_length, num_trials=1):
     kv_scaling_factor =  budget * generation_length + 0.5 * max(0, budget - context_length)**2 
@@ -111,5 +111,9 @@ def block_sparse_cost(nparams, num_attn_heads, num_kv_heads, head_dim, E_flops, 
     return compute_cost, memory_cost
         
 def expected_cost(cost_fn: callable, generation_lengths, num_trials=1, **kwargs):
-    compute_costs, memory_costs = zip(*[cost_fn(generation_length=x, num_trials=num_trials, **kwargs) for x in generation_lengths])
-    return np.mean(compute_costs), np.mean(memory_costs)
+    if cost_fn == dense_cost_w_offload:
+        compute_costs, comm_mem_costs, gpu_mem_costs = zip(*[cost_fn(generation_length=x, num_trials=num_trials, **kwargs) for x in generation_lengths])
+        return np.mean(compute_costs), np.mean(comm_mem_costs), np.mean(gpu_mem_costs)
+    else:
+        compute_costs, memory_costs = zip(*[cost_fn(generation_length=x, num_trials=num_trials, **kwargs) for x in generation_lengths])
+        return np.mean(compute_costs), np.mean(memory_costs)
