@@ -1,0 +1,1862 @@
+{
+  "run_config": {
+    "server_url": "http://127.0.0.1:8000",
+    "model_id": "qwen3_8b",
+    "dataset_name": "ChilleD/MultiArith",
+    "dataset_split": "test",
+    "max_examples": 180,
+    "temperature": 0.2,
+    "top_p": 1,
+    "top_k": 20,
+    "max_context": 2048,
+    "max_new_tokens": 512,
+    "gpu_layers": 32,
+    "offload_desc": "qwen3_8b_q6k_cpu_offload_0",
+    "request_timeout": 3400.0,
+    "num_samples_per_question": 1,
+    "output_dir": "outputs",
+    "script_invocation": "python scripts/qwen3_8b_eval.py --server-url http://127.0.0.1:8000 --model-id qwen3_8b --max-context 2048 --max-new-tokens 512 --gpu-layers 32 --offload-desc qwen3_8b_q6k_cpu_offload_0 --num-samples-per-question 1 --max-examples 180"
+  },
+  "run_summary": {
+    "num_questions": 61,
+    "num_correct_questions": 61,
+    "accuracy_majority": 1.0,
+    "avg_latency_ms_per_question": 25166.36471670182,
+    "total_prompt_tokens": 9838,
+    "total_completion_tokens": 26703,
+    "total_tokens": 36541,
+    "tokens_per_second_overall": 23.80291288108425
+  },
+  "results": [
+    {
+      "id": 0,
+      "problem": " Paige had 11 songs on her mp3 player. If she deleted 9 old songs from it and then added 8 new songs, how many songs does she have on her mp3 player? ",
+      "gold_answer_str": "10",
+      "gold_answer_int": 10,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Start with the initial number of songs, which is 11.\nStep 2: Subtract the number of songs deleted, 9, from the initial number: 11 - 9 = 2.\nStep 3: Add the number of new songs, 8, to the result from Step 2: 2 + 8 = 10.\nStep 4: The final number of songs on the mp3 player is 10.\n\nAnswer: \\boxed{10}\nOkay, let me try to figure out this problem. So Paige starts with 11 songs on her mp3 player. Then she deletes 9 old ones. Hmm, so if she deletes 9, I need to subtract that from the original 11. Let me do that calculation: 11 minus 9 equals 2. Wait, that leaves her with 2 songs. Then she adds 8 new songs. So adding 8 to the remaining 2. Let me check that: 2 plus 8 is 10. So after deleting and adding, she should have 10 songs in total. Let me just make sure I didn't mix up the numbers. Original 11, subtract 9 gives 2, add 8 gives 10. Yeah, that seems right. I don't think I made any mistakes here. The answer should be 10.\n\\boxed{10}",
+          "extracted_answer": "10",
+          "parsed_answer": "10",
+          "is_correct": true,
+          "latency_ms": 16699.31983947754,
+          "usage": {
+            "completion_tokens": 295,
+            "prompt_tokens": 163,
+            "total_tokens": 458
+          },
+          "prompt_tokens": 163,
+          "completion_tokens": 295,
+          "total_tokens": 458
+        }
+      ],
+      "majority_answer": "10",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 295,
+      "total_prompt_tokens": 163,
+      "total_latency_ms": 16699.31983947754
+    },
+    {
+      "id": 1,
+      "problem": " There were 39 girls and 4 boys trying out for the schools basketball team. If only 26 of them got called back, how many students didn't make the cut? ",
+      "gold_answer_str": "17",
+      "gold_answer_int": 17,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of students trying out.\nTotal students = 39 girls + 4 boys = 43 students.\n\nStep 2: Subtract the number of students who got called back from the total number of students.\nStudents who didn't make the cut = 43 - 26 = 17 students.\n\nFinal Answer: \\boxed{17}\nOkay, let me try to solve this AIME problem. So, the problem says there were 39 girls and 4 boys trying out for the school's basketball team. Only 26 of them got called back. We need to find out how many students didn't make the cut.\n\nFirst, I should figure out the total number of students who tried out. That would be the sum of the girls and boys. So 39 girls plus 4 boys. Let me add those numbers: 39 + 4 equals 43. So there were 43 students in total.\n\nNext, the problem states that 26 students got called back. To find out how many didn't make the cut, I need to subtract the number of students who got called back from the total number of students. So that's 43 minus 26. Let me do the subtraction: 43 - 26. Hmm, 43 minus 20 is 23, and then minus 6 more is 17. So 17 students didn't make the cut.\n\nWait, let me check my math again to be sure. 39 girls plus 4 boys is definitely 43. Then 43 minus 26... Yeah, 26 plus 17 is 43. So that seems right. I don't think I made any mistakes here. The answer should be 17. \n\nFinal Answer: \\boxed{17}\nAlright, let me just go through the steps again to make sure. Total students are girls plus boys, which is 39 + 4 = 43. Then, subtract the number of students who got called back, which is 26. So 43 - 26 = 17. Yep, that's correct. No other steps needed. The answer is definitely 17. \n\nFinal Answer: \\boxed{17}\nOkay, I think that's solid. The problem is straightforward. Total students minus those called back gives the ones who didn't make it. The arithmetic checks out",
+          "extracted_answer": "17",
+          "parsed_answer": "17",
+          "is_correct": true,
+          "latency_ms": 28933.240175247192,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 159,
+            "total_tokens": 671
+          },
+          "prompt_tokens": 159,
+          "completion_tokens": 512,
+          "total_tokens": 671
+        }
+      ],
+      "majority_answer": "17",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 159,
+      "total_latency_ms": 28933.240175247192
+    },
+    {
+      "id": 2,
+      "problem": " Faye had 34 coloring books. If she gave away 3 of them, but then bought 48 more, how many would she have total? ",
+      "gold_answer_str": "79",
+      "gold_answer_int": 79,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Start with the initial number of coloring books, which is 34.\nStep 2: Subtract the number of coloring books she gave away, 34 - 3 = 31.\nStep 3: Add the number of coloring books she bought, 31 + 48 = 79.\nFinal Answer: \\boxed{79}\n\nOkay, let me try to solve this problem. So, Faye starts with 34 coloring books. Then she gives away 3. To find out how many she has left after giving away, I subtract 3 from 34. That would be 34 minus 3, which is 31. Then she buys 48 more. So I need to add those 48 to the 31 she has left. Adding 31 and 48... Let me do that step by step. 31 plus 40 is 71, and then plus 8 more makes 79. So the total number of coloring books she has now is 79. I think that's right. Let me check again: 34 minus 3 is definitely 31. Then 31 plus 48... Yeah, 31 + 48 equals 79. Yep, that seems correct. So the answer should be 79.\n\\boxed{79} \n\nWait, the problem says \"how many would she have total?\" So after giving away 3 and buying 48 more. So initial 34, minus 3 is 31, plus 48 is 79. Yep, same as before. I think that's correct. No mistakes here. The answer is definitely 79. \n\n\\boxed{79}\n\\boxed{79} \n\nHmm, why did I write that twice? Oh, maybe I was testing if I would make a mistake. But no, the answer is definitely 79. So the final answer is 79. \n\n\\boxed{79}\n\\boxed{79} \n\nOkay, I think I've confirmed it enough. The answer is 79. \n\n\\boxed{79}\n\\boxed{79} \n\nWait, the instructions say to output only the final answer once. So I need to make sure I don't have multiple boxes. Let me check the original problem again. The problem is straightforward: start with 34, subtract 3,",
+          "extracted_answer": "79",
+          "parsed_answer": "79",
+          "is_correct": true,
+          "latency_ms": 29021.793842315674,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 154,
+            "total_tokens": 666
+          },
+          "prompt_tokens": 154,
+          "completion_tokens": 512,
+          "total_tokens": 666
+        }
+      ],
+      "majority_answer": "79",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 154,
+      "total_latency_ms": 29021.793842315674
+    },
+    {
+      "id": 3,
+      "problem": " The school cafeteria had 23 apples. If they used 20 to make lunch for the students and then bought 6 more, how many apples would they have? ",
+      "gold_answer_str": "9",
+      "gold_answer_int": 9,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Start with 23 apples.\nStep 2: Subtract the 20 apples used for lunch: 23 - 20 = 3 apples remaining.\nStep 3: Add the 6 new apples bought: 3 + 6 = 9 apples total.\nFinal Answer: \\boxed{9}\n\nOkay, let's see. The problem says the cafeteria had 23 apples. They used 20 for lunch, so I need to subtract those. 23 minus 20 is 3. Then they bought 6 more apples, so adding those to the remaining 3. 3 plus 6 equals 9. That seems straightforward. Wait, is there any trick here? Maybe checking if the operations are correct. Yeah, starting with 23, subtracting 20 leaves 3, then adding 6 gives 9. I don't think I missed anything. The answer should be 9.\n\\boxed{9}\nOkay, let me go through the problem again to make sure. The cafeteria starts with 23 apples. They use 20, so 23 minus 20 is 3. Then they buy 6 more, so 3 plus 6 is 9. Yep, that's correct. No tricks here, just simple arithmetic. The answer is definitely 9.\n\\boxed{9}\nAlright, I think I've confirmed it enough. The steps are correct, and the answer is 9. No issues here.\n\\boxed{9}\nHmm, maybe I should check if there's any alternative way to approach it. Like, adding 6 first? Wait, no, because they used 20 first. So the order matters. Subtracting 20 first and then adding 6 is the right sequence. So 23 - 20 = 3, then 3 + 6 = 9. Yep, same result. All good.\n\\boxed{9}\nI think that's solid. No mistakes detected. Final answer is 9.\n\\boxed{9}\nAlright, I'm confident. The answer is 9.\n\\boxed{9}\nOkay, I've checked it multiple times. The answer is definitely 9. No need to doubt here.\n\\boxed{9}\nFinal check: 23 - 20 = 3, 3 + 6 = 9. Yep. All steps correct. Answer is 9.\n\\boxed{9}\nAlright, I'm",
+          "extracted_answer": "9",
+          "parsed_answer": "9",
+          "is_correct": true,
+          "latency_ms": 28990.20504951477,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 156,
+            "total_tokens": 668
+          },
+          "prompt_tokens": 156,
+          "completion_tokens": 512,
+          "total_tokens": 668
+        }
+      ],
+      "majority_answer": "9",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 156,
+      "total_latency_ms": 28990.20504951477
+    },
+    {
+      "id": 4,
+      "problem": " In a video game, each enemy defeated gives you 9 points. If a level has 11 enemies total and you destroy all but 3 of them, how many points would you earn? ",
+      "gold_answer_str": "72",
+      "gold_answer_int": 72,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of enemies defeated. Total enemies = 11, enemies remaining = 3, so defeated = 11 - 3 = 8.\n\nStep 2: Multiply the number of defeated enemies by points per enemy. 8 * 9 = 72.\n\nFinal Answer: \\boxed{72}\n\nOkay, let me try to solve this problem. So the question is about a video game where defeating each enemy gives 9 points. The level has 11 enemies total, and you destroy all but 3. How many points do you earn?\n\nFirst, I need to figure out how many enemies were actually defeated. The total enemies are 11, and you didn't destroy 3 of them. So the number of defeated enemies should be total minus the remaining ones. That would be 11 - 3. Let me calculate that: 11 minus 3 is 8. So 8 enemies were defeated.\n\nNext, each defeated enemy gives 9 points. So the total points would be the number of defeated enemies multiplied by 9. So 8 times 9. Let me do that multiplication. 8*9 is 72. \n\nWait, is there anything else I need to consider? The problem seems straightforward. They don't mention any bonuses or penalties, just the points per enemy. So I think that's all. The answer should be 72. Let me just check my steps again. Total enemies 11, remaining 3, defeated 8. 8*9=72. Yep, that seems right. I don't see any mistakes here. So the final answer is 72.\n\\boxed{72}",
+          "extracted_answer": "72",
+          "parsed_answer": "72",
+          "is_correct": true,
+          "latency_ms": 19852.545022964478,
+          "usage": {
+            "completion_tokens": 351,
+            "prompt_tokens": 161,
+            "total_tokens": 512
+          },
+          "prompt_tokens": 161,
+          "completion_tokens": 351,
+          "total_tokens": 512
+        }
+      ],
+      "majority_answer": "72",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 351,
+      "total_prompt_tokens": 161,
+      "total_latency_ms": 19852.545022964478
+    },
+    {
+      "id": 5,
+      "problem": " Megan earned 8 points for each bag of cans she recycled. If she had 14 bags, but didn't recycle 5 of them, how many points would she have earned? ",
+      "gold_answer_str": "72",
+      "gold_answer_int": 72,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of bags Megan actually recycled. She had 14 bags but didn't recycle 5, so she recycled 14 - 5 = 9 bags.\n\nStep 2: Calculate the total points by multiplying the number of bags recycled by the points per bag. 9 bags * 8 points per bag = 72 points.\n\nFinal Answer: \\boxed{72}\nOkay, let me try to solve this problem. So Megan earns 8 points for each bag of cans she recycles. She had 14 bags in total, but she didn't recycle 5 of them. The question is asking how many points she would have earned.\n\nFirst, I need to figure out how many bags she actually recycled. If she had 14 bags and didn't recycle 5, then the number of bags she did recycle is 14 minus 5. Let me do that subtraction: 14 - 5 equals 9. So she recycled 9 bags.\n\nNext, to find the total points, I multiply the number of bags she recycled by the points per bag. That would be 9 bags times 8 points each. Let me calculate that: 9 * 8. Hmm, 9 times 8 is 72. So she earned 72 points.\n\nWait, let me double-check. If each bag gives 8 points, and she recycled 9 bags, then yes, 9*8 is definitely 72. The steps make sense. Subtract the unrecycled bags from the total, then multiply by the points per bag. Yep, that seems right. I don't think I made any mistakes here. The answer should be 72.\n\\boxed{72}",
+          "extracted_answer": "72",
+          "parsed_answer": "72",
+          "is_correct": true,
+          "latency_ms": 20244.71879005432,
+          "usage": {
+            "completion_tokens": 358,
+            "prompt_tokens": 160,
+            "total_tokens": 518
+          },
+          "prompt_tokens": 160,
+          "completion_tokens": 358,
+          "total_tokens": 518
+        }
+      ],
+      "majority_answer": "72",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 358,
+      "total_prompt_tokens": 160,
+      "total_latency_ms": 20244.71879005432
+    },
+    {
+      "id": 6,
+      "problem": " April's discount flowers was having a sale where each rose was 4 dollars. If April started with 13 roses and had 4 roses left, how much money did she earn? ",
+      "gold_answer_str": "36",
+      "gold_answer_int": 36,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of roses sold. April started with 13 roses and had 4 left, so she sold 13 - 4 = 9 roses.\n\nStep 2: Calculate the total earnings. Each rose was sold for $4, so 9 roses * $4 = $36.\n\nAnswer: \\boxed{36}\nOkay, let me try to solve this problem. So, April's discount flowers had a sale where each rose was $4. She started with 13 roses and had 4 left. The question is asking how much money she earned. \n\nFirst, I need to figure out how many roses she sold. If she started with 13 and had 4 left, then the number sold would be 13 minus 4. Let me do that subtraction: 13 - 4 equals 9. So she sold 9 roses.\n\nNext, each rose was sold for $4. To find the total earnings, I should multiply the number of roses sold by the price per rose. That would be 9 roses times $4. Let me calculate that: 9 * 4 is 36. \n\nSo, April earned $36 from selling the roses. I think that's all there is to it. Let me just check again. Starting roses 13, left with 4, sold 9. 9 times 4 is indeed 36. Yep, that seems right. The answer should be 36.\n\\boxed{36}",
+          "extracted_answer": "36",
+          "parsed_answer": "36",
+          "is_correct": true,
+          "latency_ms": 17725.19588470459,
+          "usage": {
+            "completion_tokens": 314,
+            "prompt_tokens": 159,
+            "total_tokens": 473
+          },
+          "prompt_tokens": 159,
+          "completion_tokens": 314,
+          "total_tokens": 473
+        }
+      ],
+      "majority_answer": "36",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 314,
+      "total_prompt_tokens": 159,
+      "total_latency_ms": 17725.19588470459
+    },
+    {
+      "id": 7,
+      "problem": " Ned had to wash 9 short sleeve shirts and 21 long sleeve shirts before school. If he had only washed 29 of them by the time school started, how many did he not wash? ",
+      "gold_answer_str": "1",
+      "gold_answer_int": 1,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of shirts Ned had to wash.\nTotal shirts = 9 short sleeve + 21 long sleeve = 30 shirts.\n\nStep 2: Subtract the number of shirts he washed from the total.\nShirts not washed = 30 - 29 = 1.\n\nFinal Answer: \\boxed{1}\nOkay, let me try to solve this problem. So, Ned had to wash 9 short sleeve shirts and 21 long sleeve shirts. First, I need to find out the total number of shirts he was supposed to wash. Adding 9 and 21 together gives 30 shirts in total. Then, the problem says he only washed 29 of them by school time. To find out how many he didn't wash, I subtract the number he did wash from the total. So 30 minus 29 equals 1. That means he didn't wash 1 shirt. Let me check again: 9 + 21 is definitely 30, right? Yeah, 9 plus 20 is 29, plus 1 more is 30. Then 30 minus 29 is 1. Seems straightforward. I don't think I made any mistakes here. The answer should be 1.\n\\boxed{1}",
+          "extracted_answer": "1",
+          "parsed_answer": "1",
+          "is_correct": true,
+          "latency_ms": 15351.156949996948,
+          "usage": {
+            "completion_tokens": 271,
+            "prompt_tokens": 164,
+            "total_tokens": 435
+          },
+          "prompt_tokens": 164,
+          "completion_tokens": 271,
+          "total_tokens": 435
+        }
+      ],
+      "majority_answer": "1",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 271,
+      "total_prompt_tokens": 164,
+      "total_latency_ms": 15351.156949996948
+    },
+    {
+      "id": 8,
+      "problem": " A company invited 47 people to a luncheon, but 7 of them didn't show up. If the tables they had held 5 people each, how many tables do they need? ",
+      "gold_answer_str": "8",
+      "gold_answer_int": 8,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of people who attended the luncheon.\nTotal invited: 47\nPeople who didn't show up: 7\nPeople who attended: 47 - 7 = 40\n\nStep 2: Determine the number of tables needed.\nEach table holds 5 people.\nNumber of tables = 40 / 5 = 8\n\nFinal Answer: \\boxed{8}\nOkay, let me try to figure out this problem. So, the company invited 47 people, but 7 didn't come. First, I need to find out how many people actually attended. That would be 47 minus 7, which is 40. Got that part.\n\nNow, the tables can hold 5 people each. The question is asking how many tables they need. So, if there are 40 people and each table seats 5, I should divide 40 by 5. Let me do that calculation: 40 divided by 5 equals 8. Hmm, that seems straightforward. Wait, but what if there's a remainder? Like, if the division wasn't exact? But in this case, 40 divided by 5 is exactly 8, so no leftover people. So they need exactly 8 tables. \n\nLet me double-check. If each table holds 5, then 8 tables would hold 8 times 5, which is 40. That matches the number of attendees. So yeah, 8 tables are needed. I think that's it. No need to round up or anything because it's a whole number. So the answer should be 8.\n\\boxed{8}",
+          "extracted_answer": "8",
+          "parsed_answer": "8",
+          "is_correct": true,
+          "latency_ms": 19461.079120635986,
+          "usage": {
+            "completion_tokens": 344,
+            "prompt_tokens": 161,
+            "total_tokens": 505
+          },
+          "prompt_tokens": 161,
+          "completion_tokens": 344,
+          "total_tokens": 505
+        }
+      ],
+      "majority_answer": "8",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 344,
+      "total_prompt_tokens": 161,
+      "total_latency_ms": 19461.079120635986
+    },
+    {
+      "id": 9,
+      "problem": " Tom had 5 books. If he sold 4 of them and used the money he earned to buy 38 new books, how many books would Tom have? ",
+      "gold_answer_str": "39",
+      "gold_answer_int": 39,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Tom starts with 5 books.\nStep 2: He sells 4 books, so he has 5 - 4 = 1 book left.\nStep 3: He uses the money from selling 4 books to buy 38 new books.\nStep 4: Total books = 1 + 38 = 39 books.\nAnswer: \\boxed{39}\n\nOkay, let me try to solve this problem. So Tom has 5 books initially. He sells 4 of them. Selling 4 books means he gets rid of those, so he has 5 minus 4, which is 1 book left. Then he uses the money from selling those 4 to buy 38 new books. So he adds those 38 to the 1 he already has. Wait, but does selling 4 books mean he gets money to buy more? The problem says he uses the money earned to buy 38 new books. So the total books he has after selling and buying would be the remaining books plus the new ones. So 1 + 38 equals 39. That seems straightforward. Let me check again. Start with 5, subtract 4 sold, so 1 left. Then buy 38, so total is 1 + 38 = 39. Yeah, that makes sense. I don't think there's any trick here. The answer should be 39.\n\\boxed{39} \n\nWait, but maybe I need to check if there's any other interpretation. For example, does selling 4 books mean he sells them all, and then buys 38? But the problem says he sold 4 and used the money to buy 38. So he still has the 1 book he didn't sell, plus the 38 new ones. So total is 39. Yeah, that's correct. No other steps needed. The answer is definitely 39.\n\\boxed{39} \n\nHmm, but why is this an AIME problem? Maybe there's a trick? Let me read again. \"Tom had 5 books. If he sold 4 of them and used the money he earned to buy 38 new books, how many books would Tom have?\" So he sells 4, so he has 1 left. Then he buys 38, so total is 1 + 38 = 39. I think that's all. Maybe the problem is",
+          "extracted_answer": "39",
+          "parsed_answer": "39",
+          "is_correct": true,
+          "latency_ms": 28978.029012680054,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 155,
+            "total_tokens": 667
+          },
+          "prompt_tokens": 155,
+          "completion_tokens": 512,
+          "total_tokens": 667
+        }
+      ],
+      "majority_answer": "39",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 155,
+      "total_latency_ms": 28978.029012680054
+    },
+    {
+      "id": 10,
+      "problem": " For a birthday party Jerry bought 41 regular sodas and 22 diet sodas. If his fridge would only hold 9 on each shelf, how many shelves would he fill up? ",
+      "gold_answer_str": "7",
+      "gold_answer_int": 7,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of sodas Jerry has. 41 regular sodas + 22 diet sodas = 63 sodas.\n\nStep 2: Divide the total number of sodas by the number of sodas that can fit on one shelf. 63 ÷ 9 = 7.\n\nStep 3: Since 9 × 7 = 63, Jerry can fill up exactly 7 shelves.\n\nAnswer: \\boxed{7}\nOkay, let me try to solve this problem. So, Jerry has 41 regular sodas and 22 diet sodas. The fridge can hold 9 sodas per shelf. We need to find out how many shelves he'll fill up.\n\nFirst, I should add the number of regular and diet sodas to get the total. 41 plus 22 is 63. So, there are 63 sodas in total. \n\nNext, each shelf holds 9 sodas. To find out how many shelves are needed, I divide the total number of sodas by the capacity per shelf. So 63 divided by 9. Let me do that calculation. 9 times 7 is 63, right? So 63 divided by 9 equals 7. \n\nWait, does that mean exactly 7 shelves? Since 9 times 7 is exactly 63, there's no remainder. So Jerry can fill up exactly 7 shelves without any leftover sodas. \n\nI think that's it. The answer should be 7. Let me check again. 41 +22 is definitely 63. Divided by 9 gives 7. Yep, that seems right. No need for partial shelves since it's exact. So the answer is 7.\n\\boxed{7}",
+          "extracted_answer": "7",
+          "parsed_answer": "7",
+          "is_correct": true,
+          "latency_ms": 21208.96577835083,
+          "usage": {
+            "completion_tokens": 375,
+            "prompt_tokens": 161,
+            "total_tokens": 536
+          },
+          "prompt_tokens": 161,
+          "completion_tokens": 375,
+          "total_tokens": 536
+        }
+      ],
+      "majority_answer": "7",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 375,
+      "total_prompt_tokens": 161,
+      "total_latency_ms": 21208.96577835083
+    },
+    {
+      "id": 11,
+      "problem": " For Halloween Debby and her sister combined the candy they received. Debby had 32 pieces of candy while her sister had 42. If they ate 35 pieces the first night, how many pieces do they have left? ",
+      "gold_answer_str": "39",
+      "gold_answer_int": 39,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Combine the candies. Debby had 32 and her sister had 42, so together they have 32 + 42 = 74 pieces.\n\nStep 2: Subtract the candies they ate. They ate 35 pieces, so 74 - 35 = 39 pieces left.\n\nAnswer: \\boxed{39}\nOkay, let me try to solve this problem. So, Debby and her sister combined their candy. Debby had 32 pieces and her sister had 42. First, I need to find the total amount of candy they have together. That would be adding 32 and 42. Let me do that: 32 + 42 equals... 74? Wait, 30+40 is 70, and 2+2 is 4, so yeah, 74 total. \n\nThen, they ate 35 pieces the first night. So, to find out how many are left, I need to subtract the eaten candies from the total. So 74 minus 35. Let me calculate that. 74 minus 30 is 44, and then minus 5 more is 39. So, 39 pieces left. \n\nHmm, that seems straightforward. Let me check again. 32 + 42 is definitely 74. Then 74 - 35. Yeah, 35 + 39 is 74? Let me add 35 and 39. 30+30 is 60, 5+9 is 14, so 60+14 is 74. Yep, that checks out. So the answer should be 39. I think that's it. No complicated steps here, just basic addition and subtraction. Maybe I overcomplicated it, but better safe than sorry. \n\nWait, the problem says \"how many pieces do they have left?\" So after eating 35, the remaining is 74 - 35 = 39. Yep, that's correct. I don't see any tricks or anything here. The answer is 39. Alright, confident with that.\nOkay, let me just go through the steps again to make sure I didn't miss anything. \n\nFirst, combining the candies: Debby's 32 plus sister's 42. 32 + 4",
+          "extracted_answer": "39",
+          "parsed_answer": "39",
+          "is_correct": true,
+          "latency_ms": 29020.00594139099,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 170,
+            "total_tokens": 682
+          },
+          "prompt_tokens": 170,
+          "completion_tokens": 512,
+          "total_tokens": 682
+        }
+      ],
+      "majority_answer": "39",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 170,
+      "total_latency_ms": 29020.00594139099
+    },
+    {
+      "id": 12,
+      "problem": " Emily was planting vegetables in her garden. She started with 41 seeds and planted 29 of them in the big garden and in each of her small gardens put 4 seeds each. How many small gardens did Emily have? ",
+      "gold_answer_str": "3",
+      "gold_answer_int": 3,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of seeds left after planting in the big garden.\nStep 2: Divide the remaining seeds by the number of seeds per small garden to find the number of small gardens.\n\nLet me solve this problem.\n\nOkay, so Emily started with 41 seeds. She planted 29 in the big garden. Let me subtract 29 from 41 to find out how many seeds are left. That would be 41 minus 29, which is 12 seeds remaining. Now, she put 4 seeds in each small garden. To find out how many small gardens she has, I need to divide the remaining seeds by 4. So 12 divided by 4 equals 3. Therefore, Emily has 3 small gardens.\n\nWait, let me check again. 41 total seeds, minus 29 in the big garden: 41 - 29 = 12. Then 12 divided by 4 is indeed 3. Yep, that seems right. So the answer should be 3.\n\n\\boxed{3}\nOkay, let me go through the problem again to make sure I didn't miss anything. Emily starts with 41 seeds. She plants 29 in the big garden, so 41 minus 29 is 12. Then she uses 4 seeds for each small garden. So 12 divided by 4 is 3. That seems straightforward. I don't think there's any trick here. The answer is definitely 3.\n\n\\boxed{3}\nOkay, let me check once more. Total seeds: 41. Big garden: 29. Remaining seeds: 41 - 29 = 12. Each small garden gets 4 seeds. Number of small gardens: 12 / 4 = 3. Yep, that's correct. No other steps needed. The answer is 3.\n\n\\boxed{3}\nAlright, I think that's solid. The answer is 3.\n\n\\boxed{3}\nAlright, I think that's solid. The answer is 3.\n\n\\boxed{3}\nAlright, I think that's solid. The answer is 3.\n\n\\boxed{3}\nAlright, I think that's solid. The answer is 3.\n\n\\boxed{3}\nAlright, I think that's solid. The answer is 3.\n\n\\boxed{3}\nAlright, I think that's solid. The answer is 3.\n\n\\",
+          "extracted_answer": "3",
+          "parsed_answer": "3",
+          "is_correct": true,
+          "latency_ms": 29031.479120254517,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 168,
+            "total_tokens": 680
+          },
+          "prompt_tokens": 168,
+          "completion_tokens": 512,
+          "total_tokens": 680
+        }
+      ],
+      "majority_answer": "3",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 168,
+      "total_latency_ms": 29031.479120254517
+    },
+    {
+      "id": 13,
+      "problem": " For Halloween Emily received 5 pieces of candy from neighbors and 13 pieces from her older sister. If she only ate 9 pieces a day, how long would the candy last her? ",
+      "gold_answer_str": "2",
+      "gold_answer_int": 2,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of candies Emily has.\nTotal = 5 + 13 = 18\n\nStep 2: Divide the total by the number of candies she eats per day.\nDays = 18 / 9 = 2\n\nAnswer: \\boxed{2}\n\nOkay, let me try to solve this problem. So Emily got 5 pieces of candy from neighbors and 13 from her sister. First, I need to find out how many candies she has in total. Adding those together, 5 plus 13 equals 18. Got that part. Now, she eats 9 pieces a day. To find out how many days the candy will last, I should divide the total number of candies by the number she consumes each day. So 18 divided by 9 is 2. That means the candy will last her 2 days. Wait, is there anything I'm missing? Let me check again. Total candies are definitely 5+13=18. Divided by 9 per day, yes, 18/9=2. Seems straightforward. No complications here. The answer should be 2.\n\\boxed{2} \n\nWait, the problem says \"how long would the candy last her?\" So if she eats 9 a day, 18 divided by 9 is exactly 2 days. No leftovers, right? Yeah, 9*2=18. Perfect. So the answer is definitely 2. I think that's all. No need for more steps. The answer is 2.\n\\boxed{2} \n\nHmm, but why did they give the problem in such a simple way? Maybe to test if we can handle the basic operations. Yeah, seems like it. So the answer is 2. I'll go with that.\n\\boxed{2} \n\nWait, but the problem is from AIME. AIME problems are usually more complex. Maybe I misread something? Let me check again. The problem says Emily received 5 from neighbors and 13 from her sister. Total is 5+13=18. She eats 9 a day. So 18 divided by 9 is 2. So the answer is 2. Maybe it's a trick question? Like, does she eat 9 pieces a day starting from the first day? So if she has 18, first day she eats 9, leaving 9, then second day she eats ",
+          "extracted_answer": "2",
+          "parsed_answer": "2",
+          "is_correct": true,
+          "latency_ms": 29023.84877204895,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 160,
+            "total_tokens": 672
+          },
+          "prompt_tokens": 160,
+          "completion_tokens": 512,
+          "total_tokens": 672
+        }
+      ],
+      "majority_answer": "2",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 160,
+      "total_latency_ms": 29023.84877204895
+    },
+    {
+      "id": 14,
+      "problem": " Mike is at the library helping put away books. There are 82 book to put away total but a librarian takes 10 of them and leaves Mike with the rest. If he can fit 9 books on a shelf, how many shelves will he need? ",
+      "gold_answer_str": "8",
+      "gold_answer_int": 8,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of books Mike has to put away. Total books are 82, and the librarian takes 10, so Mike has 82 - 10 = 72 books.\n\nStep 2: Calculate how many shelves are needed for 72 books if each shelf holds 9 books. Divide 72 by 9 to get 8. Since 72 is divisible by 9, Mike needs exactly 8 shelves.\n\nAnswer: \\boxed{8}\nOkay, let me try to solve this problem. So, Mike has to put away books. The total is 82, but a librarian takes 10, so Mike is left with 82 minus 10. Let me do that subtraction: 82 - 10 is 72. So he has 72 books to shelve.\n\nNow, each shelf can hold 9 books. The question is how many shelves he needs. So I need to divide the total number of books by the number of books per shelf. That would be 72 divided by 9. Let me calculate that. 9 times 8 is 72, so 72 divided by 9 is exactly 8. Since there's no remainder, he doesn't need any extra shelves. So the answer should be 8. Wait, is there any chance he might need an extra shelf if there's a remainder? But in this case, 72 is perfectly divisible by 9, so 8 shelves are enough. Yeah, that makes sense. So the answer is 8.\n\n**Final Answer**\n\\boxed{8}\n```\n\n**Final Answer**\n\\boxed{8}\n```",
+          "extracted_answer": "8",
+          "parsed_answer": "8",
+          "is_correct": true,
+          "latency_ms": 19806.790590286255,
+          "usage": {
+            "completion_tokens": 350,
+            "prompt_tokens": 175,
+            "total_tokens": 525
+          },
+          "prompt_tokens": 175,
+          "completion_tokens": 350,
+          "total_tokens": 525
+        }
+      ],
+      "majority_answer": "8",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 350,
+      "total_prompt_tokens": 175,
+      "total_latency_ms": 19806.790590286255
+    },
+    {
+      "id": 15,
+      "problem": " While on vacation, Nancy took 49 pictures at the zoo and 8 at the museum. If she later deleted 38 of the pictures, how many pictures from her vacation did she still have? ",
+      "gold_answer_str": "19",
+      "gold_answer_int": 19,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Calculate the total number of pictures Nancy took.\nTotal pictures = pictures at zoo + pictures at museum = 49 + 8 = 57.\n\nStep 2: Subtract the number of deleted pictures from the total.\nRemaining pictures = total pictures - deleted pictures = 57 - 38 = 19.\n\nFinal Answer: \\boxed{19}\nOkay, let me try to solve this problem. So, Nancy took some pictures during her vacation. The problem says she took 49 at the zoo and 8 at the museum. First, I need to find out how many pictures she had in total. That should be adding the two numbers together. Let me check: 49 plus 8. Hmm, 49 plus 8 is 57. Yeah, that seems right.\n\nThen, she deleted 38 of the pictures. The question is asking how many she still has left. So, I need to subtract the deleted pictures from the total. So, 57 minus 38. Let me do that calculation. 57 minus 30 is 27, and then minus 8 more would be 19. Wait, is that correct? Let me verify. 38 plus 19 is 57? Let me add 38 and 19. 30+10 is 40, 8+9 is 17, so 40+17 is 57. Yes, that checks out. So the answer should be 19. \n\nI think that's all. The steps make sense. Total pictures taken, subtract the ones deleted, and that gives the remaining. No complicated steps here. Just basic arithmetic. I don't see any tricks or anything. So yeah, the answer is 19.\n\\boxed{19}",
+          "extracted_answer": "19",
+          "parsed_answer": "19",
+          "is_correct": true,
+          "latency_ms": 21727.789640426636,
+          "usage": {
+            "completion_tokens": 384,
+            "prompt_tokens": 163,
+            "total_tokens": 547
+          },
+          "prompt_tokens": 163,
+          "completion_tokens": 384,
+          "total_tokens": 547
+        }
+      ],
+      "majority_answer": "19",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 384,
+      "total_prompt_tokens": 163,
+      "total_latency_ms": 21727.789640426636
+    },
+    {
+      "id": 16,
+      "problem": " A new building needed 14 windows. The builder had already installed 8 of them. If it takes 8 hours to install each window, how long will it take him to install the rest? ",
+      "gold_answer_str": "48",
+      "gold_answer_int": 48,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of windows remaining to be installed.\nTotal windows needed: 14\nWindows already installed: 8\nRemaining windows: 14 - 8 = 6\n\nStep 2: Calculate the total time required to install the remaining windows.\nTime per window: 8 hours\nTotal time: 6 windows * 8 hours/window = 48 hours\n\nAnswer: \\boxed{48}\nOkay, let me try to solve this problem. So, the building needs 14 windows total. The builder has already installed 8. So first, I need to find out how many are left. That would be 14 minus 8, which is 6. Right, 6 windows remaining. \n\nNow, each window takes 8 hours to install. So for each of those 6 windows, it's 8 hours. So multiplying 6 by 8 gives the total time. Let me do that math: 6 times 8 is 48. So the total time needed is 48 hours. \n\nWait, is there anything else I need to consider? The problem seems straightforward. No mention of breaks or multiple workers, so it's just the time for the remaining windows. Yeah, so the answer should be 48. Let me check again. 14 total, 8 done, 6 left. 6*8=48. Yep, that's right. I think that's all.\nOkay, so the problem is about calculating the time needed to install the remaining windows. Let me go through the steps again to make sure I didn't miss anything. \n\nFirst, total windows needed are 14. The builder has already installed 8. So subtracting 8 from 14 gives 6 windows left. That part seems simple enough. Then, each window takes 8 hours. So multiplying the number of remaining windows by the time per window gives the total time. 6 times 8 is indeed 48. \n\nI don't see any tricks or hidden details here. The problem states it takes 8 hours per window, and there are no other factors mentioned, like different sizes or complexities of windows. So the calculation should be straightforward. \n\nAnother way to think about it: if each window is 8 hours, then for each window installed, 8 hours are added. So 6 windows would be 6*8. Yep, that's 48. \n\nI think that's solid. No",
+          "extracted_answer": "48",
+          "parsed_answer": "48",
+          "is_correct": true,
+          "latency_ms": 28985.846042633057,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 162,
+            "total_tokens": 674
+          },
+          "prompt_tokens": 162,
+          "completion_tokens": 512,
+          "total_tokens": 674
+        }
+      ],
+      "majority_answer": "48",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 162,
+      "total_latency_ms": 28985.846042633057
+    },
+    {
+      "id": 17,
+      "problem": " A store had 40 oranges in a bin. If they threw away 25 of the old ones and put 21 new ones in the bin how many would be in the bin? ",
+      "gold_answer_str": "36",
+      "gold_answer_int": 36,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Start with 40 oranges.\nStep 2: Subtract the 25 old ones that were thrown away: 40 - 25 = 15.\nStep 3: Add the 21 new ones that were put in the bin: 15 + 21 = 36.\nFinal Answer: \\boxed{36}\nOkay, let me try to solve this problem. So, the store initially has 40 oranges in a bin. Then they throw away 25 old ones. Hmm, so first I need to subtract those 25 from the original 40. Let me do that calculation: 40 minus 25 equals 15. So after throwing away the old ones, there are 15 oranges left. \n\nNext, they add 21 new oranges to the bin. So now I need to add those 21 to the remaining 15. Let me add them up: 15 plus 21. Let me check that again. 15 plus 20 is 35, and then plus 1 more is 36. So the total number of oranges in the bin after adding the new ones should be 36. \n\nWait, let me make sure I didn't mix up any numbers. The problem says they threw away 25 old ones and put 21 new ones. So starting with 40, subtract 25 gives 15, then add 21 gives 36. Yeah, that seems right. I don't think I made any mistakes here. The answer should be 36. \n\nFinal Answer: \\boxed{36}\nOkay, let me go through the steps again to be sure. Starting with 40 oranges. Throwing away 25 means we remove those from the total. So 40 minus 25 is indeed 15. Then adding 21 new ones: 15 plus 21. Breaking it down, 15 + 20 is 35, plus 1 is 36. Yep, that checks out. No other steps involved. The answer is definitely 36. \n\nFinal Answer: \\boxed{36}\nAlright, I think that's solid. No mistakes in the calculations. The answer is 36.\n\nFinal Answer: \\boxed{36}\nOkay, I've verified it multiple times. The answer is 36.",
+          "extracted_answer": "36",
+          "parsed_answer": "36",
+          "is_correct": true,
+          "latency_ms": 29021.199703216553,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 161,
+            "total_tokens": 673
+          },
+          "prompt_tokens": 161,
+          "completion_tokens": 512,
+          "total_tokens": 673
+        }
+      ],
+      "majority_answer": "36",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 161,
+      "total_latency_ms": 29021.199703216553
+    },
+    {
+      "id": 18,
+      "problem": " At lunch a waiter had 7 customers and 5 of them didn't leave a tip. If he got $3 each from the ones who did tip, how much money did he earn? ",
+      "gold_answer_str": "6",
+      "gold_answer_int": 6,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of customers who left a tip. There are 7 customers in total, and 5 didn't leave a tip, so 7 - 5 = 2 customers left a tip.\n\nStep 2: Calculate the total amount of money from the tips. Each of the 2 customers left $3, so 2 * $3 = $6.\n\nStep 3: Add the total amount of money from the tips to the money from the customers who didn't tip. However, the problem does not mention any money from the customers who didn't tip, so we assume they paid the bill but didn't leave additional tips. Therefore, the total money earned is just the tips, which is $6.\n\nFinal Answer: \\boxed{6}\nOkay, let me try to solve this problem. So, the waiter had 7 customers. Out of these, 5 didn't leave a tip. That means the remaining customers did tip. Let me calculate how many that is. If there are 7 total and 5 didn't tip, then 7 minus 5 is 2. So, 2 customers left a tip. \n\nEach of those 2 customers gave $3. So, the total tips would be 2 multiplied by 3. Let me do that math: 2 * 3 equals 6. So, the total money from tips is $6. \n\nWait, the problem says \"how much money did he earn?\" Now, I need to make sure if there's any other money involved. The problem mentions that 5 customers didn't leave a tip. But it doesn't say anything about them not paying for their meals. Typically, in such problems, unless stated otherwise, we assume that the customers paid for their meals, but the tips are extra. However, the problem doesn't mention the base amount they paid for the meal, only the tips. \n\nSo, the question is only asking about the money earned from tips. Since the ones who didn't tip didn't leave any extra money, the total earnings would just be the tips. Therefore, the answer should be $6. \n\nLet me check again. Total customers: 7. 5 didn't tip, so 2 did. Each tip is $3. 2*3=6. Yep, that seems right. The problem doesn't mention any other sources of income, so the answer is 6. \n\nFinal Answer: \\boxed{6}\nAlright, let me go through the problem again to",
+          "extracted_answer": "6",
+          "parsed_answer": "6",
+          "is_correct": true,
+          "latency_ms": 29010.94698905945,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 160,
+            "total_tokens": 672
+          },
+          "prompt_tokens": 160,
+          "completion_tokens": 512,
+          "total_tokens": 672
+        }
+      ],
+      "majority_answer": "6",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 160,
+      "total_latency_ms": 29010.94698905945
+    },
+    {
+      "id": 19,
+      "problem": " For Halloween Faye scored 47 pieces of candy. She ate 25 pieces the first night and then her sister gave her 40 more pieces. How many pieces of candy does Faye have now? ",
+      "gold_answer_str": "62",
+      "gold_answer_int": 62,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Start with the initial amount of candy Faye had, which is 47 pieces.\n\nStep 2: Subtract the number of pieces she ate, which is 25. So, 47 - 25 = 22.\n\nStep 3: Add the number of pieces her sister gave her, which is 40. So, 22 + 40 = 62.\n\nTherefore, Faye has 62 pieces of candy now.\n\nAnswer: \\boxed{62}\nOkay, let me try to solve this problem. So, Faye started with 47 pieces of candy. The first thing she did was eat 25 pieces. Hmm, so I need to subtract 25 from 47. Let me do that calculation: 47 minus 25. Let's see, 47 minus 20 is 27, and then minus 5 more is 22. So after eating, she has 22 left. Then her sister gave her 40 more pieces. So now I need to add 40 to the remaining 22. 22 plus 40... that's 62. Wait, is there any chance I messed up the subtraction or addition? Let me check again. 47 minus 25: 25 plus 22 is 47, right? Yes, because 25 + 20 is 45, plus 2 is 47. So that's correct. Then 22 + 40 is definitely 62. I think that's right. So the answer should be 62. \n\nAnswer: \\boxed{62}\nAlright, let me go through the steps again to make sure. Starting with 47, subtract 25: 47 - 25 equals 22. Then adding 40: 22 + 40 equals 62. Yep, that seems correct. No mistakes there. So the final answer is 62.\n\nAnswer: \\boxed{62}\nOkay, I think I've confirmed it enough. The answer is definitely 62.\n\nAnswer: \\boxed{62}\nAlright, I'm confident now. The answer is 62.\n\nAnswer: \\boxed{62}\nAlright, I've checked the calculations multiple times. Starting with 47, subtract 25 to get 22, then add",
+          "extracted_answer": "62",
+          "parsed_answer": "62",
+          "is_correct": true,
+          "latency_ms": 29051.669359207153,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 165,
+            "total_tokens": 677
+          },
+          "prompt_tokens": 165,
+          "completion_tokens": 512,
+          "total_tokens": 677
+        }
+      ],
+      "majority_answer": "62",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 165,
+      "total_latency_ms": 29051.669359207153
+    },
+    {
+      "id": 20,
+      "problem": " A group of 4 friends went into a restaurant. The chef already had 9 chicken wings cooked but cooked 7 more for the group. If they each got the same amount how many would each person get? ",
+      "gold_answer_str": "4",
+      "gold_answer_int": 4,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of chicken wings. The chef had 9 already and cooked 7 more, so 9 + 7 = 16 wings total.\n\nStep 2: Divide the total number of wings by the number of friends. There are 4 friends, so 16 ÷ 4 = 4.\n\nEach person would get 4 chicken wings.\n\nAnswer: \\boxed{4}\nOkay, let me try to solve this problem. So, there are 4 friends who went into a restaurant. The chef already had 9 chicken wings cooked and then made 7 more for the group. The question is asking how many wings each person would get if they all got the same amount.\n\nFirst, I need to figure out the total number of wings. The chef had 9 already, and then cooked 7 more. So adding those together, 9 + 7 equals 16. That makes sense. So there are 16 wings in total.\n\nNow, there are 4 friends, and they each need to get the same number of wings. To find out how many each person gets, I should divide the total number of wings by the number of friends. So that's 16 divided by 4. Let me do that calculation. 16 divided by 4 is 4. \n\nWait, is there any chance I missed something? Let me check again. The chef had 9, cooked 7 more, so total is definitely 16. Divided by 4 people, each gets 4. Yeah, that seems right. I don't think there's any trick here. The problem seems straightforward. So the answer should be 4. \n\nI think that's all. Each person gets 4 wings. The answer is 4.\n\\boxed{4} \n\n**Final Answer**\n\\boxed{4}\n\\boxed{4}\n```",
+          "extracted_answer": "4",
+          "parsed_answer": "4",
+          "is_correct": true,
+          "latency_ms": 22022.948265075684,
+          "usage": {
+            "completion_tokens": 389,
+            "prompt_tokens": 164,
+            "total_tokens": 553
+          },
+          "prompt_tokens": 164,
+          "completion_tokens": 389,
+          "total_tokens": 553
+        }
+      ],
+      "majority_answer": "4",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 389,
+      "total_prompt_tokens": 164,
+      "total_latency_ms": 22022.948265075684
+    },
+    {
+      "id": 21,
+      "problem": " John earned 8 dollars for each lawn he mowed. If he had 15 lawns to mow, but forgot to mow 7 of them, how much money did he actually earn? ",
+      "gold_answer_str": "64",
+      "gold_answer_int": 64,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of lawns John actually mowed.\nJohn had 15 lawns to mow but forgot to mow 7. So, he mowed 15 - 7 = 8 lawns.\n\nStep 2: Calculate the total earnings.\nHe earns $8 per lawn, so for 8 lawns, he earned 8 * 8 = $64.\n\nAnswer: \\boxed{64}\nOkay, let me try to solve this problem. So, John was supposed to mow 15 lawns, but he forgot 7 of them. First, I need to figure out how many lawns he actually mowed. That would be the total lawns minus the ones he forgot. So 15 minus 7 is 8 lawns. Got that part.\n\nNow, he earns $8 for each lawn he mows. So if he mowed 8 lawns, his total earnings would be 8 dollars multiplied by the number of lawns. So 8 times 8. Let me do that multiplication. 8 times 8 is 64. So he earned $64. \n\nWait, let me check again. Total lawns 15, forgot 7, so 15-7=8. Yep, that's right. Then 8 lawns times $8 each is indeed 64. I don't think I made any mistakes here. The answer should be 64. \n\nHmm, just to make sure, maybe I can think of another way. If he had mowed all 15, he would have earned 15*8=120. But he didn't mow 7, so he lost 7*8=56. So 120-56=64. Yep, same result. So definitely, the answer is 64. \n\nI think that's solid. No issues here. The answer is 64.\n\\boxed{64}\n```",
+          "extracted_answer": "64",
+          "parsed_answer": "64",
+          "is_correct": true,
+          "latency_ms": 23536.084413528442,
+          "usage": {
+            "completion_tokens": 416,
+            "prompt_tokens": 163,
+            "total_tokens": 579
+          },
+          "prompt_tokens": 163,
+          "completion_tokens": 416,
+          "total_tokens": 579
+        }
+      ],
+      "majority_answer": "64",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 416,
+      "total_prompt_tokens": 163,
+      "total_latency_ms": 23536.084413528442
+    },
+    {
+      "id": 22,
+      "problem": " A pet shelter had 5 puppies when another 35 were brought in. If 8 puppies a day are adopted, how long would it take for all of them to be adopted? ",
+      "gold_answer_str": "5",
+      "gold_answer_int": 5,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of puppies. 5 + 35 = 40.\nStep 2: Divide the total number by the number adopted per day. 40 / 8 = 5.\nStep 3: Since the number divides evenly, the answer is 5 days.\n\nAnswer: \\boxed{5}\n\nOkay, let me try to solve this AIME problem. So the problem is about a pet shelter that had 5 puppies and then another 35 were brought in. Then, 8 puppies a day are adopted. We need to find out how long it would take for all of them to be adopted. \n\nFirst, I need to figure out the total number of puppies. The shelter initially had 5, and then 35 more were added. So adding those together: 5 + 35 equals 40. That seems straightforward. \n\nNext, if 8 puppies are adopted each day, I need to determine how many days it will take to adopt all 40 puppies. To do this, I should divide the total number of puppies by the number adopted per day. So 40 divided by 8. Let me check that calculation. 8 times 5 is 40, so 40 divided by 8 is indeed 5. \n\nWait, but I need to make sure there's no trick here. The problem says \"how long would it take for all of them to be adopted.\" Since 8 puppies are adopted each day and 40 is exactly divisible by 8, there's no remainder. That means after 5 days, all puppies would be adopted. \n\nI don't think there's any catch here. The problem seems pretty straightforward. Maybe sometimes these problems have something like partial days or something, but since the division comes out even, it's just 5 days. \n\nSo the answer should be 5. Let me just recap: total puppies 5 + 35 = 40. Divided by 8 per day gives 5 days. Yep, that's it. I think that's correct.\nOkay, so the problem is about calculating the number of days required to adopt all the puppies. Let me go through the steps again to make sure I didn't miss anything.\n\nFirst, the shelter starts with 5 puppies. Then, 35 more are brought in. Adding those together gives 5 + 35 = 40 puppies total. That seems right. \n\nThen, 8",
+          "extracted_answer": "5",
+          "parsed_answer": "5",
+          "is_correct": true,
+          "latency_ms": 29034.23810005188,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 159,
+            "total_tokens": 671
+          },
+          "prompt_tokens": 159,
+          "completion_tokens": 512,
+          "total_tokens": 671
+        }
+      ],
+      "majority_answer": "5",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 159,
+      "total_latency_ms": 29034.23810005188
+    },
+    {
+      "id": 23,
+      "problem": " A new building needed 9 windows. The builder had already installed 6 of them. If it takes 6 hours to install each window, how long will it take him to install the rest? ",
+      "gold_answer_str": "18",
+      "gold_answer_int": 18,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of windows remaining to be installed. Total windows needed is 9, already installed is 6, so remaining is 9 - 6 = 3.\n\nStep 2: Calculate the total time required for the remaining windows. Each window takes 6 hours, so 3 windows * 6 hours per window = 18 hours.\n\nFinal Answer: \\boxed{18}\nOkay, let me try to solve this AIME problem. So the problem says a building needed 9 windows, and the builder has already installed 6. Each window takes 6 hours to install. We need to find out how long it will take to install the rest.\n\nFirst, I need to figure out how many windows are left. The total needed is 9, and they've already put in 6. So subtracting 6 from 9 gives 3 windows remaining. That seems straightforward.\n\nNext, each window takes 6 hours. So if there are 3 windows left, the total time should be 3 multiplied by 6 hours. Let me do that math: 3 times 6 is 18. So the total time needed is 18 hours.\n\nWait, is there anything else I need to consider? The problem doesn't mention any breaks or additional factors, so it's just a simple multiplication. Yeah, I think that's all. The answer should be 18. Let me double-check the steps. 9 total minus 6 done equals 3 left. 3 times 6 hours is indeed 18. Yep, that makes sense. So the final answer is 18.\n\\boxed{18}",
+          "extracted_answer": "18",
+          "parsed_answer": "18",
+          "is_correct": true,
+          "latency_ms": 19348.628044128418,
+          "usage": {
+            "completion_tokens": 341,
+            "prompt_tokens": 161,
+            "total_tokens": 502
+          },
+          "prompt_tokens": 161,
+          "completion_tokens": 341,
+          "total_tokens": 502
+        }
+      ],
+      "majority_answer": "18",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 341,
+      "total_prompt_tokens": 161,
+      "total_latency_ms": 19348.628044128418
+    },
+    {
+      "id": 24,
+      "problem": " A teacher had 34 worksheets to grade. If she graded 7, but then another 36 were turned in, how many worksheets would she have to grade? ",
+      "gold_answer_str": "63",
+      "gold_answer_int": 63,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Start with the initial number of worksheets, which is 34.\nStep 2: Subtract the number she already graded, which is 7. So, 34 - 7 = 27.\nStep 3: Add the number of worksheets that were turned in later, which is 36. So, 27 + 36 = 63.\nFinal Answer: \\boxed{63}\n\nOkay, let's see. The teacher started with 34 worksheets. She graded 7, so I need to subtract that from the original amount. 34 minus 7 is 27. Then, another 36 worksheets were turned in. So, those need to be added to the remaining ones. Adding 27 and 36 gives 63. So the total number she has to grade now is 63. Wait, is there any chance I mixed up the operations? Let me check again. Original 34, subtract 7 graded, so 27 left. Then 36 more are added, so 27 + 36. 27 plus 30 is 57, plus 6 is 63. Yeah, that seems right. I don't think I made a mistake here. The answer should be 63.\n\\boxed{63}\nOkay, let me go through the problem again to make sure. The teacher had 34 worksheets. She graded 7, so subtract 7 from 34. 34 - 7 equals 27. Then, another 36 were turned in, so add those to the remaining 27. 27 + 36 is 63. Yep, that's correct. No mistakes here. The answer is definitely 63.\n\\boxed{63} \n\n**Final Answer**\n\\boxed{63}\n\\boxed{63}\n\\boxed{63} \n\n**Final Answer**\n\\boxed{63}\n\\boxed{63}\n\\boxed{63} \n\n**Final Answer**\n\\boxed{63}\n\\boxed{63}\n\\boxed{63} \n\n**Final Answer**\n\\boxed{63}\n\\boxed{63}\n\\boxed{63} \n\n**Final Answer**\n\\boxed{63}\n\\boxed{63}\n\\boxed{63} \n\n**Final Answer**\n\\boxed{63}\n\\boxed{63",
+          "extracted_answer": "63",
+          "parsed_answer": "63",
+          "is_correct": true,
+          "latency_ms": 32408.34665298462,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 156,
+            "total_tokens": 668
+          },
+          "prompt_tokens": 156,
+          "completion_tokens": 512,
+          "total_tokens": 668
+        }
+      ],
+      "majority_answer": "63",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 156,
+      "total_latency_ms": 32408.34665298462
+    },
+    {
+      "id": 25,
+      "problem": " While playing at the arcade, Frank won 33 tickets playing 'whack a mole' and 9 tickets playing 'skee ball'. If he was trying to buy candy that cost 6 tickets a piece, how many could he buy? ",
+      "gold_answer_str": "7",
+      "gold_answer_int": 7,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Calculate the total number of tickets Frank has.\nStep 2: Divide the total number of tickets by the cost per candy to find the number of candies he can buy.\n\nLet me solve this problem.\n\nStep 1: Frank has 33 tickets from whack a mole and 9 tickets from skee ball. So, the total number of tickets is 33 + 9 = 42 tickets.\nStep 2: Each candy costs 6 tickets. To find out how many candies Frank can buy, we divide the total tickets by the cost per candy: 42 ÷ 6 = 7.\n\nTherefore, Frank can buy 7 candies.\n\n\\boxed{7}\nOkay, let me check this problem again. Frank won 33 tickets from whack a mole and 9 from skee ball. Adding those together gives 33 + 9. Let me do that math: 33 plus 9 is 42. Right, so he has 42 tickets total. The candies cost 6 tickets each. So to find out how many he can buy, I need to divide 42 by 6. Dividing 42 by 6 gives 7. Wait, 6 times 7 is 42, so that's exact. There's no remainder, so he can buy exactly 7 candies. The answer should be 7. Yeah, that makes sense. I don't think I made any mistakes here. The steps are straightforward: add the tickets, divide by the cost per candy. The result is a whole number, so no need to worry about partial candies. So the final answer is 7.\n\n\\boxed{7}\nAlright, let me go through the problem once more to make sure. Frank has 33 tickets from whack a mole and 9 from skee ball. Adding those gives 33 + 9 = 42 tickets. Each candy costs 6 tickets, so dividing 42 by 6 gives 7. Since 6 multiplied by 7 is exactly 42, there are no leftover tickets. Therefore, Frank can buy 7 candies. The calculation seems correct. No steps skipped or errors in arithmetic. The answer is definitely 7.\n\n\\boxed{7}\nOkay, I think I've verified it enough. The answer is 7. Let me just make sure there's no trick in the question. The problem says \"how many could he buy,\" and since 42",
+          "extracted_answer": "7",
+          "parsed_answer": "7",
+          "is_correct": true,
+          "latency_ms": 33375.14281272888,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 171,
+            "total_tokens": 683
+          },
+          "prompt_tokens": 171,
+          "completion_tokens": 512,
+          "total_tokens": 683
+        }
+      ],
+      "majority_answer": "7",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 171,
+      "total_latency_ms": 33375.14281272888
+    },
+    {
+      "id": 26,
+      "problem": " At a restaurant each adult meal costs $7 and kids eat free. If a group of 13 people came in and 9 were kids, how much would it cost for the group to eat? ",
+      "gold_answer_str": "28",
+      "gold_answer_int": 28,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of adults in the group. Total people = 13, kids = 9, so adults = 13 - 9 = 4.\n\nStep 2: Calculate the total cost. Each adult meal costs $7, so 4 adults * $7 = $28.\n\nStep 3: Since kids eat free, there is no additional cost for them. Total cost is $28.\n\nAnswer: \\boxed{28}\nOkay, let's see. The problem is about calculating the cost for a group of people eating at a restaurant where adults pay and kids eat free. So, first, I need to figure out how many adults are in the group. The total number of people is 13, and out of those, 9 are kids. So, subtracting the kids from the total gives the number of adults. That would be 13 minus 9, which equals 4 adults. \n\nNext, each adult meal costs $7. So, multiplying the number of adults by the cost per adult meal should give the total cost. That's 4 times 7, which is 28. Since the kids are eating free, there's no extra charge for them. Therefore, the total cost for the group is just the cost for the adults, which is $28. \n\nWait, let me double-check. Total people 13, 9 kids, so adults are 4. 4 times 7 is indeed 28. No other costs mentioned. Yep, that seems right. So the answer should be 28. \n\nI think that's all. The steps make sense. No complicated calculations here. Just basic subtraction and multiplication. No need to consider anything else. The answer is 28.\nOkay, so the problem is straightforward. Let me go through it again to make sure I didn't miss anything. \n\nThe group has 13 people total. 9 are kids, so adults are 13 - 9 = 4. Each adult meal is $7. So 4 * 7 = 28. Kids eat free, so no cost for them. Total cost is $28. Yep, that's correct. \n\nNo other factors mentioned, like discounts or taxes. The problem is simple. So the answer is definitely 28. I think that's all. No mistakes here.\nAlright, I'm confident with this answer. The steps are clear and the calculations are correct. The final",
+          "extracted_answer": "28",
+          "parsed_answer": "28",
+          "is_correct": true,
+          "latency_ms": 36180.95111846924,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 162,
+            "total_tokens": 674
+          },
+          "prompt_tokens": 162,
+          "completion_tokens": 512,
+          "total_tokens": 674
+        }
+      ],
+      "majority_answer": "28",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 162,
+      "total_latency_ms": 36180.95111846924
+    },
+    {
+      "id": 27,
+      "problem": " Paige had 43 math problems and 12 science problems for homework. If she finished 44 of the problems at school, how many problems did she have to do for homework? ",
+      "gold_answer_str": "11",
+      "gold_answer_int": 11,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of problems.\nStep 2: Subtract the number of problems she finished at school.\n\nTotal problems = 43 + 12 = 55\nProblems left = 55 - 44 = 11\n\nAnswer: \\boxed{11}\nOkay, let me try to solve this problem. So Paige had 43 math problems and 12 science problems. That means the total number of problems she had is 43 plus 12. Let me add those up: 43 + 12 equals 55. Then, she finished 44 of them at school. To find out how many she still has to do, I subtract the ones she did from the total. So 55 minus 44 is 11. Wait, that seems straightforward. Let me check again. 43 math and 12 science add up to 55 total. If she did 44, then 55 - 44 is definitely 11. Yeah, that makes sense. I don't think I made any mistakes here. The answer should be 11.\n\\boxed{11}",
+          "extracted_answer": "11",
+          "parsed_answer": "11",
+          "is_correct": true,
+          "latency_ms": 18897.311210632324,
+          "usage": {
+            "completion_tokens": 247,
+            "prompt_tokens": 161,
+            "total_tokens": 408
+          },
+          "prompt_tokens": 161,
+          "completion_tokens": 247,
+          "total_tokens": 408
+        }
+      ],
+      "majority_answer": "11",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 247,
+      "total_prompt_tokens": 161,
+      "total_latency_ms": 18897.311210632324
+    },
+    {
+      "id": 28,
+      "problem": " Rachel was playing a video game where she scores 9 points for each treasure she finds. If she found 5 treasures on the first level and 2 on the second, what would her score be? ",
+      "gold_answer_str": "63",
+      "gold_answer_int": 63,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Calculate the total number of treasures found.\nStep 2: Multiply the total by the points per treasure to get the score.\n\nStep 1: 5 treasures + 2 treasures = 7 treasures.\nStep 2: 7 treasures * 9 points per treasure = 63 points.\n\nAnswer: \\boxed{63}\nOkay, let me try to solve this problem. So Rachel gets 9 points for each treasure she finds. On the first level, she found 5 treasures, and on the second level, 2. The question is asking for her total score.\n\nFirst, I need to figure out how many treasures she found in total. That would be adding the treasures from both levels. So 5 plus 2 equals 7 treasures. Then, since each treasure is worth 9 points, I multiply the total number of treasures by 9. \n\nLet me do the math: 7 times 9. Hmm, 7 times 9 is 63. So her total score should be 63 points. \n\nWait, is there anything else I need to consider? The problem seems straightforward. It doesn't mention any bonuses or penalties, just the points per treasure. So adding them up and multiplying by 9 should be correct. Yeah, I think that's all. The answer should be 63.\n\\boxed{63}",
+          "extracted_answer": "63",
+          "parsed_answer": "63",
+          "is_correct": true,
+          "latency_ms": 19009.005784988403,
+          "usage": {
+            "completion_tokens": 281,
+            "prompt_tokens": 162,
+            "total_tokens": 443
+          },
+          "prompt_tokens": 162,
+          "completion_tokens": 281,
+          "total_tokens": 443
+        }
+      ],
+      "majority_answer": "63",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 281,
+      "total_prompt_tokens": 162,
+      "total_latency_ms": 19009.005784988403
+    },
+    {
+      "id": 29,
+      "problem": " A waiter at 'The Greasy Spoon' restaurant had 26 customers to wait on. During the lunch rush he added another 27 customers. If 27 of the customers didn't leave him a tip, how many customers did leave a tip? ",
+      "gold_answer_str": "26",
+      "gold_answer_int": 26,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of customers.\nStep 2: Subtract the number of customers who didn't leave a tip.\nStep 3: The result is the number of customers who left a tip.\n\nStep 1: Total customers = 26 + 27 = 53.\nStep 2: 53 - 27 = 26.\nStep 3: Therefore, 26 customers left a tip.\n\nAnswer: \\boxed{26}\nOkay, let me try to solve this AIME problem. So, the problem is about a waiter who had 26 customers initially and then added another 27 during the lunch rush. So first, I need to find the total number of customers. That would be 26 plus 27. Let me check that again: 26 + 27. Hmm, 26 + 20 is 46, plus 7 more is 53. So total customers are 53.\n\nNow, the problem says that 27 of these customers didn't leave a tip. So to find out how many did leave a tip, I need to subtract the number of customers who didn't tip from the total. So that's 53 minus 27. Let me do that calculation. 53 - 27. Well, 53 minus 20 is 33, then minus 7 more is 26. So that gives 26 customers who left a tip.\n\nWait, let me make sure I didn't mix up any numbers. The initial customers were 26, then 27 more added, so total is definitely 53. Then 27 didn't tip, so subtracting 27 from 53 gives 26. Yeah, that seems right. I don't think I made any mistakes here. The answer should be 26. Let me just confirm once more. 26 + 27 is 53. 53 - 27 is 26. Yep, that's correct. So the number of customers who left a tip is 26. \n\nAnswer: \\boxed{26}\nAlright, let me go through the problem again to ensure I didn't miss anything. The waiter started with 26 customers and added 27 more, making the total 53. Out of these, 27 didn't leave a tip. So the ones who did tip",
+          "extracted_answer": "26",
+          "parsed_answer": "26",
+          "is_correct": true,
+          "latency_ms": 29030.69806098938,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 174,
+            "total_tokens": 686
+          },
+          "prompt_tokens": 174,
+          "completion_tokens": 512,
+          "total_tokens": 686
+        }
+      ],
+      "majority_answer": "26",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 174,
+      "total_latency_ms": 29030.69806098938
+    },
+    {
+      "id": 30,
+      "problem": " A toy store had 17 giant stuffed bears in stock when they got another shipment with 10 bears in it. The put the bears onto shelves with 9 on each shelf. How many shelves did they use? ",
+      "gold_answer_str": "3",
+      "gold_answer_int": 3,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of bears. 17 + 10 = 27.\n\nStep 2: Divide the total number of bears by the number of bears per shelf. 27 ÷ 9 = 3.\n\nStep 3: Since 27 is divisible by 9, they used exactly 3 shelves.\n\nFinal Answer: \\boxed{3}\nOkay, let me try to solve this problem. So, the toy store had 17 bears in stock and then got another shipment of 10. First, I need to find the total number of bears. That would be 17 plus 10, which equals 27. Got that part.\n\nNext, they put the bears onto shelves with 9 on each shelf. The question is asking how many shelves they used. So, I think I need to divide the total number of bears by the number per shelf. So 27 divided by 9. Let me do that calculation. 27 divided by 9 is 3. Hmm, that seems straightforward.\n\nWait, but I should make sure that there's no remainder here. Because if there was a remainder, they would need an extra shelf. But 9 times 3 is exactly 27, so there's no leftover bears. That means they used exactly 3 shelves. \n\nLet me double-check. 17 plus 10 is definitely 27. Divided by 9 per shelf, 27 divided by 9 is 3. Yep, that's correct. So the answer should be 3. I don't think I made any mistakes here. The key steps were adding the bears first and then dividing by the number per shelf. Since it divides evenly, there's no need for an extra shelf. So yeah, 3 shelves in total.\n\\boxed{3}",
+          "extracted_answer": "3",
+          "parsed_answer": "3",
+          "is_correct": true,
+          "latency_ms": 21613.677501678467,
+          "usage": {
+            "completion_tokens": 382,
+            "prompt_tokens": 166,
+            "total_tokens": 548
+          },
+          "prompt_tokens": 166,
+          "completion_tokens": 382,
+          "total_tokens": 548
+        }
+      ],
+      "majority_answer": "3",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 382,
+      "total_prompt_tokens": 166,
+      "total_latency_ms": 21613.677501678467
+    },
+    {
+      "id": 31,
+      "problem": " Gwen was organizing her book case making sure each of the shelves had exactly 4 books on it. If she had 5 shelves of mystery books and 3 shelves of picture books, how many books did she have total? ",
+      "gold_answer_str": "32",
+      "gold_answer_int": 32,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the total number of shelves.\nStep 2: Multiply the total number of shelves by the number of books per shelf.\n\nSo, Gwen had 5 + 3 = 8 shelves. Each shelf has 4 books, so 8 × 4 = 32 books total.\n\nAnswer: \\boxed{32}\nOkay, let me try to solve this problem. So Gwen has a bookcase with shelves, and each shelf has exactly 4 books. She has 5 shelves of mystery books and 3 shelves of picture books. The question is asking for the total number of books she has.\n\nFirst, I need to figure out how many shelves there are in total. The problem says 5 shelves for mystery and 3 for picture books. So adding those together, 5 + 3 equals 8 shelves. That seems straightforward.\n\nNow, each shelf, regardless of the type of books, has exactly 4 books. So if there are 8 shelves, each with 4 books, the total number of books would be the number of shelves multiplied by the number of books per shelf. So that's 8 times 4. Let me calculate that: 8 * 4 is 32. \n\nWait, is there any chance that the shelves are different in some way? Like maybe the mystery shelves have different numbers? But the problem says each shelf has exactly 4 books. So whether they are mystery or picture books, each shelf has 4. So adding the shelves together and multiplying by 4 should be correct. \n\nLet me double-check the arithmetic. 5 + 3 is definitely 8. 8 times 4: 8*4 is 32. Yeah, that seems right. I don't think there's any trick here. The answer should be 32. \n\nSo the steps are: add the number of shelves (5 + 3 = 8), then multiply by the number of books per shelf (8 * 4 = 32). That gives the total number of books. I think that's all there is to it. No complicated steps or anything. Just basic addition and multiplication. \n\nAnother way to think about it: 5 shelves * 4 books = 20 mystery books, and 3 shelves * 4 books = 12 picture books. Then 20 + 12 = 32 total books. Yep, same answer. So either way, the total is 32. \n\nI don",
+          "extracted_answer": "32",
+          "parsed_answer": "32",
+          "is_correct": true,
+          "latency_ms": 29018.88132095337,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 167,
+            "total_tokens": 679
+          },
+          "prompt_tokens": 167,
+          "completion_tokens": 512,
+          "total_tokens": 679
+        }
+      ],
+      "majority_answer": "32",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 167,
+      "total_latency_ms": 29018.88132095337
+    },
+    {
+      "id": 32,
+      "problem": " Wendy uploaded 79 pictures to Facebook. She put 44 pics into one album and put the rest into 5 different albums. How many pictures were in each album? ",
+      "gold_answer_str": "7",
+      "gold_answer_int": 7,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the number of pictures not in the first album. 79 - 44 = 35.\nStep 2: Divide the remaining pictures into 5 albums. 35 / 5 = 7.\nStep 3: Each of the 5 albums has 7 pictures.\n\nAnswer: \\boxed{7}\n\nOkay, let's see. Wendy uploaded 79 pictures total. She put 44 into one album, so the rest are 79 minus 44. Let me calculate that: 79 - 44 is 35. Then she split those 35 into 5 different albums. So each album would have 35 divided by 5. That's 7. So each of the five albums has 7 pictures. The answer should be 7. Wait, the problem says \"how many pictures were in each album?\" So the answer is 7. Yeah, that makes sense. Let me check again. 44 plus 5 times 7 is 44 + 35 = 79. Yep, that adds up. So the answer is 7.\n\\boxed{7}\nOkay, let me go through this problem again to make sure I didn't miss anything. The problem states that Wendy uploaded 79 pictures. She put 44 into one album and the rest into 5 different albums. The question is asking how many pictures were in each of those 5 albums. \n\nFirst, I need to find out how many pictures are left after putting 44 into the first album. So subtracting 44 from the total: 79 - 44 = 35. That gives me 35 pictures remaining. These 35 pictures are divided equally into 5 albums. To find the number per album, I divide 35 by 5, which is 7. \n\nWait, is there any chance that the problem is asking for the total in all albums or something else? No, the wording says \"how many pictures were in each album?\" referring to the 5 different albums. So each of those 5 has 7. \n\nLet me verify once more. 44 in the first album, 5 albums with 7 each: 5*7=35. 44+35=79, which matches the total. So the answer is definitely 7. \n\nI think that's solid. No mistakes here. The answer",
+          "extracted_answer": "7",
+          "parsed_answer": "7",
+          "is_correct": true,
+          "latency_ms": 29023.005723953247,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 159,
+            "total_tokens": 671
+          },
+          "prompt_tokens": 159,
+          "completion_tokens": 512,
+          "total_tokens": 671
+        }
+      ],
+      "majority_answer": "7",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 159,
+      "total_latency_ms": 29023.005723953247
+    },
+    {
+      "id": 33,
+      "problem": " The schools debate team had 5 boys and 40 girls on it. If they were split into groups of 9 how many groups could they make? ",
+      "gold_answer_str": "5",
+      "gold_answer_int": 5,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of students on the debate team.\nTotal students = 5 boys + 40 girls = 45 students.\n\nStep 2: Divide the total number of students by the group size to find the number of groups.\nNumber of groups = 45 ÷ 9 = 5.\n\nStep 3: Since the division is exact, there are no leftover students, so the number of groups is 5.\n\nFinal Answer: \\boxed{5}\nOkay, let me try to solve this problem. So, the debate team has 5 boys and 40 girls. First, I need to find the total number of students. Adding those together, 5 plus 40 equals 45. Now, they want to split them into groups of 9. To find out how many groups they can make, I should divide the total number of students by the group size. So 45 divided by 9. Hmm, 9 times 5 is 45, so that gives exactly 5 groups. Since there's no remainder, all students can be evenly divided into 5 groups. I think that's it. The answer should be 5.\n\\boxed{5}",
+          "extracted_answer": "5",
+          "parsed_answer": "5",
+          "is_correct": true,
+          "latency_ms": 14134.161233901978,
+          "usage": {
+            "completion_tokens": 250,
+            "prompt_tokens": 153,
+            "total_tokens": 403
+          },
+          "prompt_tokens": 153,
+          "completion_tokens": 250,
+          "total_tokens": 403
+        }
+      ],
+      "majority_answer": "5",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 250,
+      "total_prompt_tokens": 153,
+      "total_latency_ms": 14134.161233901978
+    },
+    {
+      "id": 34,
+      "problem": " April's discount flowers was having a sale where each rose was 7 dollars. If April started with 9 roses and had 4 roses left, how much money did she earn? ",
+      "gold_answer_str": "35",
+      "gold_answer_int": 35,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of roses sold. April started with 9 roses and had 4 left, so she sold 9 - 4 = 5 roses.\n\nStep 2: Calculate the total earnings. Each rose was sold for $7, so 5 roses * $7 = $35.\n\nAnswer: \\boxed{35}\nOkay, let's see. The problem is about April's discount flowers sale. Each rose is $7. She started with 9 roses and had 4 left. So, how much money did she earn?\n\nFirst, I need to figure out how many roses she sold. If she started with 9 and had 4 left, then subtracting 4 from 9 gives the number sold. So 9 minus 4 is 5 roses sold. That makes sense.\n\nNext, each rose is $7, so multiplying the number of roses sold by the price per rose should give the total earnings. So 5 roses times $7 each. Let me do that math: 5 * 7 is 35. So she earned $35.\n\nWait, is there anything else I need to consider? The problem seems straightforward. No mention of discounts or other costs, just the sale price. So yeah, 5 roses sold at $7 each equals $35. I think that's it. The answer should be 35.\n\\boxed{35}",
+          "extracted_answer": "35",
+          "parsed_answer": "35",
+          "is_correct": true,
+          "latency_ms": 16391.183376312256,
+          "usage": {
+            "completion_tokens": 290,
+            "prompt_tokens": 158,
+            "total_tokens": 448
+          },
+          "prompt_tokens": 158,
+          "completion_tokens": 290,
+          "total_tokens": 448
+        }
+      ],
+      "majority_answer": "35",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 290,
+      "total_prompt_tokens": 158,
+      "total_latency_ms": 16391.183376312256
+    },
+    {
+      "id": 35,
+      "problem": " A trivia team had 11 members total, but during a game 6 members didn't show up. If each member that did show up scored 9 points, how many points were scored total? ",
+      "gold_answer_str": "45",
+      "gold_answer_int": 45,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of members who showed up. Total members is 11, 6 didn't show up, so 11 - 6 = 5 members showed up.\n\nStep 2: Multiply the number of members who showed up by the points each scored. 5 members * 9 points = 45 points total.\n\nAnswer: \\boxed{45}\nOkay, let's see. The problem says there's a trivia team with 11 members total. But during a game, 6 didn't show up. So first, I need to figure out how many members actually showed up. That would be the total members minus the ones who didn't come. So 11 minus 6 is 5. Got that.\n\nNow, each member who showed up scored 9 points. So I need to multiply the number of members who came, which is 5, by 9 points each. Let me do that calculation: 5 times 9. Hmm, 5*9 is 45. So the total points scored should be 45. \n\nWait, let me double-check. Total members 11, 6 absent, so 5 present. Each present member scores 9. 5*9 is indeed 45. Yeah, that seems right. I don't think I made any mistakes here. The answer should be 45.\n\\boxed{45}",
+          "extracted_answer": "45",
+          "parsed_answer": "45",
+          "is_correct": true,
+          "latency_ms": 16561.81573867798,
+          "usage": {
+            "completion_tokens": 293,
+            "prompt_tokens": 162,
+            "total_tokens": 455
+          },
+          "prompt_tokens": 162,
+          "completion_tokens": 293,
+          "total_tokens": 455
+        }
+      ],
+      "majority_answer": "45",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 293,
+      "total_prompt_tokens": 162,
+      "total_latency_ms": 16561.81573867798
+    },
+    {
+      "id": 36,
+      "problem": " A pet store had 13 siamese cats and 5 house cats. During a sale they sold 10 cats. How many cats do they have left? ",
+      "gold_answer_str": "8",
+      "gold_answer_int": 8,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of cats initially.\nTotal = 13 siamese + 5 house = 18 cats.\n\nStep 2: Subtract the number of cats sold.\nRemaining = 18 - 10 = 8 cats.\n\nAnswer: \\boxed{8}\nOkay, let's see. The problem says there's a pet store with 13 Siamese cats and 5 house cats. Then they sold 10 cats during a sale. We need to find out how many cats are left.\n\nFirst, I should figure out the total number of cats they had initially. So, adding the Siamese and house cats together: 13 plus 5. Let me check that again. 13 plus 5 is 18. Yeah, that seems right. So total cats are 18.\n\nThen, they sold 10 cats. To find out how many are left, I subtract the number sold from the total. So 18 minus 10. That gives 8. Wait, is there any trick here? Like, maybe different types of cats? But the problem doesn't specify that they sold a particular type. It just says 10 cats. So regardless of the type, subtracting 10 from the total should work. \n\nHmm, maybe I should verify. Suppose they sold some Siamese and some house cats, but since the problem doesn't specify, the total remaining would just be total minus 10. So yeah, 18 -10 is 8. So the answer should be 8. I think that's straightforward. No need to complicate it. The answer is 8.\n\\boxed{8}",
+          "extracted_answer": "8",
+          "parsed_answer": "8",
+          "is_correct": true,
+          "latency_ms": 19928.92622947693,
+          "usage": {
+            "completion_tokens": 353,
+            "prompt_tokens": 156,
+            "total_tokens": 509
+          },
+          "prompt_tokens": 156,
+          "completion_tokens": 353,
+          "total_tokens": 509
+        }
+      ],
+      "majority_answer": "8",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 353,
+      "total_prompt_tokens": 156,
+      "total_latency_ms": 19928.92622947693
+    },
+    {
+      "id": 37,
+      "problem": " Victor was working as a sacker at a grocery store where he made 6 dollars an hour. On Monday he worked 5 hours and on Tuesday he worked 5 hours. How much money did Victor make in those two days? ",
+      "gold_answer_str": "60",
+      "gold_answer_int": 60,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Calculate the total hours worked.\nStep 2: Multiply the total hours by the hourly wage.\nStep 3: Add the amounts from Monday and Tuesday.\n\nWait, that's not correct. The problem says Victor made 6 dollars an hour. So, on Monday, he worked 5 hours, so he made 5*6 = 30 dollars. On Tuesday, he worked 5 hours, so he made 5*6 = 30 dollars. So, in total, he made 30 + 30 = 60 dollars. Therefore, the answer is 60.\n\nBut the problem is presented as an AIME problem, which usually has more complex steps. Maybe the problem is different? Let me check again.\n\nWait, the problem says Victor was working as a sacker at a grocery store where he made 6 dollars an hour. On Monday he worked 5 hours and on Tuesday he worked 5 hours. How much money did Victor make in those two days?\n\nSo, the problem is straightforward. The answer is 5*6 + 5*6 = 30 + 30 = 60. So, the answer is 60. But maybe there is a trick? For example, maybe the 6 dollars an hour is not the total, but something else? Or maybe the hours are different? Wait, the problem says on Monday he worked 5 hours and on Tuesday he worked 5 hours. So, total hours is 10, times 6 is 60. So, the answer is 60. So, the answer is 60. But why is this an AIME problem? Maybe the original problem is different? Or maybe there is a typo in the problem statement?\n\nWait, the original problem is as stated. So, the answer is 60. So, the answer is \\boxed{60}.\nOkay, let me try to figure out this problem. Victor earns $6 per hour. He worked 5 hours on Monday and 5 hours on Tuesday. To find his total earnings, I need to calculate his earnings for each day and then add them together. \n\nFirst, for Monday: 5 hours multiplied by $6 per hour equals $30. Similarly, for Tuesday: another 5 hours times $6 per hour also equals $30. Adding both days' earnings, $30 + $30 gives a total of $60. \n\nWait, but the problem mentions",
+          "extracted_answer": "60",
+          "parsed_answer": "60",
+          "is_correct": true,
+          "latency_ms": 29027.418613433838,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 169,
+            "total_tokens": 681
+          },
+          "prompt_tokens": 169,
+          "completion_tokens": 512,
+          "total_tokens": 681
+        }
+      ],
+      "majority_answer": "60",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 169,
+      "total_latency_ms": 29027.418613433838
+    },
+    {
+      "id": 38,
+      "problem": " Megan baked 71 cupcakes for her school's bake sale. If her brother, Todd, ate 43 of them how many packages could she make if she put 7 cupcake in each package? ",
+      "gold_answer_str": "4",
+      "gold_answer_int": 4,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of cupcakes Megan has left after Todd ate some.\nStep 2: Divide the remaining cupcakes by the number of cupcakes per package to find the number of packages.\n\nMegan started with 71 cupcakes. After Todd ate 43, she has 71 - 43 = 28 cupcakes left. Dividing these by 7 cupcakes per package gives 28 / 7 = 4 packages. Therefore, Megan could make 4 packages.\n\n\\boxed{4}\nOkay, let me try to solve this problem. So Megan baked 71 cupcakes, and her brother Todd ate 43 of them. The question is asking how many packages she can make if each package has 7 cupcakes. \n\nFirst, I need to figure out how many cupcakes are left after Todd ate his share. That would be 71 minus 43. Let me do that subtraction: 71 - 43. Hmm, 71 minus 40 is 31, and then minus 3 more is 28. So she has 28 cupcakes left.\n\nNow, she wants to put 7 cupcakes in each package. To find out how many packages she can make, I need to divide the remaining cupcakes by 7. So 28 divided by 7. Well, 7 times 4 is 28, so that's 4 packages. \n\nWait, is there any chance that there's a remainder? Let me check. 28 divided by 7 is exactly 4 with no remainder. So there's no leftover cupcakes. Therefore, the answer should be 4. \n\nI think that's all. The steps make sense. Subtract the eaten cupcakes from the total, then divide by the package size. The calculations seem right. So the final answer is 4.\n\\boxed{4}\nOkay, let me go through the problem again to make sure I didn't miss anything. Megan starts with 71 cupcakes. Todd eats 43, so 71 minus 43 equals 28. Then, dividing 28 by 7 gives exactly 4. There's no mention of any leftovers or partial packages, so 4 is correct. Yep, that's solid. \n\n\\boxed{4}\nAlright, just to double-check, maybe I can think of another way. If each package is 7 cupcakes, how many packages would 28 make? Well, 7 times 4 is 2",
+          "extracted_answer": "4",
+          "parsed_answer": "4",
+          "is_correct": true,
+          "latency_ms": 29016.916275024414,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 164,
+            "total_tokens": 676
+          },
+          "prompt_tokens": 164,
+          "completion_tokens": 512,
+          "total_tokens": 676
+        }
+      ],
+      "majority_answer": "4",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 164,
+      "total_latency_ms": 29016.916275024414
+    },
+    {
+      "id": 39,
+      "problem": " There were 2 friends playing a video game online when 2 more players joined the game. If each player had 6 lives, how many lives did they have total? ",
+      "gold_answer_str": "24",
+      "gold_answer_int": 24,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the total number of players. Initially, there were 2 friends, and then 2 more players joined, so the total number of players is 2 + 2 = 4.\n\nStep 2: Calculate the total number of lives. Each player has 6 lives, so the total number of lives is 4 * 6 = 24.\n\nFinal Answer: \\boxed{24}\nOkay, let me try to solve this problem. So, the question is about figuring out the total number of lives that all the players have in a video game. Let me read it again carefully.\n\nThe problem says there were 2 friends playing a video game online when 2 more players joined the game. Each player had 6 lives. How many lives did they have total?\n\nAlright, so first, I need to find out how many players there are in total. Initially, there are 2 friends. Then, 2 more players join. So, adding those together, 2 plus 2 equals 4 players total. That seems straightforward.\n\nNext, each player has 6 lives. So, to find the total number of lives, I should multiply the number of players by the number of lives each has. So that's 4 players multiplied by 6 lives per player. Let me do that calculation: 4 times 6 is 24. \n\nWait, is there any chance I misread the problem? Let me check again. The friends were playing when two more joined. So total players are indeed 2 + 2 = 4. Each has 6 lives. Multiplying them gives 24. Hmm, seems correct. Maybe I should consider if \"lives\" is per player or something else, but the problem states each player had 6 lives, so it's per player. \n\nNo, I think that's all. The answer should be 24. Let me just make sure there's no trick here. Sometimes problems might have tricks, but this seems pretty direct. Total players times lives per player. Yep, 4*6=24. I think that's it.\nOkay, so the solution is straightforward. First, add the number of players: 2 original friends plus 2 new players equals 4 players. Then multiply by the number of lives each has, which is 6. So 4 times 6 is 24. Therefore, the total number of lives is 24. I don't see any other factors here.",
+          "extracted_answer": "24",
+          "parsed_answer": "24",
+          "is_correct": true,
+          "latency_ms": 29007.16543197632,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 156,
+            "total_tokens": 668
+          },
+          "prompt_tokens": 156,
+          "completion_tokens": 512,
+          "total_tokens": 668
+        }
+      ],
+      "majority_answer": "24",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 156,
+      "total_latency_ms": 29007.16543197632
+    },
+    {
+      "id": 40,
+      "problem": " Sam had 10 socks. If he threw away 3 old ones that didn't fit and bought 36 new ones, how many socks would he have? ",
+      "gold_answer_str": "43",
+      "gold_answer_int": 43,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Start with the original number of socks, which is 10.\nStep 2: Subtract the number of socks he threw away, which is 3.\nStep 3: Add the number of new socks he bought, which is 36.\nStep 4: Calculate the total number of socks he has now.\n\nSo, the total number of socks Sam has now is 10 - 3 + 36 = 43.\n\nFinal Answer: \\boxed{43}\nOkay, let me try to solve this problem. So, Sam starts with 10 socks. Then he throws away 3 old ones. That means he has 10 minus 3, which is 7 socks left. After that, he buys 36 new ones. So adding those to the remaining socks, 7 plus 36 equals 43. Wait, is there anything else I need to consider? The problem doesn't mention any other actions, like losing socks or giving some away. So it's just a straightforward calculation. Let me check the arithmetic again: 10 minus 3 is 7, and 7 plus 36 is indeed 43. Yeah, that seems right. I don't think I made any mistakes here. The answer should be 43.\n\nFinal Answer: \\boxed{43}\nAlright, let me go through the problem again to make sure. Sam had 10 socks. He threw away 3, so subtract 3 from 10, which gives 7. Then he bought 36 new ones, so add 36 to 7. 7 plus 36 is 43. Yep, that's correct. No other steps or complications. The answer is definitely 43.\n\nFinal Answer: \\boxed{43}\nOkay, I think I've confirmed it enough. The answer is 43. No doubts here.\n\nFinal Answer: \\boxed{43}\nAlright, I'm confident. The answer is 43.\n\nFinal Answer: \\boxed{43}\nAlright, I think I've checked it enough. The answer is 43.\n\nFinal Answer: \\boxed{43}\nOkay, I'm going to stick with 43. The steps are simple and the arithmetic checks out.\n\nFinal Answer: \\boxed{43}\nI think that's all. The answer is 43.\n\nFinal Answer: \\boxed{43}\nAlright, I'm done. The",
+          "extracted_answer": "43",
+          "parsed_answer": "43",
+          "is_correct": true,
+          "latency_ms": 28996.885776519775,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 155,
+            "total_tokens": 667
+          },
+          "prompt_tokens": 155,
+          "completion_tokens": 512,
+          "total_tokens": 667
+        }
+      ],
+      "majority_answer": "43",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 155,
+      "total_latency_ms": 28996.885776519775
+    },
+    {
+      "id": 41,
+      "problem": " Wendy picked 103 flowers for her friend’s wedding. She was making bouquets with 8 flowers in each one. If 47 of the flowers wilted before the wedding, how many bouquets could she still make? ",
+      "gold_answer_str": "7",
+      "gold_answer_int": 7,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of flowers that did not wilt.\nStep 2: Divide the number of non-wilted flowers by the number of flowers per bouquet to find the number of bouquets.\n\nLet me solve this problem.\n\nOkay, so Wendy picked 103 flowers total. Then 47 of them wilted. So first, I need to find out how many flowers are left that didn't wilt. That would be 103 minus 47. Let me calculate that: 103 - 47 equals 56. So there are 56 flowers that are still good.\n\nNow, she wants to make bouquets with 8 flowers each. To find out how many bouquets she can make, I need to divide the number of good flowers by 8. So 56 divided by 8. Let me do that division: 56 ÷ 8 equals 7. \n\nWait, is there any remainder? Let me check. 8 times 7 is 56, so there's no remainder. That means she can make exactly 7 bouquets. \n\nSo the answer should be 7. Let me just make sure I didn't make any mistakes in the subtraction or division. 103 minus 47 is definitely 56. And 56 divided by 8 is 7. Yep, that seems right. So the final answer is 7.\n\\boxed{7}\nOkay, let me go through this problem again to make sure I didn't miss anything. The problem says Wendy picked 103 flowers, but 47 wilted. So the first step is to subtract the wilted flowers from the total to find out how many are still good. 103 minus 47 is 56. That part seems straightforward. \n\nNext, she wants to make bouquets with 8 flowers each. So dividing the remaining flowers by 8 should give the number of bouquets. 56 divided by 8 is 7. Since 8 times 7 is exactly 56, there's no leftover flowers. That means she can make exactly 7 bouquets. \n\nWait, is there any chance that the problem is trying to trick me? For example, maybe the wilted flowers are part of the total, so subtracting them is correct. The problem says \"how many bouquets could she still make,\" so it's definitely about the remaining flowers. \n\nAnother thing to check:",
+          "extracted_answer": "7",
+          "parsed_answer": "7",
+          "is_correct": true,
+          "latency_ms": 29022.73178100586,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 171,
+            "total_tokens": 683
+          },
+          "prompt_tokens": 171,
+          "completion_tokens": 512,
+          "total_tokens": 683
+        }
+      ],
+      "majority_answer": "7",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 171,
+      "total_latency_ms": 29022.73178100586
+    },
+    {
+      "id": 42,
+      "problem": " Adam had 48 books. If he sold 19 of them and used the money he earned to buy 38 new books, how many books would Adam have? ",
+      "gold_answer_str": "67",
+      "gold_answer_int": 67,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Adam starts with 48 books.\nStep 2: He sells 19 books, so he has 48 - 19 = 29 books left.\nStep 3: He uses the money from selling 19 books to buy 38 new books.\nStep 4: Adding the new books to his remaining books: 29 + 38 = 67 books.\nFinal Answer: \\boxed{67}\n\nOkay, let me try to solve this problem. So, Adam starts with 48 books. Then he sells 19 of them. Hmm, selling books would mean he has fewer books left. So subtracting 19 from 48 gives 48 - 19. Let me calculate that: 48 minus 10 is 38, minus 9 more is 29. So he has 29 books left after selling.\n\nNow, he uses the money from selling those 19 books to buy 38 new ones. Wait, does that mean he adds 38 books to his remaining 29? So 29 plus 38. Let me add those numbers. 29 + 38: 20 + 30 is 50, 9 + 8 is 17, so total is 50 +17 = 67. So he ends up with 67 books. \n\nWait, but is there any trick here? Like, does selling the books affect the total in another way? For example, maybe he couldn't buy the new books because he sold some? But the problem says he used the money from selling to buy 38 new ones. So the total should be the remaining books plus the new ones. So 29 + 38 = 67. Yeah, that seems right. So the answer should be 67. Let me check again. 48 -19 =29, then 29 +38=67. Yep, that's correct. So the final answer is 67.\n\\boxed{67} \n\n**Final Answer**\n\\boxed{67}\n```\n\n**Final Answer**\n\\boxed{67}\n```",
+          "extracted_answer": "67",
+          "parsed_answer": "67",
+          "is_correct": true,
+          "latency_ms": 26486.74201965332,
+          "usage": {
+            "completion_tokens": 468,
+            "prompt_tokens": 157,
+            "total_tokens": 625
+          },
+          "prompt_tokens": 157,
+          "completion_tokens": 468,
+          "total_tokens": 625
+        }
+      ],
+      "majority_answer": "67",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 468,
+      "total_prompt_tokens": 157,
+      "total_latency_ms": 26486.74201965332
+    },
+    {
+      "id": 43,
+      "problem": " Nancy's class is going on a field trip to the zoo. If each van can hold 5 people and there are 12 students and 3 adults going, how many vans will they need? ",
+      "gold_answer_str": "3",
+      "gold_answer_int": 3,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Calculate the total number of people going to the zoo.\nTotal people = 12 students + 3 adults = 15 people.\n\nStep 2: Determine how many vans are needed by dividing the total number of people by the capacity of each van.\nNumber of vans = 15 people ÷ 5 people per van = 3 vans.\n\nStep 3: Since you can't have a fraction of a van, round up to the nearest whole number if necessary.\nIn this case, 15 is divisible by 5, so no rounding is needed.\n\nFinal Answer: \\boxed{3}\nOkay, let me try to figure out this problem. So, Nancy's class is going to the zoo, and they need to figure out how many vans they need. Each van can hold 5 people. There are 12 students and 3 adults going. \n\nFirst, I should find the total number of people. That would be students plus adults. So 12 plus 3 is 15 people total. Got that part. \n\nNext, each van can carry 5 people. So to find out how many vans they need, I should divide the total number of people by the capacity of each van. So 15 divided by 5. Let me do that calculation. 15 divided by 5 is 3. \n\nWait, but what if there was a remainder? Like if it didn't divide evenly? For example, if there were 16 people, then 16 divided by 5 is 3.2, which would mean they need 4 vans because you can't have a fraction of a van. But in this case, 15 divided by 5 is exactly 3, so they don't need to round up. \n\nSo the answer should be 3 vans. Let me just check again. 12 students + 3 adults = 15. 15 divided by 5 is 3. Yep, that seems right. No need for extra vans here. \n\nI think that's all. The answer is 3.\n\\boxed{3}",
+          "extracted_answer": "3",
+          "parsed_answer": "3",
+          "is_correct": true,
+          "latency_ms": 24802.85668373108,
+          "usage": {
+            "completion_tokens": 438,
+            "prompt_tokens": 163,
+            "total_tokens": 601
+          },
+          "prompt_tokens": 163,
+          "completion_tokens": 438,
+          "total_tokens": 601
+        }
+      ],
+      "majority_answer": "3",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 438,
+      "total_prompt_tokens": 163,
+      "total_latency_ms": 24802.85668373108
+    },
+    {
+      "id": 44,
+      "problem": " For a birthday party Tom bought 4 regular sodas and 52 diet sodas. If his fridge would only hold 7 on each shelf, how many shelves would he fill up? ",
+      "gold_answer_str": "8",
+      "gold_answer_int": 8,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the total number of sodas.\nStep 2: Divide the total by the number of sodas per shelf.\nStep 3: Round up to the nearest whole number since partial shelves are not possible.\n\nLet's see, he has 4 + 52 = 56 sodas in total. Dividing 56 by 7 gives exactly 8. So he would fill up 8 shelves.\n\n\\boxed{8}\nOkay, let me try to figure out this problem. So Tom has 4 regular sodas and 52 diet sodas. The fridge can hold 7 sodas per shelf. The question is asking how many shelves he would fill up. \n\nFirst, I need to find the total number of sodas. Adding 4 and 52 gives 56 sodas in total. Then, since each shelf holds 7 sodas, I should divide the total number by 7. So 56 divided by 7 is 8. That means exactly 8 shelves would be filled. \n\nWait, but the problem says \"fill up\" the shelves. Does that mean he can't have a partial shelf? Well, since 56 is exactly divisible by 7, there's no remainder. So he uses all the shelves completely. Therefore, the answer should be 8. \n\nLet me double-check. 4 + 52 is definitely 56. Divided by 7, 7 times 8 is 56. Yep, that's correct. So the answer is 8. \n\n\\boxed{8}\nOkay, let me go through this again. The problem states Tom has 4 regular sodas and 52 diet sodas. So total sodas are 4 + 52 = 56. The fridge holds 7 per shelf. So dividing 56 by 7 gives exactly 8. Since there's no remainder, he fills up exactly 8 shelves. No need to round up because it's a whole number. So the answer is 8. \n\n\\boxed{8}\nAlright, I think that's solid. The key steps are adding the sodas and dividing by the shelf capacity. Since it divides evenly, the answer is straightforward. \n\n\\boxed{8}\nOkay, I'm confident now. The total is 56, divided by 7 is 8. So the answer is 8. \n\n\\boxed{8}\nAlright, I think that's all. The",
+          "extracted_answer": "8",
+          "parsed_answer": "8",
+          "is_correct": true,
+          "latency_ms": 29006.799459457397,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 160,
+            "total_tokens": 672
+          },
+          "prompt_tokens": 160,
+          "completion_tokens": 512,
+          "total_tokens": 672
+        }
+      ],
+      "majority_answer": "8",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 160,
+      "total_latency_ms": 29006.799459457397
+    },
+    {
+      "id": 45,
+      "problem": " The school cafeteria had 38 apples. If they used 20 to make lunch for the students and then bought 28 more, how many apples would they have? ",
+      "gold_answer_str": "46",
+      "gold_answer_int": 46,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Start with the initial number of apples, which is 38.\nStep 2: Subtract the number of apples used for lunch, which is 20. 38 - 20 = 18.\nStep 3: Add the number of apples bought, which is 28. 18 + 28 = 46.\nFinal Answer: \\boxed{46}\n\nOkay, let's see. The problem is about the cafeteria's apples. They start with 38 apples. Then they use 20 for lunch. So first, I need to subtract 20 from 38. Let me do that: 38 minus 20 is 18. Then they buy 28 more apples. So adding those to the remaining 18. 18 plus 28... Hmm, 18 plus 20 is 38, and then plus 8 more is 46. So the total apples they have now should be 46. Let me check again. Start with 38, subtract 20 gives 18, add 28 gives 46. Yep, that seems right. I don't think I made any mistakes here. The answer should be 46.\n\\boxed{46}\nOkay, let me go through the problem again to make sure. The cafeteria starts with 38 apples. They use 20, so 38 minus 20 is 18. Then they buy 28 more, so 18 plus 28. Breaking it down: 18 + 20 is 38, then add 8 more to get 46. Yep, that's correct. No steps missed. The answer is definitely 46.\n\\boxed{46} \n\nThe cafeteria initially has 38 apples. After using 20 for lunch, they have $38 - 20 = 18$ apples left. Then, they purchase 28 more apples, resulting in $18 + 28 = 46$ apples. \n\n\\boxed{46}",
+          "extracted_answer": "46",
+          "parsed_answer": "46",
+          "is_correct": true,
+          "latency_ms": 25439.175128936768,
+          "usage": {
+            "completion_tokens": 449,
+            "prompt_tokens": 157,
+            "total_tokens": 606
+          },
+          "prompt_tokens": 157,
+          "completion_tokens": 449,
+          "total_tokens": 606
+        }
+      ],
+      "majority_answer": "46",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 449,
+      "total_prompt_tokens": 157,
+      "total_latency_ms": 25439.175128936768
+    },
+    {
+      "id": 46,
+      "problem": " Luke was helping the cafeteria workers pick up lunch trays, but he could only carry 4 trays at a time. If he had to pick up 20 trays from one table and 16 trays from another, how many trips will he make? ",
+      "gold_answer_str": "9",
+      "gold_answer_int": 9,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of trays.\nTotal trays = 20 + 16 = 36.\n\nStep 2: Divide the total by the number of trays he can carry per trip.\n36 / 4 = 9.\n\nStep 3: Since he can't make a fraction of a trip, round up to the nearest whole number.\n9 is already a whole number, so the answer is 9.\n\nFinal Answer: \\boxed{9}\n\nOkay, let me try to figure out this problem. So Luke can carry 4 trays at a time. He needs to pick up 20 trays from one table and 16 from another. First, I should find the total number of trays. Adding 20 and 16 gives 36 trays in total. \n\nNow, he can carry 4 trays per trip. To find out how many trips he needs, I divide the total trays by the number he can carry each trip. So 36 divided by 4 equals 9. Wait, that's a whole number. So he doesn't need to make an extra trip. But wait, maybe I should check if there's any remainder. Let me do the division again: 4 times 9 is 36, so there's no remainder. \n\nHmm, so the calculation seems straightforward. But sometimes, if there was a remainder, you'd have to round up. For example, if it was 37 trays, then 37 divided by 4 is 9.25, so he'd need 10 trips. But in this case, since it's exactly 9 trips, the answer is 9. \n\nI think that's all. The steps make sense. Total trays, divide by capacity, check for whole number. Since there's no remainder, the answer is 9. I don't see any mistakes here. So the final answer should be 9.\n\\boxed{9} \n\nWait, but let me double-check. Maybe there's a trick here. The problem says he has to pick up trays from two different tables. Does that affect anything? Like, does he have to go to each table separately? But the problem doesn't specify any constraints about having to go to each table in separate trips. It just says he has to pick up 20 from one and 16 from another. So maybe he can carry some from each table in a single trip? But the problem doesn't specify that he can't.",
+          "extracted_answer": "9",
+          "parsed_answer": "9",
+          "is_correct": true,
+          "latency_ms": 29042.068243026733,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 172,
+            "total_tokens": 684
+          },
+          "prompt_tokens": 172,
+          "completion_tokens": 512,
+          "total_tokens": 684
+        }
+      ],
+      "majority_answer": "9",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 172,
+      "total_latency_ms": 29042.068243026733
+    },
+    {
+      "id": 47,
+      "problem": " The cafeteria had 96 apples. For lunch they handed out 42 to students and decided to use the rest to make pies. If each pie takes 6 apples, how many pies could they make? ",
+      "gold_answer_str": "9",
+      "gold_answer_int": 9,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the number of apples left after handing out to students.\nStep 2: Divide the remaining apples by the number of apples needed per pie to find the number of pies.\n\nLet me do the math.\n\nStep 1: 96 - 42 = 54 apples left.\nStep 2: 54 ÷ 6 = 9 pies.\n\nSo, the answer is 9.\n\n\\boxed{9}\nOkay, let me try to figure out this problem. The cafeteria started with 96 apples. They gave out 42 to students, so I need to subtract that from the total. 96 minus 42 is 54. Now, they want to use the remaining apples to make pies, and each pie requires 6 apples. So, I should divide the remaining apples by the number of apples per pie. 54 divided by 6 equals 9. That means they can make 9 pies. Wait, is there any chance they can't use all the apples? Like, if there was a remainder, but 54 divided by 6 is exactly 9, so no leftover apples. Yeah, that seems right. So the answer should be 9.\n\n\\boxed{9}\nOkay, let me check again. Total apples 96, gave out 42, so 96 - 42 = 54. Each pie needs 6 apples, so 54 divided by 6 is indeed 9. No remainders here. So yeah, 9 pies. I think that's correct.\n\n\\boxed{9}\nAlright, I'm confident now. The steps are straightforward: subtract the given apples and divide by the apples per pie. The calculations check out. Answer is 9.\n\n\\boxed{9}\nHmm, maybe I should verify once more. 96 minus 42 is 54. 54 divided by 6 is 9. Yep, that's correct. No mistakes here. Final answer is definitely 9.\n\n\\boxed{9}\nOkay, I've verified it multiple times. The answer is 9. No doubts left.\n\n\\boxed{9}\nAlright, I think that's solid. The answer is 9.\n\n\\boxed{9}\nI can't see any errors in my reasoning. The answer is 9.\n\n\\boxed{9}\nAlright, I'm going to stick with 9. All steps are correct.\n\n\\boxed{9}\nI've checked it",
+          "extracted_answer": "9",
+          "parsed_answer": "9",
+          "is_correct": true,
+          "latency_ms": 28986.76085472107,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 164,
+            "total_tokens": 676
+          },
+          "prompt_tokens": 164,
+          "completion_tokens": 512,
+          "total_tokens": 676
+        }
+      ],
+      "majority_answer": "9",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 164,
+      "total_latency_ms": 28986.76085472107
+    },
+    {
+      "id": 48,
+      "problem": " Henry had 3 action figures, but needed 8 total for a complete collection. If each one costs $6, how much money would he need to finish his collection? ",
+      "gold_answer_str": "30",
+      "gold_answer_int": 30,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine how many more action figures Henry needs. He needs 8 total and has 3, so 8 - 3 = 5.\n\nStep 2: Calculate the total cost. Each action figure costs $6, so 5 * $6 = $30.\n\nAnswer: \\boxed{30}\nOkay, let me try to solve this problem. So, Henry has 3 action figures and needs 8 in total. The question is asking how much money he needs to buy the remaining ones, with each figure costing $6. \n\nFirst, I need to figure out how many more action figures he needs. If he already has 3 and needs 8, then subtracting 3 from 8 gives 5. So he needs 5 more. \n\nNext, each of those 5 figures costs $6. To find the total cost, I multiply the number of figures by the cost per figure. That would be 5 times 6. Let me do that calculation: 5 * 6 equals 30. \n\nSo, the total amount of money Henry needs is $30. I should check if there are any other steps or if I missed something. The problem seems straightforward—just subtracting to find the needed quantity and then multiplying by the cost. There's no mention of discounts or taxes, so it's just a simple multiplication. \n\nTherefore, the answer should be 30. Let me make sure I didn't make any arithmetic errors. 8 minus 3 is definitely 5, and 5 times 6 is 30. Yep, that seems right. \n\nI think that's all. The answer is 30.\n\\boxed{30} \n\n**Final Answer**\n\\boxed{30}\n```\n\n**Final Answer**\n\\boxed{30}\n```",
+          "extracted_answer": "30",
+          "parsed_answer": "30",
+          "is_correct": true,
+          "latency_ms": 21198.068618774414,
+          "usage": {
+            "completion_tokens": 375,
+            "prompt_tokens": 156,
+            "total_tokens": 531
+          },
+          "prompt_tokens": 156,
+          "completion_tokens": 375,
+          "total_tokens": 531
+        }
+      ],
+      "majority_answer": "30",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 375,
+      "total_prompt_tokens": 156,
+      "total_latency_ms": 21198.068618774414
+    },
+    {
+      "id": 49,
+      "problem": " Frank had saved up 3 dollars. If he received another 37 dollars for his allowance, how many 8 dollar toys could he buy? ",
+      "gold_answer_str": "5",
+      "gold_answer_int": 5,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Calculate total amount of money Frank has.\nStep 2: Divide total amount by the cost of each toy to find the number of toys he can buy.\n\nFrank initially has $3. After receiving $37 for his allowance, his total is $3 + $37 = $40. Dividing $40 by the cost of each toy, which is $8, gives $40 / $8 = 5. Therefore, Frank can buy 5 toys.\n\n\\boxed{5}\nOkay, let me try to figure out this problem. So Frank has $3 saved up and gets another $37 for allowance. The question is how many $8 toys he can buy. \n\nFirst, I need to find out how much money he has in total. That should be adding the $3 he already has to the $37 he gets. Let me do that addition: 3 + 37. Hmm, 3 plus 30 is 33, and then plus 7 more is 40. So total money is $40.\n\nNow, each toy costs $8. To find out how many toys he can buy, I need to divide the total money by the cost per toy. So 40 divided by 8. Let me calculate that. 8 times 5 is 40, so 40 divided by 8 is 5. \n\nWait, is there any chance he can't buy a fraction of a toy? But since 40 is exactly divisible by 8, there's no remainder. So he can buy exactly 5 toys. \n\nI think that's all. The steps make sense. Add the money, divide by the toy price. The answer should be 5. Let me just check the arithmetic again. 3 + 37 is definitely 40. 40 divided by 8 is 5. Yep, that's right. So the final answer is 5.\n\\boxed{5} \n\n**Final Answer**\n\\boxed{5}\n\\boxed{5}\n```",
+          "extracted_answer": "5",
+          "parsed_answer": "5",
+          "is_correct": true,
+          "latency_ms": 24108.088493347168,
+          "usage": {
+            "completion_tokens": 426,
+            "prompt_tokens": 151,
+            "total_tokens": 577
+          },
+          "prompt_tokens": 151,
+          "completion_tokens": 426,
+          "total_tokens": 577
+        }
+      ],
+      "majority_answer": "5",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 426,
+      "total_prompt_tokens": 151,
+      "total_latency_ms": 24108.088493347168
+    },
+    {
+      "id": 50,
+      "problem": " Vanessa and her mom were picking carrots from their garden. Vanessa picked 17 and her mother picked 14. If only 24 of the carrots were good, how many bad carrots did they have? ",
+      "gold_answer_str": "7",
+      "gold_answer_int": 7,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the total number of carrots picked by both Vanessa and her mom.\nStep 2: Subtract the number of good carrots from the total to find the number of bad carrots.\n\nStep 1: Total carrots = 17 (Vanessa) + 14 (mom) = 31 carrots.\nStep 2: Bad carrots = Total carrots - Good carrots = 31 - 24 = 7 bad carrots.\n\nAnswer: \\boxed{7}\nOkay, let's see. Vanessa picked 17 carrots and her mom picked 14. So first, I need to find the total number of carrots they picked together. Adding 17 and 14 gives 31. Then, the problem says that only 24 of these were good. To find the bad ones, I subtract the good carrots from the total. So 31 minus 24 equals 7. That means there are 7 bad carrots. Wait, is there anything else I need to consider? The problem doesn't mention any other factors, like some carrots being counted twice or anything. So I think it's straightforward. Total picked is 31, 24 good, so 31-24=7 bad. Yeah, that makes sense. The answer should be 7.\n\\boxed{7} \n\n**Final Answer**\n\\boxed{7}\n\\boxed{7}\n```",
+          "extracted_answer": "7",
+          "parsed_answer": "7",
+          "is_correct": true,
+          "latency_ms": 16344.436168670654,
+          "usage": {
+            "completion_tokens": 289,
+            "prompt_tokens": 165,
+            "total_tokens": 454
+          },
+          "prompt_tokens": 165,
+          "completion_tokens": 289,
+          "total_tokens": 454
+        }
+      ],
+      "majority_answer": "7",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 289,
+      "total_prompt_tokens": 165,
+      "total_latency_ms": 16344.436168670654
+    },
+    {
+      "id": 51,
+      "problem": " At a company picnic 23 managers and 7 employees decided to start a game of volleyball. If they split into 6 teams how many people would be on each team? ",
+      "gold_answer_str": "5",
+      "gold_answer_int": 5,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of people. 23 managers + 7 employees = 30 people.\nStep 2: Divide the total number of people by the number of teams. 30 / 6 = 5.\nStep 3: Each team would have 5 people.\n\nAnswer: \\boxed{5}\nOkay, let me try to solve this problem. So, the question is about splitting 23 managers and 7 employees into 6 teams for volleyball. The goal is to find out how many people would be on each team. \n\nFirst, I need to figure out the total number of people. The problem says there are 23 managers and 7 employees. Adding those together, 23 plus 7 equals 30. So, there are 30 people in total.\n\nNext, they want to split these 30 people into 6 teams. To find out how many people are on each team, I should divide the total number of people by the number of teams. That would be 30 divided by 6. Let me do that calculation. 30 divided by 6 is 5. \n\nWait, is there any catch here? The problem doesn't mention any restrictions on team sizes or any specific rules about having equal numbers. It just asks how many people would be on each team if they split into 6 teams. So, assuming they want equal teams, dividing 30 by 6 gives exactly 5. \n\nI don't think there's any trick here. The answer should be straightforward. Let me double-check the addition: 23 managers plus 7 employees is indeed 30. Dividing by 6 teams gives 5 per team. Yep, that seems right. \n\nSo, the final answer is 5. I should make sure to present it in the required format, which is \\boxed{5}.\nOkay, let me go through the steps again to be sure. \n\nTotal people: 23 + 7 = 30. Number of teams: 6. Dividing 30 by 6 gives 5. Each team has 5 people. No remainders or anything. Yep, that's correct. \n\nI think that's all. The answer is definitely 5.\n\\boxed{5} \n\n**Final Answer**\n\\boxed{5}\n\\boxed{5}\n\\boxed{5}\n\\boxed{5}\n\\boxed{5}\n\\boxed{5}\n\\boxed{5",
+          "extracted_answer": "5",
+          "parsed_answer": "5",
+          "is_correct": true,
+          "latency_ms": 28988.10124397278,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 157,
+            "total_tokens": 669
+          },
+          "prompt_tokens": 157,
+          "completion_tokens": 512,
+          "total_tokens": 669
+        }
+      ],
+      "majority_answer": "5",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 157,
+      "total_latency_ms": 28988.10124397278
+    },
+    {
+      "id": 52,
+      "problem": " Tiffany baked 8 brownies, but needed 17 total for her party. If she used 8 cups of flour on each one, how much cups of flour does she still need? ",
+      "gold_answer_str": "72",
+      "gold_answer_int": 72,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine how many more brownies Tiffany needs to bake. She needs 17 total and has already baked 8, so she needs 17 - 8 = 9 more brownies.\n\nStep 2: Calculate the total amount of flour needed for the remaining brownies. Each brownie requires 8 cups of flour, so 9 brownies will need 9 * 8 = 72 cups of flour.\n\nFinal Answer: \\boxed{72}\nOkay, let me try to figure out this problem. So Tiffany baked 8 brownies but needed 17 total. First, I need to find out how many more she needs to make. That would be 17 minus 8, which is 9. Right, so she needs 9 more brownies. \n\nNow, each brownie requires 8 cups of flour. So for 9 brownies, the total flour needed would be 9 multiplied by 8. Let me do that calculation: 9 times 8 is 72. So she needs 72 more cups of flour. \n\nWait, let me check again. The problem says she used 8 cups of flour on each one. So each brownie is 8 cups. She already made 8, but the question is how much she still needs. So the remaining 9 brownies would need 9*8. Yeah, that's 72. \n\nI think that's all. The answer should be 72. Let me make sure there's no trick here. The problem seems straightforward. Subtract the baked brownies from the total needed to get the remaining number, then multiply by flour per brownie. Yep, 72 is correct.\n\\boxed{72}\n```",
+          "extracted_answer": "72",
+          "parsed_answer": "72",
+          "is_correct": true,
+          "latency_ms": 20348.22654724121,
+          "usage": {
+            "completion_tokens": 360,
+            "prompt_tokens": 161,
+            "total_tokens": 521
+          },
+          "prompt_tokens": 161,
+          "completion_tokens": 360,
+          "total_tokens": 521
+        }
+      ],
+      "majority_answer": "72",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 360,
+      "total_prompt_tokens": 161,
+      "total_latency_ms": 20348.22654724121
+    },
+    {
+      "id": 53,
+      "problem": " Carol and her mom were picking carrots from their garden. Carol picked 29 and her mother picked 16. If only 38 of the carrots were good, how many bad carrots did they have? ",
+      "gold_answer_str": "7",
+      "gold_answer_int": 7,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of carrots picked by Carol and her mom.\nStep 2: Subtract the number of good carrots from the total to find the number of bad carrots.\n\nTotal carrots = 29 + 16 = 45\nBad carrots = 45 - 38 = 7\nFinal Answer: \\boxed{7}\nOkay, let me try to solve this problem. So, Carol and her mom picked carrots. Carol picked 29, and her mom picked 16. The total number of carrots they have is the sum of those two numbers. Let me add them up: 29 plus 16. Hmm, 29 plus 10 is 39, and then plus 6 more makes 45. So total carrots are 45.\n\nNow, the problem says that only 38 of these carrots were good. So the bad ones would be the total minus the good ones. That means 45 total minus 38 good. Let me subtract: 45 minus 38. 45 minus 30 is 15, then minus 8 more is 7. So there are 7 bad carrots. \n\nWait, is there anything else I need to consider? The problem doesn't mention any other categories or conditions. It just asks for the number of bad carrots, which is straightforward. So the answer should be 7. Let me double-check the addition and subtraction. 29 + 16 is indeed 45. 45 - 38 is 7. Yep, that seems right. I think that's all there is to it.\n\\boxed{7}",
+          "extracted_answer": "7",
+          "parsed_answer": "7",
+          "is_correct": true,
+          "latency_ms": 19668.794870376587,
+          "usage": {
+            "completion_tokens": 348,
+            "prompt_tokens": 164,
+            "total_tokens": 512
+          },
+          "prompt_tokens": 164,
+          "completion_tokens": 348,
+          "total_tokens": 512
+        }
+      ],
+      "majority_answer": "7",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 348,
+      "total_prompt_tokens": 164,
+      "total_latency_ms": 19668.794870376587
+    },
+    {
+      "id": 54,
+      "problem": " A worksheet had 7 problems on it. If a teacher had 17 worksheets to grade and had already graded 8 of them, how many more problems does she have to grade? ",
+      "gold_answer_str": "63",
+      "gold_answer_int": 63,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the total number of problems on all worksheets. There are 7 problems per worksheet and 17 worksheets, so 7 × 17 = 119 problems in total.\n\nStep 2: Determine the number of problems already graded. The teacher graded 8 worksheets, so 8 × 7 = 56 problems have been graded.\n\nStep 3: Subtract the number of graded problems from the total number of problems to find the number of problems remaining. 119 − 56 = 63 problems remain.\n\nFinal Answer: \\boxed{63}\n\nOkay, let me try to figure out this AIME problem. So the problem says there's a worksheet with 7 problems. The teacher has 17 worksheets to grade and has already graded 8 of them. We need to find out how many more problems she has left to grade.\n\nFirst, I need to calculate the total number of problems. Since each worksheet has 7 problems and there are 17 worksheets, multiplying them should give the total. So 7 times 17. Let me do that: 7*17 is 119. So there are 119 problems in total.\n\nNext, the teacher has already graded 8 worksheets. Each of those has 7 problems, so the number of problems she's graded is 8*7. Let me compute that: 8*7 is 56. So she's done 56 problems.\n\nTo find out how many are left, subtract the graded problems from the total. So 119 minus 56. Let me do that subtraction: 119-56. 119 minus 50 is 69, then minus 6 more is 63. So the remaining problems are 63.\n\nWait, let me check if I did everything right. Total problems: 17 worksheets *7 problems each. Yep, 17*7 is 119. Graded ones: 8*7=56. Subtracting gives 119-56=63. That seems correct. I don't think I made any mistakes here. The answer should be 63. So the final answer is 63.\nOkay, so the problem is about calculating the remaining problems the teacher needs to grade. Let me go through the steps again to make sure.\n\nTotal problems: 17 worksheets * 7 problems each. ",
+          "extracted_answer": "63",
+          "parsed_answer": "63",
+          "is_correct": true,
+          "latency_ms": 29031.761646270752,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 159,
+            "total_tokens": 671
+          },
+          "prompt_tokens": 159,
+          "completion_tokens": 512,
+          "total_tokens": 671
+        }
+      ],
+      "majority_answer": "63",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 159,
+      "total_latency_ms": 29031.761646270752
+    },
+    {
+      "id": 55,
+      "problem": " There were 8 friends playing a video game online when 2 more players joined the game. If each player had 6 lives, how many lives did they have total? ",
+      "gold_answer_str": "60",
+      "gold_answer_int": 60,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of players. Initially, there were 8 friends, and then 2 more joined. So, 8 + 2 = 10 players in total.\n\nStep 2: Each player has 6 lives. To find the total number of lives, multiply the number of players by the number of lives per player: 10 * 6 = 60.\n\nTherefore, the total number of lives is 60.\n\nAnswer: \\boxed{60}\nOkay, let me try to solve this problem. So, the question is about figuring out the total number of lives that all the players have combined. Let me read it again carefully.\n\nThere were 8 friends playing a video game online when 2 more players joined the game. If each player had 6 lives, how many lives did they have total?\n\nAlright, so first, I need to find out how many players there are in total. Initially, there are 8 friends. Then, 2 more players join. So, adding those together, 8 plus 2 equals 10 players total. That seems straightforward.\n\nNext, each player has 6 lives. To find the total number of lives, I should multiply the number of players by the number of lives each one has. So that's 10 players multiplied by 6 lives per player. Let me do that calculation: 10 times 6 is 60. \n\nWait, is there anything else I need to consider? The problem doesn't mention any players losing lives or anything like that. It just asks for the total number of lives they have. So, each player's lives are separate, so adding them up should be correct. \n\nLet me check again. 8 original players plus 2 new ones makes 10. Each has 6 lives. 10 times 6 is indeed 60. I don't think I missed anything here. The answer should be 60. \n\nHmm, maybe I should think if there's a trick or something. But the problem seems pretty direct. No mention of shared lives or anything. Just each player has their own 6 lives. So total lives would be 10*6=60. Yeah, that makes sense. \n\nI think that's all. The answer is 60.\nOkay, let me just recap. The problem says there are 8 friends playing, then 2 more join. So total players are 8 + 2 = 1",
+          "extracted_answer": "60",
+          "parsed_answer": "60",
+          "is_correct": true,
+          "latency_ms": 29004.57000732422,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 156,
+            "total_tokens": 668
+          },
+          "prompt_tokens": 156,
+          "completion_tokens": 512,
+          "total_tokens": 668
+        }
+      ],
+      "majority_answer": "60",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 156,
+      "total_latency_ms": 29004.57000732422
+    },
+    {
+      "id": 56,
+      "problem": " At the arcade Cody won 49 tickets. If he spent 25 tickets on a beanie and later won 6 more tickets, how many would he have? ",
+      "gold_answer_str": "30",
+      "gold_answer_int": 30,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Start with the initial tickets: 49.\nStep 2: Subtract the tickets spent on the beanie: 49 - 25 = 24.\nStep 3: Add the tickets won later: 24 + 6 = 30.\nFinal Answer: \\boxed{30}\nOkay, let me try to solve this problem. So, Cody starts with 49 tickets. Then he spends 25 tickets on a beanie. To find out how many he has left after that, I need to subtract 25 from 49. Let me do that calculation: 49 minus 25 equals 24. Then, later on, he wins 6 more tickets. So I should add those 6 tickets to the remaining 24. Adding 24 and 6 gives me 30. Therefore, the total number of tickets Cody would have at the end is 30. I think that's all the steps. Let me check again: 49 minus 25 is definitely 24, and 24 plus 6 is 30. Yep, that seems right. So the answer should be 30.\n\nFinal Answer: \\boxed{30}\nAlright, let me go through the problem again to make sure I didn't miss anything. The problem says Cody won 49 tickets initially. Then he spent 25 on a beanie, so subtracting that from the initial amount gives 49 - 25 = 24. After that, he won 6 more tickets, so adding those to the remaining tickets: 24 + 6 = 30. There's no mention of any other transactions or losses, so the final amount should indeed be 30. I don't see any errors in the calculations. The answer is 30.\n\nFinal Answer: \\boxed{30}\nOkay, let me verify once more. Starting with 49 tickets. Spending 25 means 49 - 25 = 24. Then winning 6 more adds to that: 24 + 6 = 30. Yep, that's straightforward. No other steps or complications. The answer is definitely 30.\n\nFinal Answer: \\boxed{30}\nI think I've checked it enough. The answer is 30. No mistakes in the steps. All operations are correct. Final answer is 30.\n\nFinal Answer",
+          "extracted_answer": "30",
+          "parsed_answer": "30",
+          "is_correct": true,
+          "latency_ms": 28999.187231063843,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 156,
+            "total_tokens": 668
+          },
+          "prompt_tokens": 156,
+          "completion_tokens": 512,
+          "total_tokens": 668
+        }
+      ],
+      "majority_answer": "30",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 156,
+      "total_latency_ms": 28999.187231063843
+    },
+    {
+      "id": 57,
+      "problem": " For Halloween Bianca received 78 pieces of candy. She ate 30 pieces then placed the rest into piles with 8 in each pile. How many piles could she make? ",
+      "gold_answer_str": "6",
+      "gold_answer_int": 6,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Bianca had 78 pieces of candy and ate 30, so she has 78 - 30 = 48 pieces left.\nStep 2: She wants to make piles with 8 in each pile, so we divide 48 by 8.\nStep 3: 48 divided by 8 is 6, so she can make 6 piles.\n\nAnswer: \\boxed{6}\nOkay, let's see. Bianca starts with 78 candies. She eats 30, so subtracting that from 78 gives 48. Then she wants to divide the remaining 48 into piles of 8 each. Dividing 48 by 8 gives 6. So the answer should be 6. Wait, is there any trick here? Like, does she have to have some leftover or something? But the problem says she placed the rest into piles with 8 in each pile. So if 48 is exactly divisible by 8, then 6 piles is correct. Yeah, 8 times 6 is 48. So no issues here. The answer is 6.\n\nAnswer: \\boxed{6}\nOkay, let me check again. 78 minus 30 is definitely 48. Then 48 divided by 8 is 6. Yep, that's straightforward. No complications. So the answer is 6. I think that's right.\n\nAnswer: \\boxed{6}\nAlright, I'm confident. The steps are simple subtraction and division. No remainders, so the number of piles is exactly 6. \n\nAnswer: \\boxed{6}\nYes, that's correct. The answer is 6.\n\nAnswer: \\boxed{6}\nAlright, I think that's solid. No mistakes in the calculations. The answer is definitely 6.\n\nAnswer: \\boxed{6}\nOkay, I've checked it multiple times. The answer is 6. \n\nAnswer: \\boxed{6}\nYep, 78-30=48, 48/8=6. All steps are correct. \n\nAnswer: \\boxed{6}\nFinal check: 78-30=48. 48 divided by 8 is 6. Answer is 6. \n\nAnswer: \\boxed{6}\nAlright, I'm done. The answer is 6.\n\nAnswer: \\boxed{6}\nYes, that's the correct answer. \n\nAnswer:",
+          "extracted_answer": "6",
+          "parsed_answer": "6",
+          "is_correct": true,
+          "latency_ms": 29026.638507843018,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 159,
+            "total_tokens": 671
+          },
+          "prompt_tokens": 159,
+          "completion_tokens": 512,
+          "total_tokens": 671
+        }
+      ],
+      "majority_answer": "6",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 159,
+      "total_latency_ms": 29026.638507843018
+    },
+    {
+      "id": 58,
+      "problem": " There were 5 friends playing a video game online when 2 more players joined the game. If each player had 8 lives, how many lives did they have total? ",
+      "gold_answer_str": "56",
+      "gold_answer_int": 56,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the total number of players. Initially, there were 5 friends, and 2 more players joined, so the total number of players is 5 + 2 = 7.\n\nStep 2: Calculate the total number of lives. Each player has 8 lives, so the total number of lives is 7 * 8 = 56.\n\nFinal Answer: \\boxed{56}\nOkay, let me try to solve this problem. So, the question is about figuring out the total number of lives that all the players have combined. Let me read it again to make sure I get all the details right.\n\nThe problem says there were 5 friends playing a video game online, and then 2 more players joined. Each player has 8 lives. We need to find the total number of lives they all have together. \n\nAlright, so first, I need to find out how many players there are in total. Initially, there are 5 friends. Then 2 more join. So adding those together, 5 plus 2 equals 7 players total. That seems straightforward. \n\nNext, each of these 7 players has 8 lives. To find the total lives, I should multiply the number of players by the number of lives each has. So 7 players multiplied by 8 lives per player. Let me do that calculation: 7 times 8. Hmm, 7*8 is 56. \n\nWait, is there any chance I missed something here? Let me check again. The problem doesn't mention any players leaving or any other changes, just 5 friends plus 2 more. So total players are definitely 7. Each has 8 lives. Multiplying them gives 56. \n\nI don't think there's any trick here. It's a simple multiplication after finding the total number of players. So the answer should be 56. \n\nJust to make sure, let me think if \"lives\" could mean something else here. Like, maybe each player has 8 lives, but does that mean 8 per player or something else? The problem states \"each player had 8 lives,\" so it's 8 per player. So yeah, 7 times 8 is definitely 56. \n\nNo, I think that's solid. The answer is 56.\nOkay, let me go through the steps again to be thorough. \n\nFirst, the number of players: 5 original friends plus 2 new players equals 7 players",
+          "extracted_answer": "56",
+          "parsed_answer": "56",
+          "is_correct": true,
+          "latency_ms": 29037.85800933838,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 156,
+            "total_tokens": 668
+          },
+          "prompt_tokens": 156,
+          "completion_tokens": 512,
+          "total_tokens": 668
+        }
+      ],
+      "majority_answer": "56",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 156,
+      "total_latency_ms": 29037.85800933838
+    },
+    {
+      "id": 59,
+      "problem": " At a restaurant each adult meal costs $8 and kids eat free. If a group of 11 people came in and 2 were kids, how much would it cost for the group to eat? ",
+      "gold_answer_str": "72",
+      "gold_answer_int": 72,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Determine the number of adults. Total people is 11, 2 are kids, so 11 - 2 = 9 adults.\nStep 2: Calculate the total cost. Each adult meal costs $8, so 9 adults * $8 = $72.\nStep 3: Since kids eat free, there's no additional cost for them.\nFinal Answer: The total cost is $72.\n\n\\boxed{72}\nOkay, let me try to figure out this problem. So, the question is about calculating the total cost for a group of 11 people where 2 are kids and the rest are adults. Each adult meal costs $8, and kids eat free. \n\nFirst, I need to find out how many adults there are. The total number of people is 11, and 2 of them are kids. So, subtracting the kids from the total gives the number of adults. That would be 11 minus 2, which equals 9 adults. \n\nNext, since each adult meal is $8, I multiply the number of adults by the cost per adult meal. So 9 adults times $8. Let me do that math: 9 times 8 is 72. \n\nWait, the kids eat free, so there's no cost for them. Therefore, the total cost should just be the cost for the adults, which is $72. \n\nLet me double-check. Total people: 11. Kids: 2, so adults: 9. 9 times 8 is indeed 72. No other costs mentioned, so the answer should be 72. Yeah, that makes sense. I don't think I made any mistakes here. The answer is 72.\n\\boxed{72}",
+          "extracted_answer": "72",
+          "parsed_answer": "72",
+          "is_correct": true,
+          "latency_ms": 20920.52173614502,
+          "usage": {
+            "completion_tokens": 370,
+            "prompt_tokens": 162,
+            "total_tokens": 532
+          },
+          "prompt_tokens": 162,
+          "completion_tokens": 370,
+          "total_tokens": 532
+        }
+      ],
+      "majority_answer": "72",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 370,
+      "total_prompt_tokens": 162,
+      "total_latency_ms": 20920.52173614502
+    },
+    {
+      "id": 60,
+      "problem": " Roger had 25 books. If he sold 21 of them and used the money he earned to buy 30 new books, how many books would Roger have? ",
+      "gold_answer_str": "34",
+      "gold_answer_int": 34,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Roger starts with 25 books.\nStep 2: He sells 21 books, so he has 25 - 21 = 4 books left.\nStep 3: He uses the money from selling 21 books to buy 30 new books.\nStep 4: Total books = 4 + 30 = 34 books.\nAnswer: \\boxed{34}\n\nOkay, let me try to solve this problem. So, Roger starts with 25 books. Then he sells 21 of them. Hmm, selling books would mean he loses those from his collection. So subtracting 21 from 25 gives 4 books remaining. Then, he uses the money from selling those 21 books to buy 30 new ones. Wait, buying new books adds to his total. So he had 4 left, then adds 30. So 4 plus 30 is 34. That seems straightforward. Let me check again. 25 minus 21 is definitely 4. Then adding 30 gives 34. Yeah, that makes sense. I don't think I missed anything here. The answer should be 34.\n\\boxed{34}\nOkay, let me try to solve this problem. So, Roger starts with 25 books. Then he sells 21 of them. Hmm, selling books would mean he loses those from his collection. So subtracting 21 from 25 gives 4 books remaining. Then, he uses the money from selling those 21 books to buy 30 new ones. Wait, buying new books adds to his total. So he had 4 left, then adds 30. So 4 plus 30 is 34. That seems straightforward. Let me check again. 25 minus 21 is definitely 4. Then adding 30 gives 34. Yeah, that makes sense. I don't think I missed anything here. The answer should be 34.\n\\boxed{34}\nOkay, let me try to solve this problem. So, Roger starts with 25 books. Then he sells 21 of them. Hmm, selling books would mean he loses those from his collection. So subtracting 21 from 25 gives 4 books remaining. Then, he uses the money from selling those 21 books to buy 30 new ones. Wait",
+          "extracted_answer": "34",
+          "parsed_answer": "34",
+          "is_correct": true,
+          "latency_ms": 28975.643157958984,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 157,
+            "total_tokens": 669
+          },
+          "prompt_tokens": 157,
+          "completion_tokens": 512,
+          "total_tokens": 669
+        }
+      ],
+      "majority_answer": "34",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 157,
+      "total_latency_ms": 28975.643157958984
+    }
+  ]
+}

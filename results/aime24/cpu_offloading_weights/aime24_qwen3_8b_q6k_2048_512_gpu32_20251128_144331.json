@@ -1,0 +1,122 @@
+{
+  "run_config": {
+    "server_url": "http://127.0.0.1:8000",
+    "model_id": "qwen3_8b",
+    "dataset_name": "ChilleD/MultiArith",
+    "dataset_split": "test",
+    "max_examples": 3,
+    "temperature": 0.2,
+    "top_p": 1,
+    "top_k": 20,
+    "max_context": 2048,
+    "max_new_tokens": 512,
+    "gpu_layers": 32,
+    "offload_desc": "qwen3_8b_q6k_cpu_offload_0",
+    "request_timeout": 3400.0,
+    "num_samples_per_question": 1,
+    "output_dir": "outputs",
+    "script_invocation": "python scripts/qwen3_8b_eval.py --server-url http://127.0.0.1:8000 --model-id qwen3_8b --max-context 2048 --max-new-tokens 512 --gpu-layers 32 --offload-desc qwen3_8b_q6k_cpu_offload_0 --num-samples-per-question 1 --max-examples 3"
+  },
+  "run_summary": {
+    "num_questions": 3,
+    "num_correct_questions": 3,
+    "accuracy_majority": 1.0,
+    "avg_latency_ms_per_question": 27297.867854436237,
+    "total_prompt_tokens": 476,
+    "total_completion_tokens": 1444,
+    "total_tokens": 1920,
+    "tokens_per_second_overall": 23.445054515347145
+  },
+  "results": [
+    {
+      "id": 0,
+      "problem": " Paige had 11 songs on her mp3 player. If she deleted 9 old songs from it and then added 8 new songs, how many songs does she have on her mp3 player? ",
+      "gold_answer_str": "10",
+      "gold_answer_int": 10,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Start with the initial number of songs, which is 11.\nStep 2: Subtract the number of songs deleted, which is 9. 11 - 9 = 2.\nStep 3: Add the number of songs added, which is 8. 2 + 8 = 10.\nFinal Answer: \\boxed{10}\nOkay, let's see. Paige starts with 11 songs. She deletes 9, so I need to subtract 9 from 11. That would leave her with 2 songs. Then she adds 8 new ones. Adding 8 to the remaining 2 gives 10. So the total number of songs after deletion and addition is 10. I think that's straightforward. Just basic arithmetic operations. No complications here. The answer should be 10.\n\nWait, let me double-check. 11 minus 9 is definitely 2. Then 2 plus 8 is 10. Yep, that's correct. No need for any complex steps. The problem is pretty simple. So the final answer is 10. I'll make sure to put it in the box as instructed.\n\\boxed{10}\nPaige starts with 11 songs. After deleting 9, she has $11 - 9 = 2$ songs left. Adding 8 new songs gives $2 + 8 = 10$. The final count is $\\boxed{10}$.  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed{10}  \n\\boxed",
+          "extracted_answer": "10",
+          "parsed_answer": "10",
+          "is_correct": true,
+          "latency_ms": 29124.353408813477,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 163,
+            "total_tokens": 675
+          },
+          "prompt_tokens": 163,
+          "completion_tokens": 512,
+          "total_tokens": 675
+        }
+      ],
+      "majority_answer": "10",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 163,
+      "total_latency_ms": 29124.353408813477
+    },
+    {
+      "id": 1,
+      "problem": " There were 39 girls and 4 boys trying out for the schools basketball team. If only 26 of them got called back, how many students didn't make the cut? ",
+      "gold_answer_str": "17",
+      "gold_answer_int": 17,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Find the total number of students trying out.\nTotal students = 39 girls + 4 boys = 43 students.\n\nStep 2: Subtract the number of students who got called back from the total number of students.\nStudents who didn't make the cut = 43 - 26 = 17 students.\n\nAnswer: \\boxed{17}\nOkay, let me try to solve this AIME problem. So, the problem says there were 39 girls and 4 boys trying out for the school's basketball team. Only 26 of them got called back. We need to find out how many students didn't make the cut.\n\nFirst, I should figure out the total number of students who tried out. That would be the sum of the girls and boys. So 39 girls plus 4 boys. Let me add those numbers: 39 + 4 equals 43. So there were 43 students in total.\n\nNext, the problem states that 26 students got called back. To find out how many didn't make the cut, I need to subtract the number of students who got called back from the total number of students. So that's 43 minus 26. Let me do the subtraction: 43 - 26. Hmm, 43 minus 20 is 23, and then minus 6 more is 17. So 17 students didn't make the cut.\n\nWait, let me double-check my math to make sure I didn't make a mistake. 39 girls plus 4 boys is definitely 43. Then 43 minus 26... Yeah, 26 plus 17 is 43. So that seems right. I think the answer is 17. \n\nI don't see any other steps needed here. The problem is straightforward: total students minus those called back gives the number that didn't make it. So the final answer should be 17.\n\\boxed{17}",
+          "extracted_answer": "17",
+          "parsed_answer": "17",
+          "is_correct": true,
+          "latency_ms": 23777.740001678467,
+          "usage": {
+            "completion_tokens": 420,
+            "prompt_tokens": 159,
+            "total_tokens": 579
+          },
+          "prompt_tokens": 159,
+          "completion_tokens": 420,
+          "total_tokens": 579
+        }
+      ],
+      "majority_answer": "17",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 420,
+      "total_prompt_tokens": 159,
+      "total_latency_ms": 23777.740001678467
+    },
+    {
+      "id": 2,
+      "problem": " Faye had 34 coloring books. If she gave away 3 of them, but then bought 48 more, how many would she have total? ",
+      "gold_answer_str": "79",
+      "gold_answer_int": 79,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Start with the initial number of coloring books, which is 34.\nStep 2: Subtract the number of coloring books she gave away, which is 3. So, 34 - 3 = 31.\nStep 3: Add the number of coloring books she bought, which is 48. So, 31 + 48 = 79.\nFinal Answer: \\boxed{79}\n\nOkay, let me try to solve this problem. So, Faye starts with 34 coloring books. Then she gives away 3, right? So I need to subtract 3 from 34. Let me do that: 34 minus 3 is 31. Then she buys 48 more. So now I add 48 to the 31 she has left. Let me add those numbers. 31 plus 48... Hmm, 30 plus 40 is 70, and 1 plus 8 is 9, so total is 79. That seems right. Wait, is there any trick here? The problem seems straightforward. No mention of any other transactions or losses. So yeah, 34 minus 3 is 31, plus 48 equals 79. I think that's the answer.\n\\boxed{79} \n\nWait, let me check again. 34 minus 3 is definitely 31. Then 31 plus 48. Let me add 31 + 48. Breaking it down: 31 + 40 is 71, then +8 is 79. Yep, that's correct. No issues here. The answer should be 79. \n\n\\boxed{79}\nOkay, so the problem is about Faye's coloring books. She starts with 34. Gives away 3, so subtract 3. Then buys 48 more, so add 48. Let me compute step by step. \n\nFirst step: 34 - 3 = 31. Then 31 + 48. Let me add 31 + 48. 31 + 40 is 71, plus 8 is 79. Yep, that's correct. So the total number of coloring books she has is 79. \n\n\\boxed{79}\nAlright, I think that's solid. No mistakes in the",
+          "extracted_answer": "79",
+          "parsed_answer": "79",
+          "is_correct": true,
+          "latency_ms": 28991.510152816772,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 154,
+            "total_tokens": 666
+          },
+          "prompt_tokens": 154,
+          "completion_tokens": 512,
+          "total_tokens": 666
+        }
+      ],
+      "majority_answer": "79",
+      "is_correct_majority": true,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 154,
+      "total_latency_ms": 28991.510152816772
+    }
+  ]
+}
