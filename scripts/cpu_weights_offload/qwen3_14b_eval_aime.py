@@ -475,7 +475,8 @@ def run_eval(cfg: EvalConfig) -> None:
 
     results: List[Dict[str, Any]] = []
     num_questions = 0
-    num_correct_questions = 0
+    num_correct_majority = 0
+    num_correct_any = 0
 
     total_prompt_tokens_all = 0
     total_completion_tokens_all = 0
@@ -491,22 +492,27 @@ def run_eval(cfg: EvalConfig) -> None:
 
         num_questions += 1
         if question_result["is_correct_majority"]:
-            num_correct_questions += 1
+            num_correct_majority += 1
         if question_result["is_correct_any"]:
-            num_correct_questions += 1
+            num_correct_any += 1
 
 
         total_prompt_tokens_all += question_result["total_prompt_tokens"]
         total_completion_tokens_all += question_result["total_completion_tokens"]
         total_latency_ms_all += question_result["total_latency_ms"]
 
-        acc_so_far = num_correct_questions / num_questions if num_questions > 0 else 0.0
+        acc_majority_so_far = num_correct_majority / num_questions if num_questions > 0 else 0.0
+        acc_any_so_far = num_correct_any / num_questions if num_questions > 0 else 0.0
+
         print(
             f"[ID {ex_id}] majority_answer={question_result['majority_answer']}, "
             f"gold={gold_answer_str}, "
             # f"correct={question_result['is_correct_majority']}, "
-            f"correct={question_result["is_correct_any"]}, "
-            f"acc_so_far={acc_so_far:.3f}"
+            # f"correct={question_result["is_correct_any"]}, "
+            f"correct_majority={question_result['is_correct_majority']}, "
+            f"correct_any={question_result['is_correct_any']}, "
+            f"acc_majority_so_far={acc_majority_so_far:.3f}, "
+            f"acc_any_so_far={acc_any_so_far:.3f}"
         )
 
         # Stream write partial JSON so you can inspect midway
@@ -515,7 +521,9 @@ def run_eval(cfg: EvalConfig) -> None:
             cfg,
             results,
             num_questions,
-            num_correct_questions,
+            # num_correct_questions,
+            num_correct_majority,
+            num_correct_any,
             total_prompt_tokens_all,
             total_completion_tokens_all,
             total_latency_ms_all,
@@ -523,8 +531,10 @@ def run_eval(cfg: EvalConfig) -> None:
 
     print(f"\nSaved evaluation results to: {output_path}")
     if num_questions > 0:
-        final_acc = num_correct_questions / num_questions
-        print(f"Final accuracy over {num_questions} questions (majority vote): {final_acc:.3f}")
+        final_acc_majority = num_correct_majority / num_questions
+        final_acc_any = num_correct_any / num_questions
+        print(f"Final accuracy over {num_questions} questions (majority vote): {final_acc_majority:.3f}")
+        print(f"Final accuracy over {num_questions} questions (any existed in answer): {final_acc_any:.3f}")
 
 
 def _write_partial_json(
@@ -532,14 +542,22 @@ def _write_partial_json(
     cfg: EvalConfig,
     results: List[Dict[str, Any]],
     num_questions: int,
-    num_correct_questions: int,
+    # num_correct_questions: int,
+    num_correct_majority: int,
+    num_correct_any: int,
     total_prompt_tokens: int,
     total_completion_tokens: int,
     total_latency_ms: float,
 ) -> None:
     """Write current run_config + summary + question-level results to JSON."""
-    accuracy = (
-        num_correct_questions / num_questions if num_questions > 0 else 0.0
+    # accuracy = (
+    #     num_correct_questions / num_questions if num_questions > 0 else 0.0
+    # )
+    accuracy_majority = (
+        num_correct_majority / num_questions if num_questions > 0 else 0.0
+    )
+    accuracy_any = (
+        num_correct_any / num_questions if num_questions > 0 else 0.0
     )
     avg_latency_ms = (
         total_latency_ms / num_questions if num_questions > 0 else None
@@ -554,9 +572,10 @@ def _write_partial_json(
 
     run_summary = {
         "num_questions": num_questions,
-        "num_correct_questions": num_correct_questions,
-        # "accuracy_majority": accuracy,
-        "accuracy_any": accuracy,
+        "num_correct_majority": num_correct_majority,
+        "num_correct_any": num_correct_any,
+        "accuracy_majority": accuracy_majority,
+        "accuracy_any": accuracy_any,
         "avg_latency_ms_per_question": avg_latency_ms,
         "total_prompt_tokens": total_prompt_tokens,
         "total_completion_tokens": total_completion_tokens,
