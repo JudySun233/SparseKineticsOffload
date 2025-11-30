@@ -19,8 +19,8 @@
   },
   "run_summary": {
     "num_questions": 13,
-    "num_correct_questions": 8,
-    "accuracy_any": 0.6153846153846154,
+    "num_correct_questions": 3,
+    "accuracy_any": 0.230769231,
     "avg_latency_ms_per_question": 261600.38146605858,
     "total_prompt_tokens": 2996,
     "total_completion_tokens": 21458,
