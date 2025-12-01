@@ -1,0 +1,65 @@
+{
+  "run_config": {
+    "server_url": "http://127.0.0.1:8000",
+    "model_id": "qwen3_14b",
+    "dataset_name": "HuggingFaceH4/aime_2024",
+    "dataset_split": "train",
+    "max_examples": 13,
+    "temperature": 0.2,
+    "top_p": 1,
+    "top_k": 20,
+    "max_context": 3072,
+    "max_new_tokens": 2048,
+    "gpu_layers": 24,
+    "offload_desc": "qwen3_14b_q8_cpu_offload16_2048",
+    "request_timeout": 8000.0,
+    "num_samples_per_question": 1,
+    "output_dir": "outputs",
+    "script_invocation": "python scripts/qwen3_14b_eval_aime.py --server-url http://127.0.0.1:8000 --model-id qwen3_14b --max-context 3072 --max-new-tokens 2048 --gpu-layers 24 --offload-desc qwen3_14b_q8_cpu_offload16_2048 --num-samples-per-question 1 --max-examples 13 --request-timeout 8000 --output-dir outputs"
+  },
+  "run_summary": {
+    "num_questions": 1,
+    "num_correct_majority": 1,
+    "num_correct_any": 1,
+    "accuracy_majority": 1.0,
+    "accuracy_any": 1.0,
+    "avg_latency_ms_per_question": 385696.2914466858,
+    "total_prompt_tokens": 274,
+    "total_completion_tokens": 1426,
+    "total_tokens": 1700,
+    "tokens_per_second_overall": 4.407613030510531
+  },
+  "results": [
+    {
+      "id": 60,
+      "problem": "Every morning Aya goes for a $9$-kilometer-long walk and stops at a coffee shop afterwards. When she walks at a constant speed of $s$ kilometers per hour, the walk takes her 4 hours, including $t$ minutes spent in the coffee shop. When she walks $s+2$ kilometers per hour, the walk takes her 2 hours and 24 minutes, including $t$ minutes spent in the coffee shop. Suppose Aya walks at $s+\\frac{1}{2}$ kilometers per hour. Find the number of minutes the walk takes her, including the $t$ minutes spent in the coffee shop.",
+      "gold_answer_str": "204",
+      "gold_answer_int": 204,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Let's denote the walking speed as \\( s \\) km/h and the time spent in the coffee shop as \\( t \\) minutes.\n\nStep 2: When Aya walks at \\( s \\) km/h, the total time taken for the walk including the coffee stop is 4 hours. Since the walk is 9 km, the time spent walking is \\( \\frac{9}{s} \\) hours. Therefore, the total time is \\( \\frac{9}{s} + \\frac{t}{60} = 4 \\) hours.\n\nStep 3: When she walks at \\( s + 2 \\) km/h, the total time taken is 2 hours and 24 minutes, which is \\( 2 + \\frac{24}{60} = 2.4 \\) hours. The time spent walking is \\( \\frac{9}{s + 2} \\) hours. Thus, the total time is \\( \\frac{9}{s + 2} + \\frac{t}{60} = 2.4 \\) hours.\n\nStep 4: We now have two equations:\n1. \\( \\frac{9}{s} + \\frac{t}{60} = 4 \\)\n2. \\( \\frac{9}{s + 2} + \\frac{t}{60} = 2.4 \\)\n\nStep 5: Subtracting the second equation from the first to eliminate \\( t \\):\n\\( \\frac{9}{s} - \\frac{9}{s + 2} = 4 - 2.4 \\)\n\\( \\frac{9}{s} - \\frac{9}{s + 2} = 1.6 \\)\n\nStep 6: Simplify the left side:\n\\( 9 \\left( \\frac{1}{s} - \\frac{1}{s + 2} \\right) = 1.6 \\)\n\\( 9 \\left( \\frac{(s + 2) - s}{s(s + 2)} \\right) = 1.6 \\)\n\\( 9 \\left( \\frac{2}{s(s + 2)} \\right) = 1.6 \\)\n\\( \\frac{18}{s(s + 2)} = 1.6 \\)\n\nStep 7: Solve for \\( s(s + 2) \\):\n\\( s(s + 2) = \\frac{18}{1.6} \\)\n\\( s(s + 2) = 11.25 \\)\n\nStep 8: Expand the equation:\n\\( s^2 + 2s - 11.25 = 0 \\)\n\nStep 9: Solve the quadratic equation using the quadratic formula:\n\\( s = \\frac{-2 \\pm \\sqrt{4 + 45}}{2} \\)\n\\( s = \\frac{-2 \\pm \\sqrt{49}}{2} \\)\n\\( s = \\frac{-2 \\pm 7}{2} \\)\n\nStep 10: Since speed cannot be negative, take the positive root:\n\\( s = \\frac{5}{2} = 2.5 \\) km/h\n\nStep 11: Now, substitute \\( s = 2.5 \\) back into the first equation to find \\( t \\):\n\\( \\frac{9}{2.5} + \\frac{t}{60} = 4 \\)\n\\( 3.6 + \\frac{t}{60} = 4 \\)\n\\( \\frac{t}{60} = 0.4 \\)\n\\( t = 24 \\) minutes\n\nStep 12: Now, Aya walks at \\( s + \\frac{1}{2} = 2.5 + 0.5 = 3 \\) km/h.\n\nStep 13: Calculate the time taken at this new speed:\n\\( \\frac{9}{3} + \\frac{24}{60} = 3 + 0.4 = 3.4 \\) hours\n\nStep 14: Convert 3.4 hours to minutes:\n\\( 3.4 \\times 60 = 204 \\) minutes\n\nFinal Answer:\n\\boxed{204}\n</think>\n\nStep 1: Let’s denote Aya’s walking speed as \\( s \\) km/h and the time spent in the coffee shop as \\( t \\) minutes.\n\nStep 2: When walking at \\( s \\) km/h, the total time is 4 hours. The walking time is \\( \\frac{9}{s} \\) hours, so:\n\\[\n\\frac{9}{s} + \\frac{t}{60} = 4\n\\]\n\nStep 3: When walking at \\( s + 2 \\) km/h, the total time is 2.4 hours. The walking time is \\( \\frac{9}{s + 2} \\) hours, so:\n\\[\n\\frac{9}{s + 2} + \\frac{t}{60} = 2.4\n\\]\n\nStep 4: Subtract the second equation from the first to eliminate \\( t \\):\n\\[\n\\frac{9}{s} - \\frac{9}{s + 2} = 1.6\n\\]\n\nStep 5: Simplify:\n\\[\n9 \\left( \\frac{2}{s(s + 2)} \\right) = 1.6 \\implies \\frac{18}{s(s + 2)} = 1.6 \\implies s(s + 2) = 11.25\n\\]\n\nStep 6: Solve the quadratic equation:\n\\[\ns^2 + 2s - 11.25 = 0 \\implies s = \\frac{-2 \\pm 7}{2} \\implies s = 2.5 \\text{ km/h}\n\\]\n\nStep 7: Substitute \\( s = 2.5 \\) into the first equation to find \\( t \\):\n\\[\n\\frac{9}{2.5} + \\frac{t}{60} = 4 \\implies 3.6 + \\frac{t}{60} = 4 \\implies t = 24 \\text{ minutes}\n\\]\n\nStep 8: When walking at \\( s + \\frac{1}{2} = 3 \\) km/h, the total time is:\n\\[\n\\frac{9}{3} + \\frac{24}{60} = 3 + 0.4 = 3.4 \\text{ hours} = 204 \\text{ minutes}\n\\]\n\nFinal Answer:\n\\boxed{204}",
+          "extracted_answer": "204",
+          "parsed_answer": "204",
+          "is_correct": true,
+          "latency_ms": 385696.2914466858,
+          "usage": {
+            "completion_tokens": 1426,
+            "prompt_tokens": 274,
+            "total_tokens": 1700
+          },
+          "prompt_tokens": 274,
+          "completion_tokens": 1426,
+          "total_tokens": 1700
+        }
+      ],
+      "majority_answer": "204",
+      "is_correct_majority": true,
+      "is_correct_any": true,
+      "num_samples": 1,
+      "total_completion_tokens": 1426,
+      "total_prompt_tokens": 274,
+      "total_latency_ms": 385696.2914466858
+    }
+  ]
+}
