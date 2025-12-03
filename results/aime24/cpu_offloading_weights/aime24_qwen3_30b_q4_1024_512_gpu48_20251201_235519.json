@@ -1,0 +1,251 @@
+{
+  "run_config": {
+    "server_url": "http://127.0.0.1:8000",
+    "model_id": "qwen3_30b_q4",
+    "dataset_name": "HuggingFaceH4/aime_2024",
+    "dataset_split": "train",
+    "max_examples": 7,
+    "temperature": 0.2,
+    "top_p": 1,
+    "top_k": 20,
+    "max_context": 1024,
+    "max_new_tokens": 512,
+    "gpu_layers": 48,
+    "offload_desc": "qwen3_30b_q4_offload0_512",
+    "request_timeout": 15000.0,
+    "num_samples_per_question": 1,
+    "output_dir": "outputs",
+    "script_invocation": "python scripts/qwen3_14b_eval_aime.py --server-url http://127.0.0.1:8000 --model-id qwen3_30b_q4 --max-context 1024 --max-new-tokens 512 --gpu-layers 48 --offload-desc qwen3_30b_q4_offload0_512 --num-samples-per-question 1 --max-examples 7 --request-timeout 15000 --output-dir outputs"
+  },
+  "run_summary": {
+    "num_questions": 7,
+    "num_correct_majority": 0,
+    "num_correct_any": 0,
+    "accuracy_majority": 0.0,
+    "accuracy_any": 0.0,
+    "avg_latency_ms_per_question": 8346.953528267997,
+    "total_prompt_tokens": 1691,
+    "total_completion_tokens": 3584,
+    "total_tokens": 5275,
+    "tokens_per_second_overall": 90.2810140273772
+  },
+  "results": [
+    {
+      "id": 60,
+      "problem": "Every morning Aya goes for a $9$-kilometer-long walk and stops at a coffee shop afterwards. When she walks at a constant speed of $s$ kilometers per hour, the walk takes her 4 hours, including $t$ minutes spent in the coffee shop. When she walks $s+2$ kilometers per hour, the walk takes her 2 hours and 24 minutes, including $t$ minutes spent in the coffee shop. Suppose Aya walks at $s+\\frac{1}{2}$ kilometers per hour. Find the number of minutes the walk takes her, including the $t$ minutes spent in the coffee shop.",
+      "gold_answer_str": "204",
+      "gold_answer_int": 204,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Convert all times to minutes. 4 hours = 240 minutes, 2 hours 24 minutes = 144 minutes. Let $w$ be the walking time in minutes. Then $w + t = 240$ and $(w - \\frac{2}{3}w) + t = 144$? Wait, no. Let’s define $w$ as walking time in minutes. Then $w + t = 240$ and $w' + t = 144$, where $w'$ is walking time at $s+2$ km/h. But $w'$ is not $w - \\frac{2}{3}w$. Let’s define $w$ as walking time in minutes. Then $w + t = 240$ and $w' + t = 144$. But $w'$ is walking time at $s+2$ km/h. So $w' = \\frac{9}{s+2} \\times 60$ minutes. Similarly, $w = \\frac{9}{s} \\times 60$ minutes. So we have:\n\n$\\frac{9}{s} \\times 60 + t = 240$  (1)\n\n$\\frac{9}{s+2} \\times 60 + t = 144$  (2)\n\nSubtract (2) from (1): $\\frac{540}{s} - \\frac{540}{s+2} = 96$\n\nSimplify: $540 \\left( \\frac{1}{s} - \\frac{1}{s+2} \\right) = 96$\n\n$540 \\left( \\frac{2}{s(s+2)} \\right) = 96$\n\n$1080 / (s(s+2)) = 96$\n\n$1080 = 96 s(s+2)$\n\nDivide both sides by 24: $45 = 4 s(s+2)$\n\nWait, 1080 / 24 = 45, 96 / 24 = 4. So $45 = 4 s(s+2)$\n\nSo $4 s^2 + 8 s - 45 = 0$\n\nSolve quadratic: $s = \\frac{-8 \\",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 8523.725032806396,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 273,
+            "total_tokens": 785
+          },
+          "prompt_tokens": 273,
+          "completion_tokens": 512,
+          "total_tokens": 785
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 273,
+      "total_latency_ms": 8523.725032806396
+    },
+    {
+      "id": 61,
+      "problem": "Let $ABC$ be a triangle inscribed in circle $\\omega$. Let the tangents to $\\omega$ at $B$ and $C$ intersect at point $D$, and let $\\overline{AD}$ intersect $\\omega$ at $P$. If $AB=5$, $BC=9$, and $AC=10$, $AP$ can be written as the form $\\frac{m}{n}$, where $m$ and $n$ are relatively prime integers. Find $m + n$.",
+      "gold_answer_str": "113",
+      "gold_answer_int": 113,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Use power of a point and harmonic division.  \nStep 2: Apply Menelaus’ theorem or use coordinates.  \nStep 3: Use the Law of Cosines to find angles.  \nStep 4: Use the formula for the length of a chord.  \nStep 5: Compute $AP$.\n\nWe need to compute $AP$ given triangle $ABC$ inscribed in circle $\\omega$, with tangents at $B$ and $C$ meeting at $D$, and $AD$ meets $\\omega$ again at $P$. We know $AB=5$, $BC=9$, $AC=10$. We need to find $AP$ as $\\frac{m}{n}$ and compute $m+n$.\n\nWe can use the Power of a Point theorem: $DB \\cdot DC = DA \\cdot DP$. But we need to find $DA$ and $DP$. Alternatively, we can use coordinates: place the circle on coordinate plane, find coordinates of $A,B,C$, compute tangent lines, find $D$, find line $AD$, find intersection $P$, compute distance $AP$.\n\nLet’s place $B$ at $(0,0)$, $C$ at $(9,0)$, and $A$ at $(x,y)$ such that $AB=5$, $AC=10$. Then we can solve for $x,y$ using distance formula: $x^2 + y^2 = 25$ and $(x-9)^2 + y^2 = 100$. Subtracting the first equation from the second: $(x-9)^2 - x^2 = 75$ => $x^2 - 18x + 81 - x^2 = 75$ => $-18x + 81 = 75$ => $-18x = -6$ => $x = 1/3$. Then $y^2 = 25 - (1/3)^2 = 25 - 1/9 = 224/9$, so $y = \\sqrt{224}/3 = 4\\sqrt{14}/3$. So $A$ is at $(1/3, 4\\sqrt{14}/3)$.\n\nNow we need to find the circumcircle of $ABC$. The circumcircle equation can be found by solving for the circle passing through $A,B,C$. General circle equation",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 8358.470439910889,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 247,
+            "total_tokens": 759
+          },
+          "prompt_tokens": 247,
+          "completion_tokens": 512,
+          "total_tokens": 759
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 247,
+      "total_latency_ms": 8358.470439910889
+    },
+    {
+      "id": 62,
+      "problem": "Each vertex of a regular octagon is independently colored either red or blue with equal probability. The probability that the octagon can then be rotated so that all of the blue vertices end up at positions where there were originally red vertices is $\\tfrac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. What is $m+n$?",
+      "gold_answer_str": "371",
+      "gold_answer_int": 371,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Understand the problem\nStep 2: Count the number of colorings that are rotationally equivalent to a given coloring\nStep 3: Use Burnside’s lemma or group theory to count the number of distinct colorings under rotation\nStep 4: Compute the probability\nStep 5: Simplify the fraction and find m+n\n\nWe must produce a concise explanation and the final answer.\n\nWe need to compute the probability that there exists a rotation such that the blue vertices are exactly the red vertices in the original coloring. This is equivalent to counting the number of colorings that are rotationally equivalent to their complement.\n\nWe can use Burnside’s lemma: the number of distinct colorings under rotation is (1/8) * sum_{d|8} φ(d) * 2^{8/d}.\n\nBut we need the number of colorings that are rotationally equivalent to their complement. That is, the number of colorings that are fixed by some rotation.\n\nWait: The problem says: \"the probability that the octagon can then be rotated so that all of the blue vertices end up at positions where there were originally red vertices\". So we need the number of colorings such that there exists a rotation r such that blue(r) = red. That is, the coloring is rotationally equivalent to its complement.\n\nSo we need to count the number of colorings that are rotationally equivalent to their complement.\n\nWe can think of the set of colorings as a set of 2^8 = 256 colorings. We want to count the number of colorings that are rotationally equivalent to their complement.\n\nLet’s denote by C the set of colorings. For a coloring c, let c^r be the coloring obtained by rotating c by r positions. We want c such that there exists r with c^r = c^c (where c^c is the complement of c).\n\nWe can count the number of colorings c such that c is rotationally equivalent to its complement.\n\nWe can use Burnside’s lemma to count the number of colorings that are fixed by some rotation. But we need the number of colorings that are fixed by some rotation and also fixed by their complement.\n\nAlternatively, we can count the number of colorings that are rotationally equivalent to their complement by counting the number of orbits under the rotation group that are fixed by the complement operation.\n\nLet’s denote by G the cyclic group of order 8. The number of orbits of colorings under G is (1/8",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 8077.841520309448,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 216,
+            "total_tokens": 728
+          },
+          "prompt_tokens": 216,
+          "completion_tokens": 512,
+          "total_tokens": 728
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 216,
+      "total_latency_ms": 8077.841520309448
+    },
+    {
+      "id": 63,
+      "problem": "Define $f(x)=|| x|-\\tfrac{1}{2}|$ and $g(x)=|| x|-\\tfrac{1}{4}|$. Find the number of intersections of the graphs of \\[y=4 g(f(\\sin (2 \\pi x))) \\quad\\text{ and }\\quad x=4 g(f(\\cos (3 \\pi y))).\\]",
+      "gold_answer_str": "385",
+      "gold_answer_int": 385,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Understand the functions f(x) and g(x).  \nStep 2: Analyze the composition 4g(f(sin(2πx))).  \nStep 3: Analyze the composition 4g(f(cos(3πy))).  \nStep 4: Find the number of intersections.  \nStep 5: Count the number of solutions to the equation 4g(f(sin(2πx))) = 4g(f(cos(3πy))).  \nStep 6: Simplify the equation to find the number of intersections.\n\nWe need to solve the equation:  \n\\[4 g(f(\\sin (2 \\pi x))) = 4 g(f(\\cos (3 \\pi y)))\\]\n\nWe can divide both sides by 4:  \n\\[g(f(\\sin (2 \\pi x))) = g(f(\\cos (3 \\pi y)))\\]\n\nLet’s define \\(u = \\sin(2\\pi x)\\) and \\(v = \\cos(3\\pi y)\\).  \nThen the equation becomes:  \n\\[g(f(u)) = g(f(v))\\]\n\nWe need to find the number of pairs \\((x,y)\\) such that this holds.\n\nWe can consider the function \\(h(t) = g(f(t))\\).  \nWe need to find the number of solutions to \\(h(u) = h(v)\\) where \\(u = \\sin(2\\pi x)\\) and \\(v = \\cos(3\\pi y)\\).\n\nWe can consider the range of \\(u\\) and \\(v\\).  \n\\(u \\in [-1,1]\\) and \\(v \\in [-1,1]\\).  \nWe need to find the number of pairs \\((u,v)\\) such that \\(h(u) = h(v)\\).\n\nWe can consider the function \\(h(t)\\) on \\([-1,1]\\).  \nWe can find the number of times \\(h(t)\\) takes each value.\n\nWe can consider the graph of \\(h(t)\\) on \\([-1,1]\\).  \nWe can find the number of intersections of the graphs of \\(y = h(\\sin(2\\pi x))\\) and \\(x = h(\\cos(3\\pi y))\\).\n\nWe can consider the equation \\(h(\\sin(2\\pi x)) = h(\\cos(3\\pi y))\\).\n\nWe can consider the function \\(h(t)\\) on \\([-1,1]\\).  \nWe can find the number",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 8143.004655838013,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 221,
+            "total_tokens": 733
+          },
+          "prompt_tokens": 221,
+          "completion_tokens": 512,
+          "total_tokens": 733
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 221,
+      "total_latency_ms": 8143.004655838013
+    },
+    {
+      "id": 64,
+      "problem": "Let $p$ be the least prime number for which there exists a positive integer $n$ such that $n^{4}+1$ is divisible by $p^{2}$. Find the least positive integer $m$ such that $m^{4}+1$ is divisible by $p^{2}$.",
+      "gold_answer_str": "110",
+      "gold_answer_int": 110,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Identify the smallest prime p for which there exists a positive integer n such that p² divides n⁴ + 1.  \nStep 2: For each prime p, check if there exists n with n⁴ ≡ -1 mod p².  \nStep 3: Find the smallest such p and the smallest n for which this holds.  \nStep 4: Output the smallest n (which is m) for that p.\n\nWe need to find the smallest prime p such that there exists n with n⁴ ≡ -1 mod p², and then find the smallest positive integer m such that m⁴ + 1 is divisible by p².\n\nWe can start by checking small primes:\n\np=2: 2²=4. We need n⁴ ≡ -1 mod 4. n⁴ mod 4: n even: 0⁴=0, 2⁴=16≡0; n odd: 1⁴=1, 3⁴=81≡1. So n⁴ ≡ 0 or 1 mod 4. -1 ≡ 3 mod 4. So no solution for p=2.\n\np=3: 3²=9. n⁴ ≡ -1 mod 9. Let’s compute n⁴ mod 9 for n=1,2,...,8.  \nn=1: 1⁴=1  \nn=2: 16≡7  \nn=3: 81≡0  \nn=4: 256≡4  \nn=5: 625≡4  \nn=6: 1296≡0  \nn=7: 2401≡7  \nn=8: 4096≡1  \nNone ≡ -1=8 mod 9. So no solution for p=3.\n\np=5: 5²=25. n⁴ ≡ -1 mod 25.  \nn=1: 1  \nn=2: 16  \nn=3: 81≡6  \nn=4: 256≡6  \nn=5: 625≡0  \nn=6: 1296≡21  \nn=7: 2401≡1  \nn=8: 4096≡16  \nn=9: 65",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 8172.61266708374,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 205,
+            "total_tokens": 717
+          },
+          "prompt_tokens": 205,
+          "completion_tokens": 512,
+          "total_tokens": 717
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 205,
+      "total_latency_ms": 8172.61266708374
+    },
+    {
+      "id": 65,
+      "problem": "Let $ABCD$ be a tetrahedron such that $AB=CD= \\sqrt{41}$, $AC=BD= \\sqrt{80}$, and $BC=AD= \\sqrt{89}$. There exists a point $I$ inside the tetrahedron such that the distances from $I$ to each of the faces of the tetrahedron are all equal. This distance can be written in the form $\\frac{m \\sqrt n}{p}$, where $m$, $n$, and $p$ are positive integers, $m$ and $p$ are relatively prime, and $n$ is not divisible by the square of any prime. Find $m+n+p$.",
+      "gold_answer_str": "104",
+      "gold_answer_int": 104,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Compute the volume of the tetrahedron.\nStep 2: Compute the area of each face.\nStep 3: Use the formula for the inradius: $r = \\frac{3V}{A_1 + A_2 + A_3 + A_4}$.\nStep 4: Simplify the expression to find $m$, $n$, $p$.\n\nWe need to compute the volume of the tetrahedron. We can use the Cayley-Menger determinant. The formula for the volume $V$ of a tetrahedron with edge lengths $a,b,c,d,e,f$ is:\n\n$$\n288 V^2 = \\begin{vmatrix}\n0 & 1 & 1 & 1 & 1 \\\\\n1 & 0 & a^2 & b^2 & c^2 \\\\\n1 & a^2 & 0 & d^2 & e^2 \\\\\n1 & b^2 & d^2 & 0 & f^2 \\\\\n1 & c^2 & e^2 & f^2 & 0 \\\\\n\\end{vmatrix}\n$$\n\nLet’s label the edges: $AB = a = \\sqrt{41}$, $AC = b = \\sqrt{80}$, $BC = c = \\sqrt{89}$, $AD = d = \\sqrt{89}$, $BD = e = \\sqrt{80}$, $CD = f = \\sqrt{41}$. So the determinant becomes:\n\n$$\n\\begin{vmatrix}\n0 & 1 & 1 & 1 & 1 \\\\\n1 & 0 & 41 & 80 & 89 \\\\\n1 & 41 & 0 & 89 & 80 \\\\\n1 & 80 & 89 & 0 & 41 \\\\\n1 & 89 & 80 & 41 & 0 \\\\\n\\end{vmatrix}\n$$\n\nWe need to compute this determinant. Let’s denote the matrix as $M$. We can compute the determinant by expanding along the first row. Let’s denote the cofactors as $C_{1j}$ for $j=1..5$. Then $\\det M = \\sum_{j=1}^5 (-1)^{1+j} M_{1j} C_{1j}$. Since $M_{11}=0$, the first term is zero. So",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 8227.082252502441,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 292,
+            "total_tokens": 804
+          },
+          "prompt_tokens": 292,
+          "completion_tokens": 512,
+          "total_tokens": 804
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 292,
+      "total_latency_ms": 8227.082252502441
+    },
+    {
+      "id": 66,
+      "problem": "Let $\\mathcal{B}$ be the set of rectangular boxes with surface area $54$ and volume $23$. Let $r$ be the radius of the smallest sphere that can contain each of the rectangular boxes that are elements of $\\mathcal{B}$. The value of $r^2$ can be written as $\\frac{p}{q}$, where $p$ and $q$ are relatively prime positive integers. Find $p+q$.",
+      "gold_answer_str": "721",
+      "gold_answer_int": 721,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Let the dimensions of a box be $x$, $y$, $z$. Then we have:\n- Surface area: $2(xy + yz + zx) = 54 \\implies xy + yz + zx = 27$.\n- Volume: $xyz = 23$.\n\nStep 2: We want to minimize the radius of the smallest sphere that can contain the box. The sphere must contain the box, so its diameter must be at least the space diagonal of the box. The space diagonal is $\\sqrt{x^2 + y^2 + z^2}$, so the radius is $\\frac{1}{2}\\sqrt{x^2 + y^2 + z^2}$. Thus we need to minimize $x^2 + y^2 + z^2$.\n\nStep 3: We know that $(x+y+z)^2 = x^2 + y^2 + z^2 + 2(xy + yz + zx)$. So $x^2 + y^2 + z^2 = (x+y+z)^2 - 54$. To minimize $x^2 + y^2 + z^2$, we need to minimize $x+y+z$.\n\nStep 4: Let $s = x+y+z$. We want to minimize $s$. We have $xy + yz + zx = 27$ and $xyz = 23$. By the AM-GM inequality, we know that $s^2 \\geq 3(xy + yz + zx) = 81$, so $s \\geq 9$. But we need to check if $s=9$ is achievable.\n\nStep 5: Suppose $s=9$. Then $x^2 + y^2 + z^2 = 81 - 54 = 27$. We need to check if there exist positive real numbers $x,y,z$ such that $x+y+z=9$, $xy + yz + zx=27$, and $xyz=23$.\n\nStep 6: The cubic equation with roots $x,y,z$ is $t^3 - st^2 + (xy+yz+zx)t - xyz = 0$, i.e., $t^3 - 9t^2 + 27t - 23 = 0$. We need to check if this cubic has three positive real roots.\n\nStep 7: Let’s compute the discrimin",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 8925.938129425049,
+          "usage": {
+            "completion_tokens": 512,
+            "prompt_tokens": 237,
+            "total_tokens": 749
+          },
+          "prompt_tokens": 237,
+          "completion_tokens": 512,
+          "total_tokens": 749
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 512,
+      "total_prompt_tokens": 237,
+      "total_latency_ms": 8925.938129425049
+    }
+  ]
+}

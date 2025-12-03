@@ -1,0 +1,127 @@
+{
+  "run_config": {
+    "server_url": "http://127.0.0.1:8000",
+    "model_id": "qwen3_14b",
+    "dataset_name": "HuggingFaceH4/aime_2024",
+    "dataset_split": "train",
+    "max_examples": 13,
+    "temperature": 0.2,
+    "top_p": 1,
+    "top_k": 20,
+    "max_context": 2048,
+    "max_new_tokens": 1024,
+    "gpu_layers": 4,
+    "offload_desc": "qwen3_14b_q8_cpu_offload36_1024",
+    "request_timeout": 8000.0,
+    "num_samples_per_question": 1,
+    "output_dir": "outputs",
+    "script_invocation": "python scripts/qwen3_14b_eval_aime.py --server-url http://127.0.0.1:8000 --model-id qwen3_14b --max-context 2048 --max-new-tokens 1024 --gpu-layers 4 --offload-desc qwen3_14b_q8_cpu_offload36_1024 --num-samples-per-question 1 --max-examples 13 --request-timeout 8000 --output-dir outputs"
+  },
+  "run_summary": {
+    "num_questions": 3,
+    "num_correct_majority": 0,
+    "num_correct_any": 0,
+    "accuracy_majority": 0.0,
+    "accuracy_any": 0.0,
+    "avg_latency_ms_per_question": 524415.9376621246,
+    "total_prompt_tokens": 739,
+    "total_completion_tokens": 3072,
+    "total_tokens": 3811,
+    "tokens_per_second_overall": 2.422377433829624
+  },
+  "results": [
+    {
+      "id": 60,
+      "problem": "Every morning Aya goes for a $9$-kilometer-long walk and stops at a coffee shop afterwards. When she walks at a constant speed of $s$ kilometers per hour, the walk takes her 4 hours, including $t$ minutes spent in the coffee shop. When she walks $s+2$ kilometers per hour, the walk takes her 2 hours and 24 minutes, including $t$ minutes spent in the coffee shop. Suppose Aya walks at $s+\\frac{1}{2}$ kilometers per hour. Find the number of minutes the walk takes her, including the $t$ minutes spent in the coffee shop.",
+      "gold_answer_str": "204",
+      "gold_answer_int": 204,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Let's denote the walking speed as \\( s \\) km/h and the time spent in the coffee shop as \\( t \\) minutes.\n\nStep 2: When walking at speed \\( s \\) km/h, the total time taken is 4 hours, which is 240 minutes. This includes both the walking time and the coffee shop time.\n\nStep 3: The distance Aya walks is 9 km. So, the time she spends walking is \\( \\frac{9}{s} \\) hours. Converting this to minutes, it's \\( \\frac{9}{s} \\times 60 \\) minutes.\n\nStep 4: Therefore, the total time equation is:\n\\[ \\frac{9}{s} \\times 60 + t = 240 \\]\nSimplifying:\n\\[ \\frac{540}{s} + t = 240 \\quad \\text{(Equation 1)} \\]\n\nStep 5: When walking at speed \\( s + 2 \\) km/h, the total time is 2 hours and 24 minutes, which is 144 minutes.\n\nStep 6: The walking time at this speed is \\( \\frac{9}{s + 2} \\) hours, which is \\( \\frac{9}{s + 2} \\times 60 \\) minutes.\n\nStep 7: The total time equation for this scenario is:\n\\[ \\frac{540}{s + 2} + t = 144 \\quad \\text{(Equation 2)} \\]\n\nStep 8: Now, we have two equations:\n1. \\( \\frac{540}{s} + t = 240 \\)\n2. \\( \\frac{540}{s + 2} + t = 144 \\)\n\nStep 9: Subtract Equation 2 from Equation 1 to eliminate \\( t \\):\n\\[ \\frac{540}{s} - \\frac{540}{s + 2} = 240 - 144 \\]\n\\[ \\frac{540}{s} - \\frac{540}{s + 2} = 96 \\]\n\nStep 10: Factor out 540:\n\\[ 540 \\left( \\frac{1}{s} - \\frac{1}{s + 2} \\right) = 96 \\]\n\\[ 540 \\left( \\frac{(s + 2) - s}{s(s + 2)} \\right) = 96 \\]\n\\[ 540 \\left( \\frac{2}{s(s + 2)} \\right) = 96 \\]\n\\[ \\frac{1080}{s(s + 2)} = 96 \\]\n\nStep 11: Solve for \\( s(s + 2) \\):\n\\[ s(s + 2) = \\frac{1080}{96} \\]\n\\[ s(s + 2) = 11.25 \\]\n\nStep 12: Expand the left side:\n\\[ s^2 + 2s = 11.25 \\]\n\\[ s^2 + 2s - 11.25 = 0 \\]\n\nStep 13: Solve the quadratic equation using the quadratic formula:\n\\[ s = \\frac{-2 \\pm \\sqrt{(2)^2 - 4(1)(-11.25)}}{2(1)} \\]\n\\[ s = \\frac{-2 \\pm \\sqrt{4 + 45}}{2} \\]\n\\[ s = \\frac{-2 \\pm \\sqrt{49}}{2} \\]\n\\[ s = \\frac{-2 \\pm 7}{2} \\]\n\nStep 14: Since speed cannot be negative, take the positive root:\n\\[ s = \\frac{-2 + 7}{2} = \\frac{5}{2} = 2.5 \\text{ km/h} \\]\n\nStep 15: Now, substitute \\( s = 2.5 \\) into Equation 1 to find \\( t \\):\n\\[ \\frac{540}{2.5} + t = 240 \\]\n\\[ 216 + t = 240 \\]\n\\[ t = 24 \\text{ minutes} \\]\n\nStep 16: Now, Aya walks at \\( s + \\frac{1}{2} = 2.5 + 0.5 = 3 \\) km/h.\n\nStep 17: Calculate the walking time at this speed:\n\\[ \\text{Walking time} = \\frac{9}{3} = 3 \\text{ hours} = 180 \\text{ minutes} \\]\n\nStep 18: Include",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 525973.9120006561,
+          "usage": {
+            "completion_tokens": 1024,
+            "prompt_tokens": 274,
+            "total_tokens": 1298
+          },
+          "prompt_tokens": 274,
+          "completion_tokens": 1024,
+          "total_tokens": 1298
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 1024,
+      "total_prompt_tokens": 274,
+      "total_latency_ms": 525973.9120006561
+    },
+    {
+      "id": 61,
+      "problem": "Let $ABC$ be a triangle inscribed in circle $\\omega$. Let the tangents to $\\omega$ at $B$ and $C$ intersect at point $D$, and let $\\overline{AD}$ intersect $\\omega$ at $P$. If $AB=5$, $BC=9$, and $AC=10$, $AP$ can be written as the form $\\frac{m}{n}$, where $m$ and $n$ are relatively prime integers. Find $m + n$.",
+      "gold_answer_str": "113",
+      "gold_answer_int": 113,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Recognize that triangle ABC has sides AB=5, BC=9, and AC=10. We need to find the length of AP, where P is the intersection of AD with the circumcircle ω, and D is the intersection of the tangents at B and C.\n\nStep 2: Since D is the intersection of the tangents at B and C, BD = CD. This implies that triangle BDC is isoceles with BD = CD.\n\nStep 3: Use the Power of a Point theorem at point D. The power of D with respect to ω is DB² = DC² = DP * DA.\n\nStep 4: Let’s denote AP = x and DP = y. Then, DA = DP + AP = y + x.\n\nStep 5: From the Power of a Point, DB² = DP * DA => DB² = y(y + x).\n\nStep 6: To find DB, we can use the formula for the length of the tangent from a point to a circle. The formula is DB = (AB² + BC² - AC²)/(2*BC). Wait, is that correct? Let me recall the formula.\n\nWait, actually, the length of the tangent from D to ω is DB = DC. To find DB, we can use the formula DB = (AB² + BC² - AC²)/(2*BC). Let me verify this.\n\nWait, no, that formula is for the length of the median. Hmm, perhaps I need to compute the circumradius first.\n\nAlternatively, since ABC is a triangle with sides 5,9,10, we can compute its circumradius R using the formula R = (a*b*c)/(4*Δ), where Δ is the area.\n\nStep 7: Compute the area Δ of triangle ABC using Heron's formula. The semi-perimeter s = (5 + 9 + 10)/2 = 12. Then, Δ = √[s(s - a)(s - b)(s - c)] = √[12*7*3*2] = √(504) = √(16*31.5) = 4√31.5. Wait, 504 factors into 16*31.5? Wait, 504 = 16*31.5? Let me compute 16*31.5: 16*30=480, 16*1.5=24, so 480+24=504. So, √504 = √(16*31.5) = 4√31.5. But 31.5 is 63/2, so √(63/2) = (√63)/√2 = (3√7)/√2. Therefore, Δ = 4*(3√7)/√2 = (12√7)/√2 = 12√(7/2) = 12*(√14)/2 = 6√14.\n\nWait, let me double-check that Heron's formula computation:\n\ns = (5 + 9 + 10)/2 = 12.\n\nΔ = √[12*(12 - 5)*(12 - 9)*(12 - 10)] = √[12*7*3*2] = √(504).\n\n504 factors: 504 = 16 * 31.5? Wait, 16*31.5 is 504, but 31.5 is 63/2. So, √504 = √(16 * 63/2) = 4√(63/2) = 4*(√63)/√2 = 4*(3√7)/√2 = (12√7)/√2 = 12√(7/2) = 6√14. Yes, that's correct.\n\nSo, Δ = 6√14.\n\nStep 8: Compute the circumradius R = (a*b*c)/(4Δ) = (5*9*10)/(4*6√14) = (450)/(24√14) = (75)/(4√14). Rationalizing the denominator: (75√14)/(4*14) = (75√14)/56.\n\nSo, R = 75√14 / 56.\n\nStep 9: Now, to find DB, the length of the tangent from D to ω. The formula for the length of the tangent from a point to a circle is √(OD² - R²), where O is the",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 524795.6881523132,
+          "usage": {
+            "completion_tokens": 1024,
+            "prompt_tokens": 248,
+            "total_tokens": 1272
+          },
+          "prompt_tokens": 248,
+          "completion_tokens": 1024,
+          "total_tokens": 1272
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 1024,
+      "total_prompt_tokens": 248,
+      "total_latency_ms": 524795.6881523132
+    },
+    {
+      "id": 62,
+      "problem": "Each vertex of a regular octagon is independently colored either red or blue with equal probability. The probability that the octagon can then be rotated so that all of the blue vertices end up at positions where there were originally red vertices is $\\tfrac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. What is $m+n$?",
+      "gold_answer_str": "371",
+      "gold_answer_int": 371,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Understand the problem. We have a regular octagon with each vertex colored red or blue randomly. We need to find the probability that there exists a rotation (by some multiple of 45 degrees) such that all blue vertices move to positions that were originally red.\n\nStep 2: Recognize that the octagon has rotational symmetry of order 8. So, we can consider rotations by 0°, 45°, 90°, ..., 315°. For each rotation, we can check if the condition is satisfied.\n\nStep 3: Use Burnside's lemma to count the number of colorings fixed by each rotation. Burnside's lemma states that the number of orbits (distinct colorings under rotation) is equal to the average number of fixed colorings across all group actions.\n\nStep 4: For each rotation, determine the number of colorings fixed by that rotation. The identity rotation (0°) fixes all colorings, which is 2^8 = 256.\n\nStep 5: For rotations by 45°, 135°, 225°, and 315°, which are rotations by 1, 3, 5, and 7 steps, the number of fixed colorings is 2^1 = 2 each, since all vertices must be the same color.\n\nStep 6: For rotations by 90° and 270°, which are rotations by 2 and 6 steps, the number of fixed colorings is 2^2 = 4 each, as the color must be consistent every 2 vertices.\n\nStep 7: For rotations by 180°, which is a rotation by 4 steps, the number of fixed colorings is 2^4 = 16.\n\nStep 8: Sum all fixed colorings: 256 (identity) + 4*2 (rotations by 1,3,5,7) + 2*4 (rotations by 2,6) + 16 (rotation by 4) = 256 + 8 + 8 + 16 = 288.\n\nStep 9: The total number of colorings is 256. The number of colorings fixed by at least one rotation is 288, but Burnside's lemma counts the number of orbits, which is 288 / 8 = 36.\n\nStep 10: However, we need the probability that there exists a rotation such that all blue vertices move to red positions. This is equivalent to the number of colorings where the coloring is fixed by some rotation, but with the additional condition that blue vertices are mapped to red positions.\n\nStep 11: Realize that the condition is equivalent to the coloring being fixed by a rotation, but with the colors swapped. So, for each rotation, the number of colorings fixed by that rotation and satisfying the color swap condition is equal to the number of colorings fixed by the rotation.\n\nStep 12: Therefore, the total number of favorable colorings is equal to the number of colorings fixed by some rotation, which is 288.\n\nStep 13: But since each coloring can be fixed by multiple rotations, we need to use inclusion-exclusion. However, Burnside's lemma already accounts for overcounting by averaging.\n\nStep 14: The probability is then 288 / 256 = 9/8, which is greater than 1, which is impossible. Therefore, this approach is incorrect.\n\nStep 15: Re-examine the problem. Instead of counting colorings fixed by rotations, we need to count colorings where there exists a rotation such that the image of blue vertices under rotation are red.\n\nStep 16: This is equivalent to the coloring being such that the set of blue vertices is a rotation of the set of red vertices.\n\nStep 17: Let’s consider that the octagon has rotational symmetry, so the number of such colorings is equal to the number of orbits under rotation where the blue set is a rotation of the red set.\n\nStep 18: The number of such colorings is equal to the number of distinct pairs (B, R) where B is the set of blue vertices and R is the set of red vertices, and B is a rotation of R.\n\nStep 19: Since the octagon is regular, each such pair corresponds to a rotation. The number of such colorings is equal to the number of distinct rotations, which is 8.\n\nStep 20: However, each coloring can be counted multiple times if it is symmetric under multiple rotations.\n\nStep 21: Therefore, we need to use Burnside's lemma again, but this time counting the number of colorings where B is a rotation of R.\n\nStep 22: For each rotation, count the number of colorings",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 522478.21283340454,
+          "usage": {
+            "completion_tokens": 1024,
+            "prompt_tokens": 217,
+            "total_tokens": 1241
+          },
+          "prompt_tokens": 217,
+          "completion_tokens": 1024,
+          "total_tokens": 1241
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 1024,
+      "total_prompt_tokens": 217,
+      "total_latency_ms": 522478.21283340454
+    }
+  ]
+}

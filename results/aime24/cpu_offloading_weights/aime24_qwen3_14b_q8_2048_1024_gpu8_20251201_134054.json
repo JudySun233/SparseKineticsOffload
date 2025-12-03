@@ -1,0 +1,234 @@
+{
+  "run_config": {
+    "server_url": "http://127.0.0.1:8000",
+    "model_id": "qwen3_14b",
+    "dataset_name": "HuggingFaceH4/aime_2024",
+    "dataset_split": "train",
+    "max_examples": 13,
+    "temperature": 0.2,
+    "top_p": 1,
+    "top_k": 20,
+    "max_context": 2048,
+    "max_new_tokens": 1024,
+    "gpu_layers": 8,
+    "offload_desc": "qwen3_14b_q8_cpu_offload32_1024",
+    "request_timeout": 8000.0,
+    "num_samples_per_question": 1,
+    "output_dir": "outputs",
+    "script_invocation": "python scripts/qwen3_14b_eval_aime.py --server-url http://127.0.0.1:8000 --model-id qwen3_14b --max-context 2048 --max-new-tokens 1024 --gpu-layers 8 --offload-desc qwen3_14b_q8_cpu_offload32_1024 --num-samples-per-question 1 --max-examples 13 --request-timeout 8000 --output-dir outputs"
+  },
+  "run_summary": {
+    "num_questions": 8,
+    "num_correct_majority": 0,
+    "num_correct_any": 0,
+    "accuracy_majority": 0.0,
+    "accuracy_any": 0.0,
+    "avg_latency_ms_per_question": 0.0,
+    "total_prompt_tokens": 0,
+    "total_completion_tokens": 0,
+    "total_tokens": 0,
+    "tokens_per_second_overall": null
+  },
+  "results": [
+    {
+      "id": 60,
+      "problem": "Every morning Aya goes for a $9$-kilometer-long walk and stops at a coffee shop afterwards. When she walks at a constant speed of $s$ kilometers per hour, the walk takes her 4 hours, including $t$ minutes spent in the coffee shop. When she walks $s+2$ kilometers per hour, the walk takes her 2 hours and 24 minutes, including $t$ minutes spent in the coffee shop. Suppose Aya walks at $s+\\frac{1}{2}$ kilometers per hour. Find the number of minutes the walk takes her, including the $t$ minutes spent in the coffee shop.",
+      "gold_answer_str": "204",
+      "gold_answer_int": 204,
+      "traces": [
+        {
+          "sample_id": 0,
+          "error": "500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/v1/completions",
+          "text": null,
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": null,
+          "usage": null
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 0,
+      "total_prompt_tokens": 0,
+      "total_latency_ms": 0.0
+    },
+    {
+      "id": 61,
+      "problem": "Let $ABC$ be a triangle inscribed in circle $\\omega$. Let the tangents to $\\omega$ at $B$ and $C$ intersect at point $D$, and let $\\overline{AD}$ intersect $\\omega$ at $P$. If $AB=5$, $BC=9$, and $AC=10$, $AP$ can be written as the form $\\frac{m}{n}$, where $m$ and $n$ are relatively prime integers. Find $m + n$.",
+      "gold_answer_str": "113",
+      "gold_answer_int": 113,
+      "traces": [
+        {
+          "sample_id": 0,
+          "error": "500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/v1/completions",
+          "text": null,
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": null,
+          "usage": null
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 0,
+      "total_prompt_tokens": 0,
+      "total_latency_ms": 0.0
+    },
+    {
+      "id": 62,
+      "problem": "Each vertex of a regular octagon is independently colored either red or blue with equal probability. The probability that the octagon can then be rotated so that all of the blue vertices end up at positions where there were originally red vertices is $\\tfrac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. What is $m+n$?",
+      "gold_answer_str": "371",
+      "gold_answer_int": 371,
+      "traces": [
+        {
+          "sample_id": 0,
+          "error": "500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/v1/completions",
+          "text": null,
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": null,
+          "usage": null
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 0,
+      "total_prompt_tokens": 0,
+      "total_latency_ms": 0.0
+    },
+    {
+      "id": 63,
+      "problem": "Define $f(x)=|| x|-\\tfrac{1}{2}|$ and $g(x)=|| x|-\\tfrac{1}{4}|$. Find the number of intersections of the graphs of \\[y=4 g(f(\\sin (2 \\pi x))) \\quad\\text{ and }\\quad x=4 g(f(\\cos (3 \\pi y))).\\]",
+      "gold_answer_str": "385",
+      "gold_answer_int": 385,
+      "traces": [
+        {
+          "sample_id": 0,
+          "error": "500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/v1/completions",
+          "text": null,
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": null,
+          "usage": null
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 0,
+      "total_prompt_tokens": 0,
+      "total_latency_ms": 0.0
+    },
+    {
+      "id": 64,
+      "problem": "Let $p$ be the least prime number for which there exists a positive integer $n$ such that $n^{4}+1$ is divisible by $p^{2}$. Find the least positive integer $m$ such that $m^{4}+1$ is divisible by $p^{2}$.",
+      "gold_answer_str": "110",
+      "gold_answer_int": 110,
+      "traces": [
+        {
+          "sample_id": 0,
+          "error": "500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/v1/completions",
+          "text": null,
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": null,
+          "usage": null
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 0,
+      "total_prompt_tokens": 0,
+      "total_latency_ms": 0.0
+    },
+    {
+      "id": 65,
+      "problem": "Let $ABCD$ be a tetrahedron such that $AB=CD= \\sqrt{41}$, $AC=BD= \\sqrt{80}$, and $BC=AD= \\sqrt{89}$. There exists a point $I$ inside the tetrahedron such that the distances from $I$ to each of the faces of the tetrahedron are all equal. This distance can be written in the form $\\frac{m \\sqrt n}{p}$, where $m$, $n$, and $p$ are positive integers, $m$ and $p$ are relatively prime, and $n$ is not divisible by the square of any prime. Find $m+n+p$.",
+      "gold_answer_str": "104",
+      "gold_answer_int": 104,
+      "traces": [
+        {
+          "sample_id": 0,
+          "error": "500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/v1/completions",
+          "text": null,
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": null,
+          "usage": null
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 0,
+      "total_prompt_tokens": 0,
+      "total_latency_ms": 0.0
+    },
+    {
+      "id": 66,
+      "problem": "Let $\\mathcal{B}$ be the set of rectangular boxes with surface area $54$ and volume $23$. Let $r$ be the radius of the smallest sphere that can contain each of the rectangular boxes that are elements of $\\mathcal{B}$. The value of $r^2$ can be written as $\\frac{p}{q}$, where $p$ and $q$ are relatively prime positive integers. Find $p+q$.",
+      "gold_answer_str": "721",
+      "gold_answer_int": 721,
+      "traces": [
+        {
+          "sample_id": 0,
+          "error": "500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/v1/completions",
+          "text": null,
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": null,
+          "usage": null
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 0,
+      "total_prompt_tokens": 0,
+      "total_latency_ms": 0.0
+    },
+    {
+      "id": 67,
+      "problem": "There exist real numbers $x$ and $y$, both greater than 1, such that $\\log_x\\left(y^x\\right)=\\log_y\\left(x^{4y}\\right)=10$. Find $xy$.",
+      "gold_answer_str": "025",
+      "gold_answer_int": 25,
+      "traces": [
+        {
+          "sample_id": 0,
+          "error": "500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/v1/completions",
+          "text": null,
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": null,
+          "usage": null
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 0,
+      "total_prompt_tokens": 0,
+      "total_latency_ms": 0.0
+    }
+  ]
+}

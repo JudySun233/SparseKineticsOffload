@@ -1,0 +1,251 @@
+{
+  "run_config": {
+    "server_url": "http://127.0.0.1:8000",
+    "model_id": "qwen3_30b_q4",
+    "dataset_name": "HuggingFaceH4/aime_2024",
+    "dataset_split": "train",
+    "max_examples": 7,
+    "temperature": 0.2,
+    "top_p": 1,
+    "top_k": 20,
+    "max_context": 512,
+    "max_new_tokens": 256,
+    "gpu_layers": 48,
+    "offload_desc": "qwen3_30b_q4_offload0_256",
+    "request_timeout": 15000.0,
+    "num_samples_per_question": 1,
+    "output_dir": "outputs",
+    "script_invocation": "python scripts/qwen3_14b_eval_aime.py --server-url http://127.0.0.1:8000 --model-id qwen3_30b_q4 --max-context 512 --max-new-tokens 256 --gpu-layers 48 --offload-desc qwen3_30b_q4_offload0_256 --num-samples-per-question 1 --max-examples 7 --request-timeout 15000 --output-dir outputs"
+  },
+  "run_summary": {
+    "num_questions": 7,
+    "num_correct_majority": 0,
+    "num_correct_any": 0,
+    "accuracy_majority": 0.0,
+    "accuracy_any": 0.0,
+    "avg_latency_ms_per_question": 4047.3361015319824,
+    "total_prompt_tokens": 1691,
+    "total_completion_tokens": 1739,
+    "total_tokens": 3430,
+    "tokens_per_second_overall": 121.06728665665474
+  },
+  "results": [
+    {
+      "id": 60,
+      "problem": "Every morning Aya goes for a $9$-kilometer-long walk and stops at a coffee shop afterwards. When she walks at a constant speed of $s$ kilometers per hour, the walk takes her 4 hours, including $t$ minutes spent in the coffee shop. When she walks $s+2$ kilometers per hour, the walk takes her 2 hours and 24 minutes, including $t$ minutes spent in the coffee shop. Suppose Aya walks at $s+\\frac{1}{2}$ kilometers per hour. Find the number of minutes the walk takes her, including the $t$ minutes spent in the coffee shop.",
+      "gold_answer_str": "204",
+      "gold_answer_int": 204,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Convert all times to minutes.\nStep 2: Let $t$ be the time spent in the coffee shop in minutes.\nStep 3: Write equations for the total time in minutes for both speeds.\nStep 4: Solve for $s$ and $t$.\nStep 5: Use $s+\\frac{1}{2}$ to find the new total time in minutes.\n\nWe need to solve for the total time when walking at $s+\\frac{1}{2}$ km/h.\n\nLet’s solve it.\n\nWe need to find the total time in minutes when walking at $s+\\frac{1}{2}$ km/h.\n\nWe have two equations:\n\n1. $9/s + t = 240$ minutes (since 4 hours = 240 minutes)\n2. $9/(s+2) + t = 144$ minutes (since 2 hours 24 minutes = 144 minutes)\n\nSubtract the second equation from the first:\n\n$9/s - 9/(s+2) = 96$\n\nSimplify:\n\n$9[(s+2) - s]/[s(s+2)]",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 4007.129192352295,
+          "usage": {
+            "completion_tokens": 239,
+            "prompt_tokens": 273,
+            "total_tokens": 512
+          },
+          "prompt_tokens": 273,
+          "completion_tokens": 239,
+          "total_tokens": 512
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 239,
+      "total_prompt_tokens": 273,
+      "total_latency_ms": 4007.129192352295
+    },
+    {
+      "id": 61,
+      "problem": "Let $ABC$ be a triangle inscribed in circle $\\omega$. Let the tangents to $\\omega$ at $B$ and $C$ intersect at point $D$, and let $\\overline{AD}$ intersect $\\omega$ at $P$. If $AB=5$, $BC=9$, and $AC=10$, $AP$ can be written as the form $\\frac{m}{n}$, where $m$ and $n$ are relatively prime integers. Find $m + n$.",
+      "gold_answer_str": "113",
+      "gold_answer_int": 113,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Use power of a point and harmonic division.  \nStep 2: Apply Menelaus’ theorem on triangle $ABC$ with transversal $ADP$.  \nStep 3: Use the Law of Cosines to find angles.  \nStep 4: Use the Law of Sines to find lengths.  \nStep 5: Use the formula for the length of a chord.  \nStep 6: Simplify to get $AP = \\frac{m}{n}$.  \nStep 7: Compute $m + n$.\n\nWe need to solve the problem. Let’s produce a concise solution.\n\nWe need to find $AP$ in terms of the given sides. We can use the Power of a Point theorem: $AD \\cdot AP = AB \\cdot AC$? Wait, no: Power of point $A$ with respect to circle $\\omega$ is $AB \\cdot AC = AD \\cdot AP$. Wait, actually Power of point $A$ is $AB \\cdot AC = AD \\cdot AP$? Let’s check: Power of point $A$ with respect to circle $\\omega$ is $AB \\cdot AC = AD \\cdot AP$. Yes, because $A$ lies on the circle, so Power of $A",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 3937.431573867798,
+          "usage": {
+            "completion_tokens": 256,
+            "prompt_tokens": 247,
+            "total_tokens": 503
+          },
+          "prompt_tokens": 247,
+          "completion_tokens": 256,
+          "total_tokens": 503
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 256,
+      "total_prompt_tokens": 247,
+      "total_latency_ms": 3937.431573867798
+    },
+    {
+      "id": 62,
+      "problem": "Each vertex of a regular octagon is independently colored either red or blue with equal probability. The probability that the octagon can then be rotated so that all of the blue vertices end up at positions where there were originally red vertices is $\\tfrac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. What is $m+n$?",
+      "gold_answer_str": "371",
+      "gold_answer_int": 371,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Understand the problem. We have a regular octagon with 8 vertices. Each vertex is colored red or blue independently with probability 1/2. We want the probability that there exists a rotation such that the blue vertices coincide with the original red vertices. That is, there exists a rotation r (0 ≤ r < 8) such that for every vertex i, the color at i is red iff the color at i+r mod 8 is blue. Equivalently, the set of red vertices is a rotation of the set of blue vertices.\n\nStep 2: Let R be the set of red vertices, B the set of blue vertices. Then R = B + r mod 8 for some r. So the condition is that R and B are rotations of each other. Since the octagon is regular, rotations are cyclic shifts.\n\nStep 3: Let’s count the number of colorings where R and B are rotations of each other. Let’s denote the coloring by a binary string of length 8, where 0=red, 1=blue. Then the condition is that the string is equal to its cyclic shift by some r. So we need to count the number of binary strings of length 8 that are equal to at least one of",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 4033.7538719177246,
+          "usage": {
+            "completion_tokens": 256,
+            "prompt_tokens": 216,
+            "total_tokens": 472
+          },
+          "prompt_tokens": 216,
+          "completion_tokens": 256,
+          "total_tokens": 472
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 256,
+      "total_prompt_tokens": 216,
+      "total_latency_ms": 4033.7538719177246
+    },
+    {
+      "id": 63,
+      "problem": "Define $f(x)=|| x|-\\tfrac{1}{2}|$ and $g(x)=|| x|-\\tfrac{1}{4}|$. Find the number of intersections of the graphs of \\[y=4 g(f(\\sin (2 \\pi x))) \\quad\\text{ and }\\quad x=4 g(f(\\cos (3 \\pi y))).\\]",
+      "gold_answer_str": "385",
+      "gold_answer_int": 385,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Understand the functions f and g. f(x) = ||x| - 1/2|, g(x) = ||x| - 1/4|. So f(x) is a \"V\" shape centered at 0 with a peak at 1/2, and g(x) is a \"V\" shape centered at 0 with a peak at 1/4. Then we compose them with sin(2πx) and cos(3πy) respectively. The equation is y = 4g(f(sin(2πx))) and x = 4g(f(cos(3πy))). We need to find the number of intersections of these two graphs.\n\nStep 2: Let’s simplify the right-hand side of the first equation. Let’s define h(x) = 4g(f(sin(2πx))). We can compute h(x) by composing the functions. First compute f(sin(2πx)) = ||sin(2πx)| - 1/2|. Then g of that is |||sin(2πx)| - 1/2| - 1/4|. Then multiply by 4. So h(x) = 4|||sin(2πx)| - ",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 4245.501279830933,
+          "usage": {
+            "completion_tokens": 256,
+            "prompt_tokens": 221,
+            "total_tokens": 477
+          },
+          "prompt_tokens": 221,
+          "completion_tokens": 256,
+          "total_tokens": 477
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 256,
+      "total_prompt_tokens": 221,
+      "total_latency_ms": 4245.501279830933
+    },
+    {
+      "id": 64,
+      "problem": "Let $p$ be the least prime number for which there exists a positive integer $n$ such that $n^{4}+1$ is divisible by $p^{2}$. Find the least positive integer $m$ such that $m^{4}+1$ is divisible by $p^{2}$.",
+      "gold_answer_str": "110",
+      "gold_answer_int": 110,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Identify the smallest prime p such that p² divides n⁴ + 1 for some n.\nStep 2: Find the smallest n (i.e., m) such that m⁴ + 1 ≡ 0 mod p².\nStep 3: Provide a brief explanation and the final answer.\n\nWe need to find the smallest prime p such that p² divides n⁴ + 1 for some n, and then find the smallest positive integer m such that m⁴ + 1 is divisible by p².\n\nWe need to find the smallest prime p such that there exists n with n⁴ ≡ -1 mod p². This is equivalent to finding the smallest prime p for which -1 is a quartic residue modulo p². The smallest such p is 5, since 5² = 25 divides 2⁴ + 1 = 17? Wait, 2⁴ + 1 = 17, which is not divisible by 25. 3⁴ + 1 = 81 + 1 = 82, not divisible by 9. 5⁴ + 1 = 625 + 1 = 626, which is divisible",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 4188.377141952515,
+          "usage": {
+            "completion_tokens": 256,
+            "prompt_tokens": 205,
+            "total_tokens": 461
+          },
+          "prompt_tokens": 205,
+          "completion_tokens": 256,
+          "total_tokens": 461
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 256,
+      "total_prompt_tokens": 205,
+      "total_latency_ms": 4188.377141952515
+    },
+    {
+      "id": 65,
+      "problem": "Let $ABCD$ be a tetrahedron such that $AB=CD= \\sqrt{41}$, $AC=BD= \\sqrt{80}$, and $BC=AD= \\sqrt{89}$. There exists a point $I$ inside the tetrahedron such that the distances from $I$ to each of the faces of the tetrahedron are all equal. This distance can be written in the form $\\frac{m \\sqrt n}{p}$, where $m$, $n$, and $p$ are positive integers, $m$ and $p$ are relatively prime, and $n$ is not divisible by the square of any prime. Find $m+n+p$.",
+      "gold_answer_str": "104",
+      "gold_answer_int": 104,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Compute the volume of the tetrahedron using the Cayley-Menger determinant.\nStep 2: Compute the area of each face.\nStep 3: Use the formula for the inradius of a tetrahedron: $r = \\frac{3V}{A_1 + A_2 + A_3 + A_4}$, where $A_i$ are the areas of the faces.\nStep 4: Simplify the expression to match the form $\\frac{m \\sqrt n}{p}$.\nStep 5: Compute $m+n+p$.\n\nWe will compute the volume using the Cayley-Menger determinant. The determinant is:\n\n$$\n\\begin{vmatrix}\n0 & 1 & 1 & 1 & 1 \\\\\n1 & 0 & AB^2 & AC^2 & AD^2 \\\\\n1 & AB^2 & 0 & BC^2 & BD^2 \\\\\n1 & AC^2 & BC^2 & 0 & CD^2 \\\\\n1 & AD^2 & BD^2 & CD^",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 3654.3703079223633,
+          "usage": {
+            "completion_tokens": 220,
+            "prompt_tokens": 292,
+            "total_tokens": 512
+          },
+          "prompt_tokens": 292,
+          "completion_tokens": 220,
+          "total_tokens": 512
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 220,
+      "total_prompt_tokens": 292,
+      "total_latency_ms": 3654.3703079223633
+    },
+    {
+      "id": 66,
+      "problem": "Let $\\mathcal{B}$ be the set of rectangular boxes with surface area $54$ and volume $23$. Let $r$ be the radius of the smallest sphere that can contain each of the rectangular boxes that are elements of $\\mathcal{B}$. The value of $r^2$ can be written as $\\frac{p}{q}$, where $p$ and $q$ are relatively prime positive integers. Find $p+q$.",
+      "gold_answer_str": "721",
+      "gold_answer_int": 721,
+      "traces": [
+        {
+          "sample_id": 0,
+          "text": " Let the dimensions of a box be $x, y, z$. Then $2(xy + yz + zx) = 54$ and $xyz = 23$. We want to minimize the radius of the sphere that contains the box, which is half the space diagonal: $r = \\frac{1}{2}\\sqrt{x^2 + y^2 + z^2}$. So we need to minimize $x^2 + y^2 + z^2$ given the constraints.\n\nStep 2: Use the identity $(x+y+z)^2 = x^2 + y^2 + z^2 + 2(xy + yz + zx)$. We know $xy + yz + zx = 27$, so $x^2 + y^2 + z^2 = (x+y+z)^2 - 54$. To minimize $x^2 + y^2 + z^2$, we need to minimize $x+y+z$.\n\nStep 3: Let $s = x+y+z$. Then $x^2 + y^2 + z^2 = s^2 - 54$. We want to minimize $s$.\n\nStep 4: By AM ≥ GM, we",
+          "extracted_answer": null,
+          "parsed_answer": null,
+          "is_correct": false,
+          "latency_ms": 4264.789342880249,
+          "usage": {
+            "completion_tokens": 256,
+            "prompt_tokens": 237,
+            "total_tokens": 493
+          },
+          "prompt_tokens": 237,
+          "completion_tokens": 256,
+          "total_tokens": 493
+        }
+      ],
+      "majority_answer": null,
+      "is_correct_majority": false,
+      "is_correct_any": false,
+      "num_samples": 1,
+      "total_completion_tokens": 256,
+      "total_prompt_tokens": 237,
+      "total_latency_ms": 4264.789342880249
+    }
+  ]
+}
