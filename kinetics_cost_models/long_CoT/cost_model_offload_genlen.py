@@ -79,8 +79,8 @@ def make_process_fn(model_name, gen_lens):
 
 if __name__ == "__main__":
     # E_flops = 562.5
-    E_flops_A5000 = 289.3 # 222.2 FLOPS / 768 GB/s (theoretical)
-    E_flops_CPU = 22483 # 222.2 FLOPS / 9.903 GB/s (fit, to be validated)
+    E_flops_A5000 = 36.16 # 27.77 FLOPS / 0.768 TB/s (theoretical)
+    E_flops_CPU = 881.6 # 27.77 FLOPS / 0.0315 GB/s (theoretical)
     task = sys.argv[1]
     sparse_arg = sys.argv[2]
     
