@@ -90,62 +90,58 @@ if __name__ == "__main__":
         "14B": 14.77,
         "32B": 32.76
     }
-    gen_lens = [2048, 4096, 6144, 8192, 10240, 12288, 14336, 16384, 18432, 20480, 22528, 24576, 26624, 28672, 30720, 32768]
+    gen_lens = [2048, 4096, 6144, 8192, 10240, 12288, 14336, 16384, 18432, 20480, 22528, 24576]
    
-    query_to_id = {}
-    query_id = 0
-
     for model in ["Qwen3-8B"]:
         config = AutoConfig.from_pretrained(f"Qwen/{model}")
         tokenizer = AutoTokenizer.from_pretrained(f"Qwen/{model}")
-        
+
         nparams = model_sizes[model.split("-")[1]] * 1e9
-        
+
         num_attn_heads = config.num_attention_heads
         num_kv_heads = config.num_key_value_heads
         head_dim = config.head_dim * config.num_hidden_layers
-    
-        res_dir = f"{task}/{sparse_arg}" 
+
+        res_dir = f"{task}/{sparse_arg}"
         log_files = os.listdir(res_dir)
-        
+
         tokenizer = AutoTokenizer.from_pretrained(f"Qwen/{model}")
         model_name = model.lower().replace(".", "-")
-        
+
         for log_file in log_files:
             if log_file.endswith(".jsonl") and f"_{sparse_arg}" in log_file and model_name in log_file:
-                
-                data = load_dataset("json", data_files=f"{res_dir}/{log_file}", split="train").skip(1)
-                
-                # populate query_to_id if empty
-                if len(query_to_id) == 0:
-                    query_id = 0
-                    for example in data:
-                        if example["query"] not in query_to_id:
-                            query_to_id[example["query"]] = query_id
-                            query_id += 1
-                
+                # Load all data (do not skip any rows)
+                data = load_dataset("json", data_files=f"{res_dir}/{log_file}", split="train")
+
+                # Build query_to_id for this file only, so all queries in this file are mapped and no question is missing
+                query_to_id = {}
+                for idx, example in enumerate(data):
+                    query = example["query"]
+                    if query not in query_to_id:
+                        query_to_id[query] = len(query_to_id)
+
                 process_fn = make_process_fn(f"Qwen/{model}", query_to_id, gen_lens)
-                processed = data.map(process_fn, num_proc=8, remove_columns=data.column_names)
-                
+                processed = data.map(process_fn, num_proc=1, remove_columns=data.column_names)
+
                 all_rows = list(chain.from_iterable(processed["results"]))
                 raw_df = pd.DataFrame(all_rows)
-                
+
                 raw_df = raw_df.groupby(["query_id", "gen_len_budget"]).agg({
                     "query": "first",
                     "gen_len": list,
                     "score": list
                 }).reset_index()
-                
-                result_df = [] 
+
+                result_df = []
                 for gen_len in gen_lens:
                     grouped_df_budgeted = raw_df[raw_df["gen_len_budget"] == gen_len]
                     for index, row in tqdm(grouped_df_budgeted.iterrows(), total=len(grouped_df_budgeted), desc="Processing rows"):
                         context_length = len(tokenizer.encode(row["query"]))
                         generation_lengths = row["gen_len"]
-                        
+
                         scores = row["score"]
                         cov = coverage(scores, nsamples=[1])[0]    # using ntrial=1 for cot length analysis
-                        
+
                         kwargs = {}
                         if sparse_arg != "dense":
                             attn_local = int(log_file.split("local")[-1].split("_")[0])
@@ -161,11 +157,11 @@ if __name__ == "__main__":
                         else:
                             cost_fn = dense_cost
                             budget = None
-                            
+
                         compute_cost, memory_cost = expected_cost(cost_fn, generation_lengths, context_length=context_length,
-                                                                  nparams=nparams, num_attn_heads=num_attn_heads, num_kv_heads=num_kv_heads, 
+                                                                  nparams=nparams, num_attn_heads=num_attn_heads, num_kv_heads=num_kv_heads,
                                                                   head_dim=head_dim, E_flops=E_flops, **kwargs)
-                        
+
                         res_dict = {
                             "query_id": row["query_id"],
                             "generation_length": generation_lengths,
@@ -175,13 +171,13 @@ if __name__ == "__main__":
                             "memory_cost": memory_cost,
                             "total_cost": compute_cost + memory_cost
                         }
-                        
+
                         if sparse_arg != "dense":
                             res_dict["budget"] = budget
-                            
+
                         result_df.append(res_dict)
-                        
+
                 result_df = pd.DataFrame(result_df)
-                result_df.to_csv(f"{res_dir}/no_offload/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv", index=False)
-                print(f"Saved results to {res_dir}/no_offload/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv")
+                result_df.to_csv(f"results/cost_no_offload/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv", index=False)
+                print(f"Saved results to results/cost_no_offload/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv")
                         
