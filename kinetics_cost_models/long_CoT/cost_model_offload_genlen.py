@@ -131,16 +131,10 @@ if __name__ == "__main__":
 
                 raw_df["query_id"] = raw_df.groupby("query").ngroup()
 
-                # Skip entire file if any missing lmcache_offload_gb
-                if raw_df["lmcache_offload_gb"].isna().any():
-                    print(f"Skipping file {log_file} due to missing lmcache_offload_gb.")
-                    continue
-
                 raw_df = raw_df.groupby(["query_id", "gen_len_budget"]).agg({
                     "query": "first",
                     "gen_len": list,
                     "score": list,
-                    "lmcache_offload_gb": "first"
                 }).reset_index()
 
                 result_df = []
@@ -153,25 +147,21 @@ if __name__ == "__main__":
                         scores = row["score"]
                         cov = coverage(scores, nsamples=[1])[0]    # using ntrial=1 for cot length analysis
 
-                        lmcache_offload_gb = row.get("lmcache_offload_gb", None)
-
                         kwargs = {}
                         if sparse_arg == "dense":
-                            cost_fn = dense_cost_w_offload
+                            cost_fn = dense_cost
                             budget = None
 
                         # TODO: For different gen len, the actual lmcache offload size should vary, to fix
-                        compute_cost, comm_mem_cost, gpu_mem_cost = expected_cost(
+                        compute_costs, memory_costs = expected_cost(
                             cost_fn,
                             generation_lengths,
                             context_length=context_length,
-                            lmcache_total_size_gb=lmcache_offload_gb,
                             nparams=nparams,
                             num_attn_heads=num_attn_heads,
                             num_kv_heads=num_kv_heads,
                             head_dim=head_dim,
-                            E_flops_GPU=E_flops_A5000,
-                            E_flops_CPU=E_flops_CPU,
+                            E_flops=E_flops_A5000,
                             **kwargs
                         )
 
@@ -180,11 +170,8 @@ if __name__ == "__main__":
                             "generation_length": generation_lengths,
                             "gen_len_budget": gen_len,
                             "coverage": cov,
-                            "lmcache_offload_gb": lmcache_offload_gb,
-                            "compute_cost": compute_cost,
-                            "comm_mem_cost": comm_mem_cost,
-                            "gpu_mem_cost": gpu_mem_cost,
-                            "total_cost": compute_cost + comm_mem_cost + gpu_mem_cost
+                            "compute_cost": compute_costs,
+                            "memory_cost": memory_costs,
                         }
 
                         if sparse_arg != "dense":
@@ -193,5 +180,5 @@ if __name__ == "__main__":
                         result_df.append(res_dict)
 
                 result_df = pd.DataFrame(result_df)
-                result_df.to_csv(f"{res_dir}/offload/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv", index=False)
-                print(f"Saved results to {res_dir}/offload/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv")
+                result_df.to_csv(f"results/cost_no_offload/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv", index=False)
+                print(f"Saved results to results/cost_no_offload/{log_file.split('/')[-1].split('.')[0]}_genlen_tradeoff.csv")
