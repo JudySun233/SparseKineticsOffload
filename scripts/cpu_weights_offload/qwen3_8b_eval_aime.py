@@ -1,20 +1,21 @@
 #!/usr/bin/env python
 """
-Evaluate Qwen3-8B-Q6_K on AIME24 via llama.cpp llama-server with
-Long-CoT style prompting, 4 samples per question, boxed answers, and
+Evaluate Qwen3-8B-Q8_0 on AIME24 via llama.cpp llama-server with
+Long-CoT style prompting, 2 samples per question, boxed answers, and
 majority voting.
 
 Usage example (after starting llama-server on the same node):
 
-    ./build/bin/llama-server -m models/models/Qwen3-8B-Q6_K/Qwen3-8B-Q6_K.gguf -ngl 22 -c 44000 --port 8000 --host 0.0.0.0
+    ./build/bin/llama-server -m /home/haojias/llama.cpp/models/Qwen3-8B-BF16.gguf -ngl 32 -c 18384 --port 8000 --host 0.0.0.0
 
-    python scripts/qwen3_8b_eval.py --server-url http://127.0.0.1:8000 --model-id qwen3_8b --max-context 44000 --max-new-tokens 42000 --gpu-layers 22 --offload-desc "qwen3_8b_q6k_cpu_offload_10" --max-examples 30
-"""
+    python scripts/qwen3_8b_eval_aime.py --server-url http://127.0.0.1:8000 --model-id qwen3_8b --max-context 18384 --max-new-tokens 16384 --gpu-layers 32 --offload-desc "qwen3_8b_cpu_offload_0" --num-samples-per-question 1 --max-examples 7
+    """
 
 import argparse
 import datetime
 import json
 import os
+import re
 import time
 from dataclasses import dataclass, asdict
 from typing import Any, Dict, List, Optional
@@ -57,18 +58,18 @@ class EvalConfig:
     temperature: float = 0.6
     top_p: float = 0.95
     top_k: int = 20
-    max_context: int = 34000     # metadata only; real value is set in llama-server
-    max_new_tokens: int = 8192  # up to 32k tokens per completion
+    max_context: int = 18384     # metadata only; real value is set in llama-server
+    max_new_tokens: int = 16384  # up to 32k tokens per completion
 
     # Offloading / system config (metadata only)
     gpu_layers: Optional[int] = None
     offload_desc: str = "all_gpu_no_offload"
 
     # HTTP config
-    request_timeout: float = 3400.0  # seconds
+    request_timeout: float = 34000.0  # seconds
 
     # Evaluation config
-    num_samples_per_question: int = 2  # 4 traces per question
+    num_samples_per_question: int = 1  # 4 traces per question
 
     # Output
     output_dir: str = "outputs"
@@ -92,11 +93,31 @@ def build_qwen_messages(problem: str) -> List[Dict[str, str]]:
     prompt = problem.strip()
     content = (
         prompt
-        + "\nPlease reason step by step, , but keep your reasoning concise (no more than about 20 steps), and put your final answer within \\\\boxed{}."
+        + "\nPlease reason step by step, but keep your reasoning concise (no more than about 20 steps), and put your final answer within \\\\boxed{}."
     )
     return [
         {"role": "user", "content": content}
     ]
+
+
+# def build_qwen_prompt(problem: str) -> str:
+#     problem = problem.strip()
+#     prompt = (
+#         problem
+#         + "\nPlease reason step by step, but keep your reasoning concise "
+#           "(no more than about 20 steps), and put your final answer within \\boxed{}."
+#     )
+#     return prompt
+
+def build_qwen_prompt(problem: str) -> str:
+    problem = problem.strip()
+    return (
+        f"{problem}\n\n"
+        "Please reason step by step, and put your final answer within \\boxed{}.\n"
+        "Begin your response with:\n<think>\n"
+    )
+
+
 
 
 # -----------------------------
@@ -143,6 +164,11 @@ def extract_answer(text: str) -> Optional[str]:
         # no starting '{', cut at next '$' if any
         a = ans.split("$")[0].strip()
         return a.strip() if a else None
+
+def extract_all_ints(text: str) -> list[int]:
+    if not text:
+        return []
+    return [int(m.group()) for m in re.finditer(r"-?\d+", text)]
 
 
 def parse_func(s: str):
@@ -224,6 +250,25 @@ def call_llama_server_chat(cfg: EvalConfig, messages: List[Dict[str, str]]) -> D
     data["_latency_ms"] = (t1 - t0) * 1000.0
     return data
 
+def call_llama_server_completion(cfg: EvalConfig, prompt: str) -> Dict[str, Any]:
+    url = cfg.server_url.rstrip("/") + "/v1/completions"
+    payload = {
+        "model": cfg.model_id,
+        "prompt": prompt,
+        "temperature": cfg.temperature,
+        "top_p": cfg.top_p,
+        "top_k": cfg.top_k,
+        "max_tokens": cfg.max_new_tokens,
+        "n": 1,
+        "stream": False,
+    }
+    t0 = time.time()
+    resp = requests.post(url, json=payload, timeout=cfg.request_timeout)
+    t1 = time.time()
+    resp.raise_for_status()
+    data = resp.json()
+    data["_latency_ms"] = (t1 - t0) * 1000.0
+    return data
 
 def extract_text_and_usage_chat(resp: Dict[str, Any]) -> (str, Optional[Dict[str, int]]):
     """
@@ -240,9 +285,32 @@ def extract_text_and_usage_chat(resp: Dict[str, Any]) -> (str, Optional[Dict[str
     return text, usage
 
 
+def extract_text_and_usage_completion(resp: Dict[str, Any]) -> tuple[str, Optional[Dict[str, int]]]:
+    choices = resp.get("choices", [])
+    if not choices:
+        raise ValueError("No 'choices' in completion response")
+    text = choices[0].get("text", "")
+    usage = resp.get("usage")
+    return text, usage
+
+
 def ensure_dir(path: str) -> None:
     """Create directory if it does not exist."""
     os.makedirs(path, exist_ok=True)
+
+def normalize_aime_int(ans: Optional[str]) -> Optional[int]:
+    if not ans:
+        return None
+    ans = ans.strip().rstrip(".")
+    m = re.search(r"-?\d+", ans)
+    if not m:
+        return None
+    try:
+        x = int(m.group())
+    except Exception:
+        return None
+    return x if 0 <= x <= 999 else None
+
 
 
 # -----------------------------
@@ -276,7 +344,8 @@ def evaluate_single_question(
         "total_latency_ms": float,
       }
     """
-    messages = build_qwen_messages(problem)
+    # messages = build_qwen_messages(problem)
+    prompt = build_qwen_prompt(problem)
     traces: List[Dict[str, Any]] = []
 
     total_completion_tokens = 0
@@ -288,7 +357,8 @@ def evaluate_single_question(
 
     for sample_idx in range(cfg.num_samples_per_question):
         try:
-            resp = call_llama_server_chat(cfg, messages)
+            # resp = call_llama_server_chat(cfg, messages)
+            resp = call_llama_server_completion(cfg, prompt)
         except Exception as e:
             trace_data = {
                 "sample_id": sample_idx,
@@ -303,7 +373,8 @@ def evaluate_single_question(
             traces.append(trace_data)
             continue
 
-        text, usage = extract_text_and_usage_chat(resp)
+        # text, usage = extract_text_and_usage_chat(resp)
+        text, usage = extract_text_and_usage_completion(resp)
         latency_ms = resp.get("_latency_ms", None)
 
         if latency_ms is not None:
@@ -327,9 +398,20 @@ def evaluate_single_question(
         is_correct = False
         if extracted_answer is not None and ground_truth is not None:
             try:
-                is_correct = math_equal(extracted_answer, ground_truth)
+                if math_equal(extracted_answer, ground_truth):
+                    is_correct = True
             except Exception:
-                is_correct = False
+                pass
+
+        numbers_in_text = extract_all_ints(text or "")
+        try:
+            gold_int = int(gold_answer_str)
+        except Exception:
+            gold_int = None
+
+        if not is_correct and gold_int is not None and numbers_in_text:
+            if gold_int in numbers_in_text:
+                is_correct = True
 
         trace_data = {
             "sample_id": sample_idx,
@@ -346,17 +428,32 @@ def evaluate_single_question(
         traces.append(trace_data)
 
     # Majority vote over extracted answers (raw strings)
-    answers = [t["extracted_answer"] for t in traces if t.get("extracted_answer")]
-    if answers:
-        counts = Counter(answers)
-        majority_answer, _ = counts.most_common(1)[0]
-        try:
-            is_correct_majority = math_equal(majority_answer, ground_truth)
-        except Exception:
-            is_correct_majority = False
+    # answers = [t["extracted_answer"] for t in traces if t.get("extracted_answer")]
+    # if answers:
+    #     counts = Counter(answers)
+    #     majority_answer, _ = counts.most_common(1)[0]
+    #     try:
+    #         is_correct_majority = math_equal(majority_answer, ground_truth)
+    #     except Exception:
+    #         is_correct_majority = False
+    # else:
+    #     majority_answer = None
+    #     is_correct_majority = False
+
+    norm_answers = [normalize_aime_int(t.get("extracted_answer")) for t in traces]
+    norm_answers = [a for a in norm_answers if a is not None]
+
+    if norm_answers:
+        counts = Counter(norm_answers)
+        majority_int, _ = counts.most_common(1)[0]
+        majority_answer = str(majority_int)
+        is_correct_majority = (majority_int == int(ground_truth))
     else:
         majority_answer = None
         is_correct_majority = False
+
+    
+    is_correct_any = any(t["is_correct"] for t in traces)
 
     result = {
         "id": ex_id,
@@ -366,6 +463,7 @@ def evaluate_single_question(
         "traces": traces,
         "majority_answer": majority_answer,
         "is_correct_majority": is_correct_majority,
+        "is_correct_any": is_correct_any,
         "num_samples": cfg.num_samples_per_question,
         "total_completion_tokens": total_completion_tokens,
         "total_prompt_tokens": total_prompt_tokens,
@@ -390,12 +488,13 @@ def run_eval(cfg: EvalConfig) -> None:
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     output_path = os.path.join(
         cfg.output_dir,
-        f"aime24_qwen3_8b_q6k_{timestamp}.json",
+        f"aime24_{cfg.model_id}_{cfg.max_context}_{cfg.max_new_tokens}_gpu{cfg.gpu_layers}_{timestamp}.json",
     )
 
     results: List[Dict[str, Any]] = []
     num_questions = 0
-    num_correct_questions = 0
+    num_correct_majority = 0
+    num_correct_any = 0
 
     total_prompt_tokens_all = 0
     total_completion_tokens_all = 0
@@ -411,18 +510,27 @@ def run_eval(cfg: EvalConfig) -> None:
 
         num_questions += 1
         if question_result["is_correct_majority"]:
-            num_correct_questions += 1
+            num_correct_majority += 1
+        if question_result["is_correct_any"]:
+            num_correct_any += 1
+
 
         total_prompt_tokens_all += question_result["total_prompt_tokens"]
         total_completion_tokens_all += question_result["total_completion_tokens"]
         total_latency_ms_all += question_result["total_latency_ms"]
 
-        acc_so_far = num_correct_questions / num_questions if num_questions > 0 else 0.0
+        acc_majority_so_far = num_correct_majority / num_questions if num_questions > 0 else 0.0
+        acc_any_so_far = num_correct_any / num_questions if num_questions > 0 else 0.0
+
         print(
             f"[ID {ex_id}] majority_answer={question_result['majority_answer']}, "
             f"gold={gold_answer_str}, "
-            f"correct={question_result['is_correct_majority']}, "
-            f"acc_so_far={acc_so_far:.3f}"
+            # f"correct={question_result['is_correct_majority']}, "
+            # f"correct={question_result["is_correct_any"]}, "
+            f"correct_majority={question_result['is_correct_majority']}, "
+            f"correct_any={question_result['is_correct_any']}, "
+            f"acc_majority_so_far={acc_majority_so_far:.3f}, "
+            f"acc_any_so_far={acc_any_so_far:.3f}"
         )
 
         # Stream write partial JSON so you can inspect midway
@@ -431,7 +539,9 @@ def run_eval(cfg: EvalConfig) -> None:
             cfg,
             results,
             num_questions,
-            num_correct_questions,
+            # num_correct_questions,
+            num_correct_majority,
+            num_correct_any,
             total_prompt_tokens_all,
             total_completion_tokens_all,
             total_latency_ms_all,
@@ -439,8 +549,10 @@ def run_eval(cfg: EvalConfig) -> None:
 
     print(f"\nSaved evaluation results to: {output_path}")
     if num_questions > 0:
-        final_acc = num_correct_questions / num_questions
-        print(f"Final accuracy over {num_questions} questions (majority vote): {final_acc:.3f}")
+        final_acc_majority = num_correct_majority / num_questions
+        final_acc_any = num_correct_any / num_questions
+        print(f"Final accuracy over {num_questions} questions (majority vote): {final_acc_majority:.3f}")
+        print(f"Final accuracy over {num_questions} questions (any existed in answer): {final_acc_any:.3f}")
 
 
 def _write_partial_json(
@@ -448,14 +560,22 @@ def _write_partial_json(
     cfg: EvalConfig,
     results: List[Dict[str, Any]],
     num_questions: int,
-    num_correct_questions: int,
+    # num_correct_questions: int,
+    num_correct_majority: int,
+    num_correct_any: int,
     total_prompt_tokens: int,
     total_completion_tokens: int,
     total_latency_ms: float,
 ) -> None:
     """Write current run_config + summary + question-level results to JSON."""
-    accuracy = (
-        num_correct_questions / num_questions if num_questions > 0 else 0.0
+    # accuracy = (
+    #     num_correct_questions / num_questions if num_questions > 0 else 0.0
+    # )
+    accuracy_majority = (
+        num_correct_majority / num_questions if num_questions > 0 else 0.0
+    )
+    accuracy_any = (
+        num_correct_any / num_questions if num_questions > 0 else 0.0
     )
     avg_latency_ms = (
         total_latency_ms / num_questions if num_questions > 0 else None
@@ -470,8 +590,11 @@ def _write_partial_json(
 
     run_summary = {
         "num_questions": num_questions,
-        "num_correct_questions": num_correct_questions,
-        "accuracy_majority": accuracy,
+        "num_correct_majority": num_correct_majority,
+        "num_correct_any": num_correct_any,
+        # "num_correct_questions": num_correct_questions,
+        "accuracy_majority": accuracy_majority,
+        "accuracy_any": accuracy_any,
         "avg_latency_ms_per_question": avg_latency_ms,
         "total_prompt_tokens": total_prompt_tokens,
         "total_completion_tokens": total_completion_tokens,
@@ -495,7 +618,7 @@ def _write_partial_json(
 
 def parse_args() -> EvalConfig:
     parser = argparse.ArgumentParser(
-        description="Evaluate Qwen3-8B-Q6_K on AIME24 via llama.cpp server."
+        description="Evaluate Qwen3-8B on AIME24 via llama.cpp server."
     )
     parser.add_argument(
         "--server-url",
@@ -512,13 +635,13 @@ def parse_args() -> EvalConfig:
     parser.add_argument(
         "--max-context",
         type=int,
-        default=34000,
+        default=18384,
         help="Max context length (tokens) configured for llama-server (metadata only).",
     )
     parser.add_argument(
         "--max-new-tokens",
         type=int,
-        default=8192,
+        default=16384,
         help="Max new tokens per completion.",
     )
     parser.add_argument(
@@ -554,7 +677,7 @@ def parse_args() -> EvalConfig:
     parser.add_argument(
         "--request-timeout",
         type=float,
-        default=3400.0,
+        default=34000.0,
         help="Timeout in seconds for each HTTP request.",
     )
     parser.add_argument(
@@ -566,13 +689,13 @@ def parse_args() -> EvalConfig:
     parser.add_argument(
         "--max-examples",
         type=int,
-        default=None,
+        default=7,
         help="If set, only evaluate on the first N examples (for debugging).",
     )
     parser.add_argument(
         "--num-samples-per-question",
         type=int,
-        default=4,
+        default=2,
         help="Number of completions (traces) per question for majority vote.",
     )
 
