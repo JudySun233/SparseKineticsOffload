@@ -1,22 +1,18 @@
 """
-Generate predictions on the AIME24 dataset with a Qwen-8B model and save results as JSONL.
+Generate predictions on the AIME24 dataset using vLLM for fast inference.
 
 Dependencies:
 - vllm, transformers, torch
 
-Install (example):
+Install:
   pip install vllm transformers torch
 
-Usage (example):
-  python scripts/generate_aime24_qwen8b.py \
+Usage:
+  python scripts/eval.py \
     --input aime24/dense/aime24_qwen3-8b_dense.jsonl \
-    --output results/aime24_qwen8b_outputs.jsonl \
+    --output results/aime24_outputs.jsonl \
     --model Qwen/Qwen3-8B \
-    --max-tokens 256
-
-The script will try to extract a prompt from common keys in each JSON object
-("prompt", "question", "input", "instruction", "context"). If none are
-found the example is skipped.
+    --max-model-len 16384
 """
 import argparse
 import json
@@ -24,10 +20,8 @@ import logging
 import os
 import time
 import re
-from dataclasses import dataclass, asdict
 from typing import Dict
 from vllm import LLM, SamplingParams
-from vllm.config import KVTransferConfig
 
 # copied from kinetics_cost_models/utils.py
 MATH_QUERY_TEMPLATE = """
@@ -51,86 +45,6 @@ def apply_chat_template(example, tokenizer, template):
     ))
     return example
 
-
-# LMCache logging capture (copied/adapted from scripts/fit_I_cpu.py)
-@dataclass
-class LMCacheEvent:
-    size_gb: float
-    cost_ms: float
-
-
-@dataclass
-class LMCacheAggregates:
-    total_size_gb: float = 0.0
-    total_cost_ms: float = 0.0
-    num_events: int = 0
-
-    def add(self, size_gb: float, cost_ms: float) -> None:
-        self.total_size_gb += size_gb
-        self.total_cost_ms += cost_ms
-        self.num_events += 1
-
-    @property
-    def ms_per_gb(self) -> float:
-        if self.total_size_gb == 0:
-            return 0.0
-        return self.total_cost_ms / self.total_size_gb
-
-
-lmcache_stats = LMCacheAggregates()
-lmcache_events: list[LMCacheEvent] = []
-lmcache_stats_request = LMCacheAggregates()
-lmcache_events_request: list[LMCacheEvent] = []
-
-
-class LMCacheLogHandler(logging.Handler):
-    def emit(self, record: logging.LogRecord) -> None:
-        global lmcache_stats, lmcache_events
-        raw = record.getMessage()
-        cleaned = re.sub(r"\x1b\[[0-9;]*m", "", raw).lower()
-        match = re.search(r"size:\s*([0-9]+(?:\.[0-9]+)?)\s*gb[,\s]+cost[:\s]+([0-9]+(?:\.[0-9]+)?)\s*ms", cleaned, re.IGNORECASE)
-        if not match:
-            return
-        try:
-            size_gb = float(match.group(1))
-            cost_ms = float(match.group(2))
-            lmcache_stats.add(size_gb=size_gb, cost_ms=cost_ms)
-            lmcache_events.append(LMCacheEvent(size_gb=size_gb, cost_ms=cost_ms))
-            lmcache_stats_request.add(size_gb=size_gb, cost_ms=cost_ms)
-            lmcache_events_request.append(LMCacheEvent(size_gb=size_gb, cost_ms=cost_ms))
-        except ValueError:
-            pass
-
-
-def attach_lmcache_logger() -> None:
-    handler = LMCacheLogHandler()
-    handler.setLevel(logging.DEBUG)
-
-    def _ensure(logger: logging.Logger) -> None:
-        if not any(isinstance(h, LMCacheLogHandler) for h in logger.handlers):
-            logger.addHandler(handler)
-        logger.setLevel(logging.INFO)
-        logger.propagate = True
-
-    _ensure(logging.getLogger("lmcache"))
-    for name, logger in logging.Logger.manager.loggerDict.items():
-        if not isinstance(logger, logging.Logger):
-            continue
-        if name == "lmcache" or name.startswith("lmcache."):
-            _ensure(logger)
-
-
-def reset_lmcache_counters_global() -> None:
-    global lmcache_stats, lmcache_events
-    lmcache_stats = LMCacheAggregates()
-    lmcache_events = []
-
-def reset_lmcache_counters_request() -> None:
-    global lmcache_stats_request, lmcache_events_request
-    lmcache_stats_request = LMCacheAggregates()
-    lmcache_events_request = []
-
-
 def extract_prompt(obj: Dict) -> str:
     key = "problem"
     if key in obj and isinstance(obj[key], str) and obj[key].strip():
@@ -151,12 +65,9 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--greedy", action="store_true", help="Force greedy decoding (temperature=0, top_k=1).")
     p.add_argument("--max-model-len", type=int, default=16384, help="Model context window for vLLM.")
     p.add_argument("--limit", type=int, default=0, help="If >0, only process this many examples (for testing).")
-    p.add_argument("--enable-lmcache", action="store_true", help="Enable LMCache CPU offload via vLLM kv_transfer_config")
-    p.add_argument("--cpu-budget-gb", type=float, default=1.0, help="LMCache CPU budget in GB (LMCACHE_MAX_LOCAL_CPU_SIZE)")
-    p.add_argument("--kv-chunk-size", type=int, default=256, help="LMCache chunk size (LMCACHE_CHUNK_SIZE)")
-    p.add_argument("--gpu-memory-utilization", type=float, default=0.90, help="Desired GPU memory utilization (0-1) passed to vLLM")
+    p.add_argument("--batch-size", type=int, default=1, help="Number of examples to process per batch (default: 1, i.e., no batching).")
+    p.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility.")
     return p.parse_args()
-
 
 def open_llm(model: str, max_model_len: int) -> LLM:
     return LLM(model=model, max_model_len=max_model_len)
@@ -164,34 +75,32 @@ def open_llm(model: str, max_model_len: int) -> LLM:
 
 def main() -> None:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
+
+
     args = parse_args()
+
+    # Set random seeds for reproducibility
+    import random
+    import numpy as np
+    import torch
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+    torch.manual_seed(args.seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(args.seed)
+    os.environ["PYTHONHASHSEED"] = str(args.seed)
+    # If vLLM supports a seed argument, add it to LLM() as well (not all versions do)
 
     os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
 
     logging.info("Loading model %s", args.model)
 
-    kv_cfg = None
-    if getattr(args, "enable_lmcache", False):
-        logging.info("Enabling LMCache offload: cpu_budget_gb=%s, kv_chunk_size=%s", args.cpu_budget_gb, args.kv_chunk_size)
-        # Let vLLM runs single-process so our logging handler
-        # can capture LMCache logs within the same Python process.
-        os.environ["VLLM_ENABLE_V1_MULTIPROCESSING"] = "0"
-        os.environ["LMCACHE_LOCAL_CPU"] = "True"
-        os.environ["LMCACHE_MAX_LOCAL_CPU_SIZE"] = str(args.cpu_budget_gb)
-        os.environ["LMCACHE_CHUNK_SIZE"] = str(args.kv_chunk_size)
-        attach_lmcache_logger()
-        kv_cfg = KVTransferConfig(kv_connector="LMCacheConnectorV1", kv_role="kv_both")
-
     llm = LLM(
         model=args.model,
         max_model_len=args.max_model_len,
-        kv_transfer_config=kv_cfg,
-        gpu_memory_utilization=getattr(args, "gpu_memory_utilization", None),
         enable_prefix_caching=True,
     )
-    if getattr(args, "enable_lmcache", False):
-        attach_lmcache_logger()
-    
+
     tokenizer = llm.get_tokenizer()
 
     base_kwargs = {}
@@ -207,104 +116,115 @@ def main() -> None:
             base_kwargs["repetition_penalty"] = args.repetition_penalty
 
     overall_start = time.perf_counter()
+
     with open(args.input, "r") as fin, open(args.output, "w") as fout:
-        fout.write("{}\n")
         processed_count = 0
-        for idx, line in enumerate(fin):
+        idx = 0
+        batch = []
+        obj_list = []
+        total = 0
+        while True:
             if args.limit and processed_count >= args.limit:
+                break
+            line = fin.readline()
+            if not line:
                 break
             obj = json.loads(line)
             prompt_body = extract_prompt(obj)
             query = MATH_QUERY_TEMPLATE.replace("{Question}", prompt_body).replace("{Response}", "")
-
-            prefix_chat = [{"role": "user", "content": query}]
-            prefix_length = len(tokenizer.apply_chat_template(prefix_chat, tokenize=True, add_generation_prompt=True))
-            remaining_cap = args.max_model_len - prefix_length
-            if remaining_cap <= 0:
-                skip_rec = {
+            batch.append(query)
+            obj_list.append((obj, idx))
+            idx += 1
+            if len(batch) == args.batch_size or (args.limit and processed_count + len(batch) >= args.limit) or not line:
+                # Compute prefix_length and dynamic_max_tokens for each item in batch
+                prefix_lengths = []
+                dynamic_max_tokens_list = []
+                for q in batch:
+                    prefix_chat = [{"role": "user", "content": q}]
+                    prefix_length = len(tokenizer.apply_chat_template(prefix_chat, tokenize=True, add_generation_prompt=True))
+                    prefix_lengths.append(prefix_length)
+                    dynamic_max_tokens_list.append(args.max_model_len - prefix_length)
+                # Use min dynamic_max_tokens in batch for all (to avoid overflow)
+                min_max_tokens = min(dynamic_max_tokens_list)
+                sampling = SamplingParams(max_tokens=min_max_tokens, **base_kwargs)
+                t0 = time.perf_counter()
+                outputs = llm.generate(batch, sampling)
+                t1 = time.perf_counter()
+                for i, out in enumerate(outputs):
+                    obj, real_idx = obj_list[i]
+                    text = out.outputs[0].text
+                    try:
+                        gen_token_len = len(out.outputs[0].token_ids)
+                    except Exception:
+                        gen_token_len = None
+                    choices = []
+                    if "solution" in obj:
+                        cleaned_sol = re.sub(r"\\boxed|\\begin\{.*?\}|\\end\{.*?\}", "", obj["solution"]).replace("$", "").strip().strip("{} ")
+                        if cleaned_sol:
+                            choices = [cleaned_sol]
+                    id_val = obj.get("id") if obj.get("id") is not None else real_idx
+                    rec = {
+                        "model": args.model,
+                        "query": batch[i],
+                        "prediction": [text],
+                        "choices": choices,
+                        "prefix_length": prefix_lengths[i],
+                        "token_length": gen_token_len,
+                        "id": id_val,
+                        "latency_s": (t1 - t0) / len(batch),
+                        "dynamic_max_tokens": min_max_tokens,
+                        "max_model_len": args.max_model_len,
+                    }
+                    fout.write(json.dumps(rec) + "\n")
+                    total += 1
+                    processed_count += 1
+                batch = []
+                obj_list = []
+        # Handle any remaining items in batch
+        if batch:
+            prefix_lengths = []
+            dynamic_max_tokens_list = []
+            for q in batch:
+                prefix_chat = [{"role": "user", "content": q}]
+                prefix_length = len(tokenizer.apply_chat_template(prefix_chat, tokenize=True, add_generation_prompt=True))
+                prefix_lengths.append(prefix_length)
+                dynamic_max_tokens_list.append(args.max_model_len - prefix_length)
+            min_max_tokens = min(dynamic_max_tokens_list)
+            sampling = SamplingParams(max_tokens=min_max_tokens, **base_kwargs)
+            t0 = time.perf_counter()
+            outputs = llm.generate(batch, sampling)
+            t1 = time.perf_counter()
+            for i, out in enumerate(outputs):
+                obj, real_idx = obj_list[i]
+                text = out.outputs[0].text
+                try:
+                    gen_token_len = len(out.outputs[0].token_ids)
+                except Exception:
+                    gen_token_len = None
+                choices = []
+                if "solution" in obj:
+                    cleaned_sol = re.sub(r"\\boxed|\\begin\{.*?\}|\\end\{.*?\}", "", obj["solution"]).replace("$", "").strip().strip("{} ")
+                    if cleaned_sol:
+                        choices = [cleaned_sol]
+                id_val = obj.get("id") if obj.get("id") is not None else real_idx
+                rec = {
                     "model": args.model,
-                    "query": query,
-                    "skip_reason": "prefix_exceeds_available_context",
-                    "prefix_length": prefix_length,
+                    "query": batch[i],
+                    "prediction": [text],
+                    "choices": choices,
+                    "prefix_length": prefix_lengths[i],
+                    "token_length": gen_token_len,
+                    "id": id_val,
+                    "latency_s": (t1 - t0) / len(batch),
+                    "dynamic_max_tokens": min_max_tokens,
                     "max_model_len": args.max_model_len,
                 }
-                fout.write(json.dumps(skip_rec) + "\n")
-                continue
+                fout.write(json.dumps(rec) + "\n")
+                total += 1
+                processed_count += 1
 
-            dynamic_max_tokens = remaining_cap
-            sampling = SamplingParams(max_tokens=dynamic_max_tokens, **base_kwargs)
-            if getattr(args, "enable_lmcache", False):
-                reset_lmcache_counters_request()
-            t0 = time.perf_counter()
-            outputs = llm.generate([query], sampling)
-            t1 = time.perf_counter()
-
-            if getattr(args, "enable_lmcache", False):
-                stable_rounds = 0
-                last_events = lmcache_stats_request.num_events
-                for _ in range(8):
-                    time.sleep(0.01)
-                    if lmcache_stats_request.num_events == last_events:
-                        stable_rounds += 1
-                    else:
-                        stable_rounds = 0
-                        last_events = lmcache_stats_request.num_events
-                    if stable_rounds >= 2:
-                        break
-
-            out = outputs[0]
-            text = out.outputs[0].text
-            try:
-                gen_token_len = len(out.outputs[0].token_ids)
-            except Exception:
-                gen_token_len = None
-            choices = []
-            if "solution" in obj:
-                cleaned_sol = re.sub(r"\\boxed|\\begin\{.*?\}|\\end\{.*?\}", "", obj["solution"]).replace("$", "").strip().strip("{} ")
-                if cleaned_sol:
-                    choices = [cleaned_sol]
-            id_val = obj.get("id") if obj.get("id") is not None else idx
-
-            rec = {
-                "model": args.model,
-                "query": query,
-                "prediction": [text],
-                "choices": choices,
-                "prefix_length": prefix_length,
-                "token_length": gen_token_len,
-                "id": id_val,
-                "latency_s": t1 - t0,
-                "dynamic_max_tokens": dynamic_max_tokens,
-                "max_model_len": args.max_model_len,
-            }
-            if getattr(args, "enable_lmcache", False):
-                req_gb = lmcache_stats_request.total_size_gb
-                req_cost = lmcache_stats_request.total_cost_ms
-                cumulative_gb = lmcache_stats.total_size_gb
-                cumulative_cost = lmcache_stats.total_cost_ms
-                rec["lmcache_offload_gb"] = req_gb
-                rec["lmcache_offload_cost_ms"] = req_cost
-                rec["lmcache_offload_ms_per_gb"] = (req_cost / req_gb) if req_gb > 0 else 0.0
-                rec["lmcache_offload_cumulative_gb"] = cumulative_gb
-                rec["lmcache_offload_cumulative_cost_ms"] = cumulative_cost
-                rec["lmcache_offload_cumulative_ms_per_gb"] = (cumulative_cost / cumulative_gb) if cumulative_gb > 0 else 0.0
-                rec["logged_offload_gb"] = cumulative_gb
-                rec["lmcache_source"] = "logged"
-            else:
-                rec["lmcache_offload_gb"] = None
-                rec["lmcache_offload_cost_ms"] = None
-                rec["lmcache_offload_ms_per_gb"] = None
-                rec["lmcache_offload_cumulative_gb"] = None
-                rec["lmcache_offload_cumulative_cost_ms"] = None
-                rec["lmcache_offload_cumulative_ms_per_gb"] = None
-                rec["logged_offload_gb"] = None
-                rec["lmcache_source"] = "none"
-            fout.write(json.dumps(rec) + "\n")
-            total += 1
-            processed_count += 1
-
-    dur = time.perf_counter() - overall_start
-    logging.info("Done. Wrote results to %s. Examples processed: %d. Time: %.2fs", args.output, total, dur)
+        dur = time.perf_counter() - overall_start
+        logging.info("Done. Wrote results to %s. Examples processed: %d. Time: %.2fs", args.output, total, dur)
 
 
 if __name__ == "__main__":
