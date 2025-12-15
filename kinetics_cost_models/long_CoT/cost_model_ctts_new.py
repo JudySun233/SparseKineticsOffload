@@ -49,8 +49,9 @@ def ctts_cost(
 
 results = {
     "Qwen-3-1.7B": {
-        "P": 1.7e9,
-        "L": 24,
+        "P": 2e9,
+        "L": 28,
+        "r": 2,
         "acc": {
             2048: 0.10, 4096: 0.27, 6144: 0.27, 8192: 0.30,
             10240: 0.30, 12288: 0.30, 14336: 0.30,
@@ -61,7 +62,8 @@ results = {
     },
     "Qwen-3-4B": {
         "P": 4e9,
-        "L": 32,
+        "L": 36,
+        "r": 4,
         "acc": {
             2048: 0.033, 4096: 0.200, 6144: 0.333, 8192: 0.367,
             10240: 0.433, 12288: 0.500, 14336: 0.533,
@@ -71,8 +73,9 @@ results = {
         }
     },
     "Qwen-3-8B": {
-        "P": 8e9,
+        "P": 8.2e9,
         "L": 36,
+        "r": 4,
         "acc": {
             2048: 0.1333, 4096: 0.2000, 6144: 0.3333,
             8192: 0.4000, 10240: 0.4000, 12288: 0.4667,
@@ -83,8 +86,9 @@ results = {
         }
     },
     "Qwen-3-14B": {
-        "P": 14e9,
+        "P": 14.8e9,
         "L": 40,
+        "r": 5,
         "acc": {
             2048: 0.0667, 4096: 0.1667, 6144: 0.3333,
             8192: 0.5000, 10240: 0.6000, 12288: 0.6000,
@@ -98,12 +102,12 @@ results = {
 
 # Cost–Generation Length plot (Kinetics-style)
 # Fixed experiment constants
-Lin = 1024
+Lin = 512
 N = 1
-r = 1.0
+
 
 # KV dimension (example – adjust if needed)
-D = 128 * 8   # head_dim × num_kv_heads (proxy)
+D = 128 * 8 * 2   # head_dim × num_kv_heads * (1 for k + 1 for v)
 
 # Hardware constants (from your code)
 Igpu = 36.16     # E_flops_A5000
@@ -115,7 +119,7 @@ K_fracs = [0.0, 0.25, 0.5, 0.75, 1.0]
 plt.figure(figsize=(8, 6))
 
 for model_name, m in results.items():
-    P, L = m["P"], m["L"]
+    P, L, r = m["P"], m["L"], m["r"]
     Louts = sorted(m["acc"].keys())
 
     # Baseline case with no offloading
@@ -143,7 +147,7 @@ fig, axes = plt.subplots(2, 2, figsize=(12, 10))
 axes = axes.flatten()
 
 for ax, (model_name, m) in zip(axes, results.items()):
-    P, L = m["P"], m["L"]
+    P, L, r = m["P"], m["L"], m["r"]
 
     for frac in K_fracs:
         K = int(frac * L)
